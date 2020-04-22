@@ -1669,8 +1669,6 @@ extern const char kAndroidNightModeDescription[];
 
 // Non-Android ----------------------------------------------------------------
 
-#else  // !defined(OS_ANDROID)
-
 extern const char kShowSyncPausedReasonCookiesClearedOnExitName[];
 extern const char kShowSyncPausedReasonCookiesClearedOnExitDescription[];
 

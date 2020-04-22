@@ -50,9 +50,6 @@ bool UnhandledKeyboardEventHandler::HandleKeyboardEvent(
     ignore_next_char_event_ = false;
   }
 
-  if (event.os_event && !event.skip_in_browser)
-    return HandleNativeKeyboardEvent(event.os_event, focus_manager);
-
   return false;
 }
 

@@ -31,6 +31,7 @@
 void DragDownloadItem(const download::DownloadItem* download,
                       gfx::Image* icon,
                       gfx::NativeView view) {
+#if 0
   DCHECK(download);
   DCHECK_EQ(download::DownloadItem::COMPLETE, download->GetState());
 
@@ -59,4 +60,5 @@ void DragDownloadItem(const download::DownloadItem* download,
           std::move(data), root_window, view, location,
           ui::DragDropTypes::DRAG_COPY | ui::DragDropTypes::DRAG_LINK,
           ui::DragDropTypes::DRAG_EVENT_SOURCE_MOUSE);
+#endif
 }

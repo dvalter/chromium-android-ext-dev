@@ -10,10 +10,6 @@
 #include "base/callback_forward.h"
 #include "build/build_config.h"
 
-#if defined(OS_ANDROID) || defined(OS_CHROMEOS)
-#error Not used on Android or ChromeOS
-#endif
-
 namespace base {
 class CommandLine;
 }

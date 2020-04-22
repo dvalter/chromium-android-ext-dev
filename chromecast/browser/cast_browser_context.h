@@ -25,7 +25,7 @@ class CastBrowserContext final : public content::BrowserContext {
   ~CastBrowserContext() override;
 
   // BrowserContext implementation:
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
   std::unique_ptr<content::ZoomLevelDelegate> CreateZoomLevelDelegate(
       const base::FilePath& partition_path) override;
 #endif  // !defined(OS_ANDROID)

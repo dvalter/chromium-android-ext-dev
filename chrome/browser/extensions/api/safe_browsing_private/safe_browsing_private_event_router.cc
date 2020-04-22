@@ -721,9 +721,11 @@ void SafeBrowsingPrivateEventRouter::RealtimeReportingPrefChanged(
 
 void SafeBrowsingPrivateEventRouter::IfAuthorized(
     base::OnceCallback<void(bool)> cont) {
+#if 0
   if (binary_upload_service_) {
     binary_upload_service_->IsAuthorized(std::move(cont));
   }
+#endif
 }
 
 void SafeBrowsingPrivateEventRouter::ReportRealtimeEvent(
@@ -787,6 +789,7 @@ const user_manager::User* SafeBrowsingPrivateEventRouter::GetChromeOSUser() {
 #endif
 
 bool SafeBrowsingPrivateEventRouter::IsRealtimeReportingAvailable() {
+#if 0
 #if defined(OS_CHROMEOS)
   // The device must be managed.
   if (!g_browser_process->platform_part()
@@ -805,6 +808,8 @@ bool SafeBrowsingPrivateEventRouter::IsRealtimeReportingAvailable() {
 #else
   return policy::ChromeBrowserCloudManagementController::IsEnabled();
 #endif
+#endif
+  return false;
 }
 
 }  // namespace extensions

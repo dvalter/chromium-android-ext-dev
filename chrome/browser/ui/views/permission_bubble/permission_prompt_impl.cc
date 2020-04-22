@@ -15,6 +15,7 @@
 #include "ui/views/bubble/bubble_frame_view.h"
 
 // static
+#if 0
 std::unique_ptr<PermissionPrompt> PermissionPrompt::Create(
     content::WebContents* web_contents,
     Delegate* delegate) {
@@ -27,6 +28,7 @@ std::unique_ptr<PermissionPrompt> PermissionPrompt::Create(
   return std::make_unique<PermissionPromptImpl>(browser, web_contents,
                                                 delegate);
 }
+#endif
 
 PermissionPromptImpl::PermissionPromptImpl(Browser* browser,
                                            content::WebContents* web_contents,

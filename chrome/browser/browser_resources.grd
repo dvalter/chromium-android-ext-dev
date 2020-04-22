@@ -8,18 +8,17 @@
   </outputs>
   <release seq="1">
     <structures>
-      <if expr="is_win or is_macosx or desktop_linux or chromeos">
+      <if expr="is_android or is_win or is_macosx or desktop_linux or chromeos">
         <structure name="IDR_SIGNIN_SHARED_CSS_JS" file="${root_gen_dir}\chrome\browser\resources\signin\signin_shared_css.js" use_base_dir="false" preprocess="true" type="chrome_html" />
         <structure name="IDR_SIGNIN_SHARED_OLD_CSS_HTML" file="resources\signin\signin_shared_old_css.html" preprocess="true" allowexternalscript="true" type="chrome_html" />
       </if>
-      <if expr="not is_android">
+      <if expr="is_android or not is_android">
         <!-- New Tab Page WebUI. -->
         <structure name="IDR_INCOGNITO_TAB_HTML" file="resources\ntp4\incognito_tab.html" compress="gzip" flattenhtml="true" type="chrome_html" />
         <structure name="IDR_GUEST_TAB_HTML" file="resources\ntp4\guest_tab.html" compress="gzip" flattenhtml="true" type="chrome_html" />
         <structure name="IDR_NEW_INCOGNITO_TAB_THEME_CSS" file="resources\ntp4\new_incognito_tab_theme.css" compress="gzip" flattenhtml="true" type="chrome_html" />
         <structure name="IDR_NEW_TAB_4_HTML" file="resources\ntp4\new_tab.html" compress="gzip" flattenhtml="true" type="chrome_html" />
         <structure name="IDR_NEW_TAB_4_THEME_CSS" file="resources\ntp4\new_tab_theme.css" compress="gzip" flattenhtml="true" type="chrome_html" />
-
       </if>
       <if expr="chromeos">
         <structure name="IDR_FIRST_RUN_HTML" file="resources\chromeos\first_run\first_run.html" compress="gzip" flattenhtml="true" type="chrome_html" />
@@ -41,7 +40,7 @@
       </if>
     </structures>
     <includes>
-      <if expr="is_win or is_macosx or desktop_linux or chromeos">
+      <if expr="is_android or is_win or is_macosx or desktop_linux or chromeos">
         <include name="IDR_DISCARDS_MOJO_API_JS" file="resources\discards\mojo_api.js" compress="gzip" type="BINDATA" />
         <include name="IDR_DISCARDS_DATABASE_TAB_JS" file="${root_gen_dir}\chrome\browser\resources\discards\database_tab.js" use_base_dir="false" compress="gzip" type="BINDATA" />
         <include name="IDR_DISCARDS_DISCARDS_MAIN_JS" file="${root_gen_dir}\chrome\browser\resources\discards\discards_main.js" use_base_dir="false" compress="gzip" type="BINDATA" />
@@ -54,7 +53,7 @@
         <include name="IDR_DISCARDS_MOJO_PUBLIC_BASE_PROCESS_ID_MOJOM_LITE_JS" file="${root_gen_dir}\mojo\public\mojom\base\process_id.mojom-lite.js" compress="gzip" use_base_dir="false" type="BINDATA" />
         <include name="IDR_DISCARDS_SORTED_TABLE_BEHAVIOR_JS" file="resources\discards\sorted_table_behavior.js" compress="gzip" type="BINDATA" />
       </if>
-      <if expr="is_win or is_macosx or (is_linux and not is_chromeos)">
+      <if expr="is_android or is_win or is_macosx or (is_linux and not is_chromeos)">
         <include name="IDR_BROWSER_SWITCH_APP_JS" file="${root_gen_dir}\chrome\browser\resources\browser_switch\app.js" compress="gzip" use_base_dir="false" type="BINDATA" />
         <include name="IDR_BROWSER_SWITCH_PROXY_JS" file="resources\browser_switch\browser_switch_proxy.js" compress="gzip" type="BINDATA" />
         <include name="IDR_BROWSER_SWITCH_HTML" file="resources\browser_switch\browser_switch.html" compress="gzip" allowexternalscript="true" type="BINDATA" />
@@ -70,7 +69,7 @@
         <include name="IDR_ABOUT_NACL_CSS" file="resources\about_nacl\about_nacl.css" compress="gzip" flattenhtml="true" type="chrome_html" />
         <include name="IDR_ABOUT_NACL_JS" file="resources\about_nacl\about_nacl.js" compress="gzip" type="BINDATA" />
       </if>
-      <if expr="not is_android">
+      <if expr="is_android or not is_android">
         <include name="IDR_ABOUT_SYS_HTML" file="resources\about_sys\about_sys.html" compress="gzip" type="BINDATA" />
         <include name="IDR_ABOUT_SYS_CSS" file="resources\about_sys\about_sys.css" compress="gzip" flattenhtml="true" type="BINDATA" />
         <include name="IDR_ABOUT_SYS_JS" file="resources\about_sys\about_sys.js" compress="gzip" type="BINDATA" />
@@ -163,7 +162,7 @@
         <include name="IDR_APP_MANAGEMENT_INDEX_HTML" file="resources\app_management\index.html" compress="gzip" type="BINDATA" />
       </if>
 
-      <if expr="not is_android">
+      <if expr="is_android or not is_android">
         <!-- Page not available for guest. -->
         <include name="IDR_PAGE_NOT_AVAILABLE_FOR_GUEST_APP_HTML" file="resources\page_not_available_for_guest\app.html" type="BINDATA" />
       </if>
@@ -213,10 +212,10 @@
       <if expr="chromeos">
         <include name="IDR_PLUGIN_DB_JSON" file="resources\plugin_metadata\plugins_chromeos.json" type="BINDATA" />
       </if>
-      <if expr="desktop_linux">
+      <if expr="is_android or desktop_linux">
         <include name="IDR_PLUGIN_DB_JSON" file="resources\plugin_metadata\plugins_linux.json" type="BINDATA" />
       </if>
-      <if expr="not is_android">
+      <if expr="is_android or not is_android">
         <include name="IDR_MANAGEMENT_HTML" file="resources\management\management.html" flattenhtml="true" allowexternalscript="true" type="BINDATA" compress="gzip" />
         <include name="IDR_MANAGEMENT_UI_JS" file="${root_gen_dir}/chrome/browser/resources/management/management_ui.js" use_base_dir="false" type="BINDATA" compress="gzip" preprocess="true" />
         <include name="IDR_MANAGEMENT_BROWSER_PROXY_JS" file="resources\management\management_browser_proxy.js" type="BINDATA" compress="gzip" preprocess="true" />
@@ -226,7 +225,7 @@
       <include name="IDR_SITE_ENGAGEMENT_JS" file="resources\engagement\site_engagement.js" flattenhtml="true" type="BINDATA" compress="gzip" />
       <include name="IDR_SITE_ENGAGEMENT_DETAILS_MOJOM_LITE_JS" file="${root_gen_dir}\chrome\browser\engagement\site_engagement_details.mojom-lite.js" use_base_dir="false" type="BINDATA" compress="gzip" />
       <include name="IDR_URL_MOJOM_LITE_JS" file="${root_gen_dir}\url\mojom\url.mojom-lite.js" use_base_dir="false" type="BINDATA" compress="gzip" />
-      <if expr="is_win or is_macosx or desktop_linux or chromeos">
+      <if expr="is_android or is_win or is_macosx or desktop_linux or chromeos">
         <include name="IDR_SYNC_DISABLED_CONFIRMATION_HTML" file="resources\signin\sync_confirmation\sync_disabled_confirmation.html" flattenhtml="true" allowexternalscript="true" type="BINDATA" />
         <include name="IDR_SYNC_DISABLED_CONFIRMATION_JS" file="resources\signin\sync_confirmation\sync_disabled_confirmation.js" type="BINDATA" />
         <include name="IDR_SYNC_CONFIRMATION_HTML" file="resources\signin\sync_confirmation\sync_confirmation.html" flattenhtml="true" allowexternalscript="true" type="BINDATA" />
@@ -236,7 +235,7 @@
         <include name="IDR_SYNC_CONFIRMATION_IMAGES_SYNC_CONFIRMATION_ILLUSTRATION_SVG" file="resources\signin\sync_confirmation\images\sync_confirmation_illustration.svg" type="BINDATA" compress="gzip" />
         <include name="IDR_SYNC_CONFIRMATION_IMAGES_SYNC_CONFIRMATION_ILLUSTRATION_DARK_SVG" file="resources\signin\sync_confirmation\images\sync_confirmation_illustration_dark.svg" type="BINDATA" compress="gzip" />
       </if>
-      <if expr="is_win or is_macosx or desktop_linux">
+      <if expr="is_android or is_win or is_macosx or desktop_linux">
         <include name="IDR_SIGNIN_EMAIL_CONFIRMATION_HTML" file="resources\signin\signin_email_confirmation\signin_email_confirmation.html" flattenhtml="true" allowexternalscript="true" type="BINDATA" />
         <include name="IDR_SIGNIN_EMAIL_CONFIRMATION_APP_JS" file="${root_gen_dir}\chrome\browser\resources\signin\signin_email_confirmation\signin_email_confirmation_app.js" use_base_dir="false" preprocess="true" type="BINDATA" />
         <include name="IDR_SIGNIN_ERROR_HTML" file="resources\signin\signin_error\signin_error.html" flattenhtml="true" allowexternalscript="true" type="BINDATA" />
@@ -344,7 +343,7 @@
         <include name="IDR_QUICKOFFICE_MANIFEST" file="resources\chromeos\quickoffice\manifest.json" type="BINDATA" />
         <include name="IDR_PRODUCT_CHROMEOS_SYNC_CONSENT_SCREEN_ICONS" file="internal\resources\chromeos-sync-consent-icons.html" type="BINDATA" />
       </if>
-      <if expr="not is_android and not chromeos">
+      <if expr="is_android or not is_android and not chromeos">
         <include name="IDR_CONTROL_BAR_HTML" file="resources\user_manager\control_bar.html" type="BINDATA" />
         <include name="IDR_CONTROL_BAR_JS" file="resources\user_manager\control_bar.js" type="BINDATA" />
         <include name="IDR_CREATE_PROFILE_HTML" file="resources\user_manager\create_profile.html" type="BINDATA" />
@@ -362,7 +361,7 @@
         <include name="IDR_USER_MANAGER_TUTORIAL_HTML" file="resources\user_manager\user_manager_tutorial.html" type="BINDATA" />
         <include name="IDR_USER_MANAGER_TUTORIAL_JS" file="resources\user_manager\user_manager_tutorial.js" type="BINDATA" />
       </if>
-      <if expr="not is_android">
+      <if expr="is_android or not is_android">
         <include name="IDR_IDENTITY_INTERNALS_HTML" file="resources\identity_internals\identity_internals.html" compress="gzip" type="BINDATA" />
         <include name="IDR_IDENTITY_INTERNALS_CSS" file="resources\identity_internals\identity_internals.css" compress="gzip" type="BINDATA" />
         <include name="IDR_IDENTITY_INTERNALS_JS" file="resources\identity_internals\identity_internals.js" compress="gzip" type="BINDATA" />
@@ -442,7 +441,7 @@
         </if>
         <include name="IDR_BRAILLE_MANIFEST" file="resources\chromeos\accessibility\braille_ime\manifest.json" type="BINDATA" />
       </if>
-      <if expr="not is_android">
+      <if expr="is_android or not is_android">
         <include name="IDR_MEDIA_ROUTER_INTERNALS_HTML" file="resources\media_router\media_router_internals.html" compress="gzip" type="BINDATA" />
         <include name="IDR_MEDIA_ROUTER_INTERNALS_CSS" file="resources\media_router\media_router_internals.css" compress="gzip" type="BINDATA" />
         <include name="IDR_MEDIA_ROUTER_INTERNALS_JS" file="resources\media_router\media_router_internals.js" compress="gzip" type="BINDATA" />
@@ -503,7 +502,7 @@
         <include name="IDR_RESET_PASSWORD_JS" file="resources\reset_password\reset_password.js" type="BINDATA" compress="gzip" />
         <include name="IDR_RESET_PASSWORD_MOJOM_LITE_JS" file="${root_gen_dir}\chrome\browser\ui\webui\reset_password\reset_password.mojom-lite.js" use_base_dir="false" type="BINDATA" compress="gzip" />
       </if>
-      <if expr="not is_android">
+      <if expr="is_android or not is_android">
         <include name="IDR_TAB_RANKER_EXAMPLE_PREPROCESSOR_CONFIG_PB" file="resource_coordinator\tab_ranker\example_preprocessor_config.pb" type="BINDATA" />
         <include name="IDR_TAB_RANKER_PAIRWISE_EXAMPLE_PREPROCESSOR_CONFIG_PB" file="resource_coordinator\tab_ranker\pairwise_preprocessor_config.pb" type="BINDATA" />
       </if>

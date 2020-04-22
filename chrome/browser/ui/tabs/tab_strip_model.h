@@ -31,10 +31,6 @@
 #include "ui/base/models/list_selection_model.h"
 #include "ui/base/page_transition_types.h"
 
-#if defined(OS_ANDROID)
-#error This file should only be included on desktop.
-#endif
-
 class Profile;
 class TabGroupModel;
 class TabStripModelDelegate;

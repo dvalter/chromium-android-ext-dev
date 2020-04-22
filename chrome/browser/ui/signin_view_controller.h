@@ -13,8 +13,10 @@
 #include "components/signin/public/base/signin_buildflags.h"
 #include "url/gurl.h"
 
+#if 0
 #if defined(OS_ANDROID)
 #error This file should only be included on desktop.
+#endif
 #endif
 
 class Browser;

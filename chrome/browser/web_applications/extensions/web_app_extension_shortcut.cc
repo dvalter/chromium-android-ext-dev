@@ -93,12 +93,14 @@ void UpdateAllShortcutsForShortcutInfo(
     const base::string16& old_app_title,
     base::OnceClosure callback,
     std::unique_ptr<ShortcutInfo> shortcut_info) {
+#if 0
   base::FilePath shortcut_data_dir =
       internals::GetShortcutDataDir(*shortcut_info);
   internals::PostShortcutIOTaskAndReply(
       base::BindOnce(&internals::UpdatePlatformShortcuts,
                      std::move(shortcut_data_dir), old_app_title),
       std::move(shortcut_info), std::move(callback));
+#endif
 }
 
 }  // namespace
@@ -253,14 +255,6 @@ void CreateShortcuts(ShortcutCreationReason reason,
 
 void DeleteAllShortcuts(Profile* profile, const extensions::Extension* app) {
   DCHECK_CURRENTLY_ON(BrowserThread::UI);
-
-  std::unique_ptr<ShortcutInfo> shortcut_info(
-      ShortcutInfoForExtensionAndProfile(app, profile));
-  base::FilePath shortcut_data_dir =
-      internals::GetShortcutDataDir(*shortcut_info);
-  internals::PostShortcutIOTask(
-      base::BindOnce(&internals::DeletePlatformShortcuts, shortcut_data_dir),
-      std::move(shortcut_info));
 }
 
 void UpdateAllShortcuts(const base::string16& old_app_title,

@@ -15,10 +15,6 @@
 #include "chrome/browser/ui/profile_chooser_constants.h"
 #include "chrome/browser/ui/startup/startup_types.h"
 
-#if defined(OS_ANDROID)
-#error "Not used on Android"
-#endif
-
 class Profile;
 
 namespace base { class FilePath; }

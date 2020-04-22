@@ -221,6 +221,7 @@ jumbo_static_library("extensions") {
     "api/image_writer_private/removable_storage_provider_chromeos.cc",
     "api/image_writer_private/removable_storage_provider_mac.cc",
     "api/image_writer_private/removable_storage_provider_win.cc",
+    "api/image_writer_private/removable_storage_provider_android.cc",
     "api/image_writer_private/unzip_helper.cc",
     "api/image_writer_private/unzip_helper.h",
     "api/image_writer_private/write_from_file_operation.cc",
@@ -623,6 +624,7 @@ jumbo_static_library("extensions") {
     "global_shortcut_listener_mac.mm",
     "global_shortcut_listener_win.cc",
     "global_shortcut_listener_win.h",
+    "global_shortcut_listener_android.cc",
     "install_gate.h",
     "install_observer.cc",
     "install_observer.h",
@@ -660,8 +662,6 @@ jumbo_static_library("extensions") {
     "permissions_based_management_policy_provider.h",
     "permissions_updater.cc",
     "permissions_updater.h",
-    "plugin_manager.cc",
-    "plugin_manager.h",
     "policy_extension_reinstaller.cc",
     "policy_extension_reinstaller.h",
     "policy_handlers.cc",
@@ -693,6 +693,8 @@ jumbo_static_library("extensions") {
     "system_display/display_info_provider_chromeos.h",
     "system_display/display_info_provider_mac.cc",
     "system_display/display_info_provider_mac.h",
+    "system_display/display_info_provider_android.cc",
+    "system_display/display_info_provider_android.h",
     "system_display/display_info_provider_win.cc",
     "system_display/display_info_provider_win.h",
     "tab_helper.cc",
@@ -789,7 +791,6 @@ jumbo_static_library("extensions") {
     "//chrome/browser/devtools",
     "//chrome/browser/engagement:mojo_bindings",
     "//chrome/browser/media/router",
-    "//chrome/browser/media/router/discovery",
     "//chrome/browser/resource_coordinator:mojo_bindings",
     "//chrome/browser/safe_browsing",
     "//chrome/browser/web_applications/components",
@@ -1092,7 +1093,7 @@ jumbo_static_library("extensions") {
     }
   }
 
-  if (!is_android) {
+  if (true || !is_android) {
     sources += [
       "api/processes/processes_api.cc",
       "api/processes/processes_api.h",

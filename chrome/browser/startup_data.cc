@@ -87,12 +87,18 @@ void StartupData::RecordCoreSystemProfile() {
 
 #if defined(OS_ANDROID)
 void StartupData::CreateProfilePrefService() {
+  LOG(ERROR) << "[Kiwi] StartupData::CreateProfilePrefService - Step 1";
   key_ = std::make_unique<ProfileKey>(GetProfilePath());
+  LOG(ERROR) << "[Kiwi] StartupData::CreateProfilePrefService - Step 2";
   PreProfilePrefServiceInit();
+  LOG(ERROR) << "[Kiwi] StartupData::CreateProfilePrefService - Step 3";
   CreateServicesInternal();
+  LOG(ERROR) << "[Kiwi] StartupData::CreateProfilePrefService - Step 4";
   key_->SetPrefs(prefs_.get());
+  LOG(ERROR) << "[Kiwi] StartupData::CreateProfilePrefService - Step 5";
 
   ProfileKeyStartupAccessor::GetInstance()->SetProfileKey(key_.get());
+  LOG(ERROR) << "[Kiwi] StartupData::CreateProfilePrefService - Step 6";
 }
 
 bool StartupData::HasBuiltProfilePrefService() {
@@ -138,12 +144,16 @@ StartupData::TakeProtoDatabaseProvider() {
 }
 
 void StartupData::PreProfilePrefServiceInit() {
+  LOG(ERROR) << "[Kiwi] StartupData::PreProfilePrefServiceInit - Step 1";
   pref_registry_ = base::MakeRefCounted<user_prefs::PrefRegistrySyncable>();
+  LOG(ERROR) << "[Kiwi] StartupData::PreProfilePrefServiceInit - Step 2";
   ChromeBrowserMainExtraPartsProfiles::
-      EnsureBrowserContextKeyedServiceFactoriesBuilt();
+      EnsureBrowserContextKeyedServiceFactoriesBuilt(false);
+  LOG(ERROR) << "[Kiwi] StartupData::PreProfilePrefServiceInit - Step 3";
 }
 
 void StartupData::CreateServicesInternal() {
+  LOG(ERROR) << "[Kiwi] StartupData::CreateServicesInternal - Step 1";
   const base::FilePath& path = key_->GetPath();
   if (!base::PathExists(path)) {
     // TODO(rogerta): http://crbug/160553 - Bad things happen if we can't
@@ -153,25 +163,32 @@ void StartupData::CreateServicesInternal() {
       return;
 
     CreateProfileReadme(path);
+    LOG(ERROR) << "[Kiwi] StartupData::CreateServicesInternal - Step 2";
   }
 
+  LOG(ERROR) << "[Kiwi] StartupData::CreateServicesInternal - Step 3";
   scoped_refptr<base::SequencedTaskRunner> io_task_runner =
       base::CreateSequencedTaskRunner(
           {base::ThreadPool(), base::TaskShutdownBehavior::BLOCK_SHUTDOWN,
            base::MayBlock()});
 
+  LOG(ERROR) << "[Kiwi] StartupData::CreateServicesInternal - Step 4";
   policy::ChromeBrowserPolicyConnector* browser_policy_connector =
       chrome_feature_list_creator_->browser_policy_connector();
+  LOG(ERROR) << "[Kiwi] StartupData::CreateServicesInternal - Step 5";
   std::unique_ptr<policy::SchemaRegistry> schema_registry =
       std::make_unique<policy::SchemaRegistry>();
+  LOG(ERROR) << "[Kiwi] StartupData::CreateServicesInternal - Step 6";
   schema_registry_service_ = BuildSchemaRegistryService(
       std::move(schema_registry), browser_policy_connector->GetChromeSchema(),
       browser_policy_connector->GetSchemaRegistry());
+  LOG(ERROR) << "[Kiwi] StartupData::CreateServicesInternal - Step 7";
 
   user_cloud_policy_manager_ = CreateUserCloudPolicyManager(
       path, schema_registry_service_->registry(),
       true /* force_immediate_policy_load */, io_task_runner);
 
+  LOG(ERROR) << "[Kiwi] StartupData::CreateServicesInternal - Step 8";
   profile_policy_connector_ = policy::CreateAndInitProfilePolicyConnector(
       schema_registry_service_->registry(),
       static_cast<policy::ChromeBrowserPolicyConnector*>(
@@ -179,26 +196,32 @@ void StartupData::CreateServicesInternal() {
       user_cloud_policy_manager_.get(),
       user_cloud_policy_manager_->core()->store(),
       true /* force_immediate_policy_load*/, nullptr /* user */);
+  LOG(ERROR) << "[Kiwi] StartupData::CreateServicesInternal - Step 9";
 
   // StoragePartitionImplMap uses profile directory as default storage
   // partition, see StoragePartitionImplMap::GetStoragePartitionPath().
   proto_db_provider_ =
       std::make_unique<leveldb_proto::ProtoDatabaseProvider>(path);
+  LOG(ERROR) << "[Kiwi] StartupData::CreateServicesInternal - Step 10";
   key_->SetProtoDatabaseProvider(proto_db_provider_.get());
+  LOG(ERROR) << "[Kiwi] StartupData::CreateServicesInternal - Step 11";
 
   RegisterProfilePrefs(false /* is_signin_profile */,
                        chrome_feature_list_creator_->actual_locale(),
                        pref_registry_.get());
+  LOG(ERROR) << "[Kiwi] StartupData::CreateServicesInternal - Step 12";
 
   mojo::PendingRemote<prefs::mojom::TrackedPreferenceValidationDelegate>
       pref_validation_delegate;
   // The preference tracking and protection is not required on Android.
   DCHECK(!ProfilePrefStoreManager::kPlatformSupportsPreferenceTracking);
+  LOG(ERROR) << "[Kiwi] StartupData::CreateServicesInternal - Step 14";
 
   prefs_ = CreatePrefService(
       pref_registry_, nullptr /* extension_pref_store */,
       profile_policy_connector_->policy_service(), browser_policy_connector,
       std::move(pref_validation_delegate), io_task_runner, key_.get(), path,
       false /* async_prefs*/);
+  LOG(ERROR) << "[Kiwi] StartupData::CreateServicesInternal - Step 15";
 }
 #endif

@@ -41,6 +41,9 @@ void TabManager::WebContentsData::DidStartNavigation(
 void TabManager::WebContentsData::DidFinishNavigation(
     content::NavigationHandle* navigation_handle) {
   SetIsInSessionRestore(false);
+  LOG(ERROR) << "[Kiwi] TabManager::WebContentsData::DidFinishNavigation A: " << g_browser_process;
+  LOG(ERROR) << "[Kiwi] TabManager::WebContentsData::DidFinishNavigation B: " << g_browser_process->GetTabManager();
+  LOG(ERROR) << "[Kiwi] TabManager::WebContentsData::DidFinishNavigation C: " << navigation_handle;
   g_browser_process->GetTabManager()->OnDidFinishNavigation(navigation_handle);
 }
 

@@ -3949,7 +3949,7 @@
         'items': { 'type': 'string' },
         'id': 'ExtensionInstallSources',
       },
-      'supported_on': ['chrome.*:21-', 'chrome_os:21-'],
+      'supported_on': ['chrome.*:21-', 'chrome_os:21-', 'android:30-'],
       'features': {
         'dynamic_refresh': True,
         'per_profile': True,
@@ -4008,7 +4008,7 @@
         },
         'id': 'ExtensionAllowedTypes',
       },
-      'supported_on': ['chrome.*:25-', 'chrome_os:25-'],
+      'supported_on': ['chrome.*:25-', 'chrome_os:25-', 'android:30-'],
       'features': {
         'dynamic_refresh': True,
         'per_profile': True,
@@ -4123,7 +4123,7 @@
         },
       },
       'url_schema': 'https://www.chromium.org/administrators/policy-list-3/extension-settings-full',
-      'supported_on': ['chrome.*:62-', 'chrome_os:62-'],
+      'supported_on': ['chrome.*:62-', 'chrome_os:62-', 'android:30-'],
       'features': {
         'dynamic_refresh': True,
         'per_profile': True,
@@ -4395,7 +4395,7 @@
       'owners': ['file://components/policy/resources/OWNERS'],
       'type': 'main',
       'schema': { 'type': 'boolean' },
-      'supported_on': ['chrome.*:10-', 'chrome_os:11-'],
+      'supported_on': ['chrome.*:10-', 'chrome_os:11-', 'android:30-'],
       'features': {
         'can_be_recommended': True,
         'dynamic_refresh': True,
@@ -16268,7 +16268,7 @@
           'required': ['url']
         }
       },
-      'supported_on': ['chrome.*:75-', 'chrome_os:75-'],
+      'supported_on': ['chrome.*:75-', 'chrome_os:75-', 'android:30-'],
       'features': {
         'dynamic_refresh': True,
         'per_profile': True,

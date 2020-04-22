@@ -199,7 +199,7 @@ class ProfileManager : public content::NotificationObserver,
   // profile specfic desktop shortcuts.
   ProfileShortcutManager* profile_shortcut_manager();
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
   // Less strict version of ScheduleProfileForDeletion(), silently exits if
   // profile is either scheduling or marked for deletion.
   void MaybeScheduleProfileForDeletion(
@@ -315,7 +315,7 @@ class ProfileManager : public content::NotificationObserver,
   // null if creation fails.
   Profile* CreateAndInitializeProfile(const base::FilePath& profile_dir);
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
   // Continues the scheduled profile deletion after closing all the profile's
   // browsers tabs. Creates a new profile if the profile to be deleted is the
   // last non-supervised profile. In the Mac, loads the next non-supervised
@@ -367,7 +367,7 @@ class ProfileManager : public content::NotificationObserver,
 
   void SaveActiveProfiles();
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
   void OnBrowserOpened(Browser* browser);
   void OnBrowserClosed(Browser* browser);
 

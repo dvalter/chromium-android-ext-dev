@@ -76,7 +76,6 @@
 
 #if defined(OS_ANDROID)
 #include "components/prefs/scoped_user_pref_update.h"
-#else  // !defined(OS_ANDROID)
 #include "chrome/browser/ui/zoom/chrome_zoom_level_otr_delegate.h"
 #include "components/zoom/zoom_event_manager.h"
 #include "content/public/browser/host_zoom_map.h"
@@ -110,7 +109,7 @@
 
 using content::BrowserThread;
 using content::DownloadManagerDelegate;
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 using content::HostZoomMap;
 #endif
 
@@ -162,7 +161,7 @@ void OffTheRecordProfileImpl::Init() {
         IncognitoModePrefs::GetAvailability(profile_->GetPrefs()) !=
             IncognitoModePrefs::DISABLED);
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
   TrackZoomLevelsFromParent();
 #endif
 
@@ -236,7 +235,7 @@ void OffTheRecordProfileImpl::InitIoData() {
   io_data_.reset(new OffTheRecordProfileIOData::Handle(this));
 }
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 void OffTheRecordProfileImpl::TrackZoomLevelsFromParent() {
   DCHECK(!profile_->IsIncognitoProfile());
 
@@ -290,7 +289,7 @@ base::Time OffTheRecordProfileImpl::GetCreationTime() const {
   return start_time_;
 }
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 std::unique_ptr<content::ZoomLevelDelegate>
 OffTheRecordProfileImpl::CreateZoomLevelDelegate(
     const base::FilePath& partition_path) {
@@ -635,7 +634,7 @@ Profile* Profile::CreateOffTheRecordProfile() {
   return profile;
 }
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 void OffTheRecordProfileImpl::OnParentZoomLevelChanged(
     const HostZoomMap::ZoomLevelChange& change) {
   HostZoomMap* host_zoom_map = HostZoomMap::GetDefaultForBrowserContext(this);

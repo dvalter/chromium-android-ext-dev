@@ -9,12 +9,12 @@
 namespace resource_coordinator {
 
 ResourceCoordinatorParts::ResourceCoordinatorParts()
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
     : tab_manager_(&tab_load_tracker_),
       tab_lifecycle_unit_source_(tab_manager_.usage_clock())
 #endif
 {
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
   tab_lifecycle_unit_source_.AddObserver(&tab_manager_);
 #endif
 }

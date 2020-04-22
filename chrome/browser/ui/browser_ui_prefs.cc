@@ -40,7 +40,7 @@ uint32_t GetHomeButtonAndHomePageIsNewTabPageFlags() {
 void RegisterBrowserPrefs(PrefRegistrySimple* registry) {
   registry->RegisterBooleanPref(prefs::kAllowFileSelectionDialogs, true);
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
   registry->RegisterIntegerPref(prefs::kRelaunchNotification, 0);
   registry->RegisterIntegerPref(
       prefs::kRelaunchNotificationPeriod,

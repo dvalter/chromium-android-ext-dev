@@ -23,6 +23,7 @@ ContentServiceManagerMainDelegate::~ContentServiceManagerMainDelegate() =
 
 int ContentServiceManagerMainDelegate::Initialize(
     const InitializeParams& params) {
+  LOG(ERROR) << "[Kiwi] ContentServiceManagerMainDelegate::Initialize - Step 1";
 #if defined(OS_ANDROID)
   // May be called twice on Android due to the way browser startup requests are
   // dispatched by the system.
@@ -33,6 +34,7 @@ int ContentServiceManagerMainDelegate::Initialize(
 #if defined(OS_MACOSX)
   content_main_params_.autorelease_pool = params.autorelease_pool;
 #endif
+  LOG(ERROR) << "[Kiwi] ContentServiceManagerMainDelegate::Initialize - Step 2";
 
   return content_main_runner_->Initialize(content_main_params_);
 }

@@ -31,10 +31,6 @@
 #include "ui/gfx/native_widget_types.h"
 #include "url/origin.h"
 
-#if defined(OS_ANDROID)
-#error This file should only be included on desktop.
-#endif
-
 class Browser;
 class SharingDialog;
 class DownloadShelf;

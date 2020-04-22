@@ -32,8 +32,10 @@ BackgroundContentsServiceFactory::BackgroundContentsServiceFactory()
     : BrowserContextKeyedServiceFactory(
           "BackgroundContentsService",
           BrowserContextDependencyManager::GetInstance()) {
+#if 0
   DependsOn(extensions::ExtensionRegistryFactory::GetInstance());
   DependsOn(extensions::ExtensionSystemFactory::GetInstance());
+#endif
 }
 
 BackgroundContentsServiceFactory::~BackgroundContentsServiceFactory() {}
@@ -46,6 +48,7 @@ KeyedService* BackgroundContentsServiceFactory::BuildServiceInstanceFor(
 
 void BackgroundContentsServiceFactory::RegisterProfilePrefs(
     user_prefs::PrefRegistrySyncable* user_prefs) {
+  LOG(ERROR) << "[Kiwi] BackgroundContentsServiceFactory::RegisterProfilePrefs";
   user_prefs->RegisterDictionaryPref(prefs::kRegisteredBackgroundContents);
 }
 

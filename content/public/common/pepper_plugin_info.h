@@ -17,8 +17,10 @@
 #include "ppapi/c/pp_module.h"
 #include "ppapi/c/ppb.h"
 
+#if 0
 #if !BUILDFLAG(ENABLE_PLUGINS)
 #error "Plugins should be enabled"
+#endif
 #endif
 
 namespace content {

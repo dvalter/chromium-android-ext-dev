@@ -106,8 +106,11 @@ class ApiResourceManager : public BrowserContextKeyedAPI,
  public:
   explicit ApiResourceManager(content::BrowserContext* context)
       : data_(base::MakeRefCounted<ApiResourceData>()) {
+LOG(ERROR) << "[Kiwi] Api Resource Manager - Step 1";
     extension_registry_observer_.Add(ExtensionRegistry::Get(context));
+LOG(ERROR) << "[Kiwi] Api Resource Manager - Step 2";
     process_manager_observer_.Add(ProcessManager::Get(context));
+LOG(ERROR) << "[Kiwi] Api Resource Manager - Step 3";
   }
 
   virtual ~ApiResourceManager() {
@@ -387,10 +390,15 @@ template <class T>
 struct BrowserContextFactoryDependencies<ApiResourceManager<T>> {
   static void DeclareFactoryDependencies(
       BrowserContextKeyedAPIFactory<ApiResourceManager<T>>* factory) {
+LOG(ERROR) << "[Kiwi] Api Resource Manager - Prestep A";
+LOG(ERROR) << "[Kiwi] Api Resource Manager - Step A";
     factory->DependsOn(
         ExtensionsBrowserClient::Get()->GetExtensionSystemFactory());
+LOG(ERROR) << "[Kiwi] Api Resource Manager - Step B";
     factory->DependsOn(ExtensionRegistryFactory::GetInstance());
+LOG(ERROR) << "[Kiwi] Api Resource Manager - Step C";
     factory->DependsOn(ProcessManagerFactory::GetInstance());
+LOG(ERROR) << "[Kiwi] Api Resource Manager - Step D";
   }
 };
 

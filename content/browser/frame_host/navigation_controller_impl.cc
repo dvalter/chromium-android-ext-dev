@@ -946,8 +946,10 @@ void NavigationControllerImpl::LoadURL(const GURL& url,
 }
 
 void NavigationControllerImpl::LoadURLWithParams(const LoadURLParams& params) {
+#if 0
   if (params.is_renderer_initiated)
     DCHECK(params.initiator_origin.has_value());
+#endif
 
   TRACE_EVENT1("browser,navigation",
                "NavigationControllerImpl::LoadURLWithParams", "url",
@@ -3087,7 +3089,9 @@ NavigationControllerImpl::CreateNavigationRequestFromLoadParams(
   DCHECK_EQ(-1, GetIndexOfEntry(entry));
   DCHECK(frame_entry);
   // All renderer-initiated navigations must have an initiator_origin.
+#if 0
   DCHECK(!params.is_renderer_initiated || params.initiator_origin.has_value());
+#endif
 
   GURL url_to_load;
   GURL virtual_url;

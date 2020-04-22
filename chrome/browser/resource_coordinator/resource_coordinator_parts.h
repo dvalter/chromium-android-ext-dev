@@ -10,7 +10,7 @@
 #include "chrome/browser/resource_coordinator/tab_load_tracker.h"
 #include "chrome/browser/resource_coordinator/tab_memory_metrics_reporter.h"
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 #include "chrome/browser/resource_coordinator/tab_lifecycle_unit_source.h"
 #include "chrome/browser/resource_coordinator/tab_manager.h"
 #endif
@@ -39,19 +39,11 @@ class ResourceCoordinatorParts {
   TabLoadTracker* tab_load_tracker() { return &tab_load_tracker_; }
 
   TabManager* tab_manager() {
-#if defined(OS_ANDROID)
-    return nullptr;
-#else
     return &tab_manager_;
-#endif  // defined(OS_ANDROID)
   }
 
   TabLifecycleUnitSource* tab_lifecycle_unit_source() {
-#if defined(OS_ANDROID)
-    return nullptr;
-#else
     return &tab_lifecycle_unit_source_;
-#endif  // defined(OS_ANDROID)
   }
 
  private:
@@ -62,7 +54,7 @@ class ResourceCoordinatorParts {
   // Created on demand the first time it's being accessed.
   std::unique_ptr<TabMemoryMetricsReporter> tab_memory_metrics_reporter_;
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
   // Any change to this #ifdef must be reflected as well in
   // chrome/browser/resource_coordinator/tab_manager_browsertest.cc
   //

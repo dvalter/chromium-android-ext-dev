@@ -17,6 +17,7 @@
 JavaScriptDialogViews::~JavaScriptDialogViews() = default;
 
 // static
+#if 0
 base::WeakPtr<JavaScriptDialog> JavaScriptDialog::CreateNewDialog(
     content::WebContents* parent_web_contents,
     content::WebContents* alerting_web_contents,
@@ -32,6 +33,7 @@ base::WeakPtr<JavaScriptDialog> JavaScriptDialog::CreateNewDialog(
               std::move(dialog_force_closed_callback)))
       ->weak_factory_.GetWeakPtr();
 }
+#endif
 
 void JavaScriptDialogViews::CloseDialogWithoutCallback() {
   dialog_callback_.Reset();

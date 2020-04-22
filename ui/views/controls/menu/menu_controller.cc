@@ -497,10 +497,6 @@ void MenuController::Run(Widget* parent,
     owner_ = parent;
     if (owner_)
       owner_->AddObserver(this);
-
-    // Only create a MenuPreTargetHandler for non-nested menus. Nested menus
-    // will use the existing one.
-    menu_pre_target_handler_ = MenuPreTargetHandler::Create(this, owner_);
   }
 
 #if defined(OS_MACOSX)
@@ -862,8 +858,6 @@ void MenuController::OnGestureEvent(SubmenuView* source,
 #if defined(OS_MACOSX)
     NOTIMPLEMENTED();
 #else   // !defined(OS_MACOSX)
-    event->ConvertLocationToTarget(source->GetWidget()->GetNativeWindow(),
-                                   owner()->GetNativeWindow());
 #endif  // defined(OS_MACOSX)
     owner()->OnGestureEvent(event);
     // Reset |send_gesture_events_to_owner_| when the first gesture ends.
@@ -1012,42 +1006,7 @@ int MenuController::OnDragUpdated(SubmenuView* source,
     if (menu_item)
       over_empty_menu = true;
   }
-  MenuDelegate::DropPosition drop_position = MenuDelegate::DropPosition::kNone;
   int drop_operation = ui::DragDropTypes::DRAG_NONE;
-  if (menu_item) {
-    gfx::Point menu_item_loc(event.location());
-    View::ConvertPointToTarget(source, menu_item, &menu_item_loc);
-    MenuItemView* query_menu_item;
-    if (!over_empty_menu) {
-      int menu_item_height = menu_item->height();
-      if (menu_item->HasSubmenu() &&
-          (menu_item_loc.y() > kDropBetweenPixels &&
-           menu_item_loc.y() < (menu_item_height - kDropBetweenPixels))) {
-        drop_position = MenuDelegate::DropPosition::kOn;
-      } else {
-        drop_position = (menu_item_loc.y() < menu_item_height / 2)
-                            ? MenuDelegate::DropPosition::kBefore
-                            : MenuDelegate::DropPosition::kAfter;
-      }
-      query_menu_item = menu_item;
-    } else {
-      query_menu_item = menu_item->GetParentMenuItem();
-      drop_position = MenuDelegate::DropPosition::kOn;
-    }
-    drop_operation = menu_item->GetDelegate()->GetDropOperation(
-        query_menu_item, event, &drop_position);
-
-    // If the menu has a submenu, schedule the submenu to open.
-    SetSelection(menu_item, menu_item->HasSubmenu() ? SELECTION_OPEN_SUBMENU
-                                                    : SELECTION_DEFAULT);
-
-    if (drop_position == MenuDelegate::DropPosition::kNone ||
-        drop_operation == ui::DragDropTypes::DRAG_NONE)
-      menu_item = nullptr;
-  } else {
-    SetSelection(source->GetMenuItem(), SELECTION_OPEN_SUBMENU);
-  }
-  SetDropMenuItem(menu_item, drop_position);
   last_drop_operation_ = drop_operation;
   return drop_operation;
 }
@@ -2868,34 +2827,6 @@ void MenuController::UpdateActiveMouseView(SubmenuView* event_source,
     target = target_menu->GetEventHandlerForPoint(target_menu_loc);
     if (target == target_menu || !target->GetEnabled())
       target = nullptr;
-  }
-  View* active_mouse_view = active_mouse_view_tracker_->view();
-  if (target != active_mouse_view) {
-    SendMouseCaptureLostToActiveView();
-    active_mouse_view = target;
-    active_mouse_view_tracker_->SetView(active_mouse_view);
-    if (active_mouse_view) {
-      gfx::Point target_point(target_menu_loc);
-      View::ConvertPointToTarget(target_menu, active_mouse_view, &target_point);
-      ui::MouseEvent mouse_entered_event(ui::ET_MOUSE_ENTERED, target_point,
-                                         target_point, ui::EventTimeForNow(), 0,
-                                         0);
-      active_mouse_view->OnMouseEntered(mouse_entered_event);
-
-      ui::MouseEvent mouse_pressed_event(
-          ui::ET_MOUSE_PRESSED, target_point, target_point,
-          ui::EventTimeForNow(), event.flags(), event.changed_button_flags());
-      active_mouse_view->OnMousePressed(mouse_pressed_event);
-    }
-  }
-
-  if (active_mouse_view) {
-    gfx::Point target_point(target_menu_loc);
-    View::ConvertPointToTarget(target_menu, active_mouse_view, &target_point);
-    ui::MouseEvent mouse_dragged_event(
-        ui::ET_MOUSE_DRAGGED, target_point, target_point, ui::EventTimeForNow(),
-        event.flags(), event.changed_button_flags());
-    active_mouse_view->OnMouseDragged(mouse_dragged_event);
   }
 }
 

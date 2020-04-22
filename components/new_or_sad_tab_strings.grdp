@@ -112,7 +112,7 @@
                desc="Title of the new tab page, not to be confused with the action of opening a new tab.">
         New Tab
       </message>
-      <if expr="not is_android">
+      <if expr="is_android or not is_android">
         <message name="IDS_NEW_TAB_OTR_HEADING"
                  desc="Heading used when a person opens an OTR window">
           You’ve gone incognito

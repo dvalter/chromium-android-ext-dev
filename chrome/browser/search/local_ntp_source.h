@@ -26,10 +26,6 @@
 #include "components/prefs/pref_registry_simple.h"
 #include "content/public/browser/url_data_source.h"
 
-#if defined(OS_ANDROID)
-#error "Instant is only used on desktop";
-#endif
-
 struct OneGoogleBarData;
 struct PromoData;
 class Profile;

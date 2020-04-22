@@ -88,7 +88,7 @@ MediaRouterBase::GetFlingingController(const MediaRoute::Id& route_id) {
   return nullptr;
 }
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 void MediaRouterBase::GetMediaController(
     const MediaRoute::Id& route_id,
     mojo::PendingReceiver<mojom::MediaController> controller,

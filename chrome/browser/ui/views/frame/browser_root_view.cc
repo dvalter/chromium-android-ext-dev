@@ -67,10 +67,14 @@ void OnFindURLMimeType(const GURL& url,
   // to do disk access.
   content::WebPluginInfo plugin;
   std::move(callback).Run(
-      url, mime_type.empty() || blink::IsSupportedMimeType(mime_type) ||
+      url, mime_type.empty() || blink::IsSupportedMimeType(mime_type)
+#if 0
+ ||
                content::PluginService::GetInstance()->GetPluginInfo(
                    process_id, routing_id, url, url::Origin(), mime_type, false,
-                   nullptr, &plugin, nullptr));
+                   nullptr, &plugin, nullptr)
+#endif
+);
 }
 
 bool GetURLForDrop(const ui::DropTargetEvent& event, GURL* url) {

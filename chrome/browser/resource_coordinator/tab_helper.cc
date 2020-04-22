@@ -25,7 +25,7 @@
 #include "content/public/browser/render_process_host.h"
 #include "services/resource_coordinator/public/cpp/memory_instrumentation/memory_instrumentation.h"
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 #include "chrome/browser/resource_coordinator/local_site_characteristics_webcontents_observer.h"
 #include "chrome/browser/resource_coordinator/tab_manager.h"
 #endif
@@ -43,7 +43,7 @@ ResourceCoordinatorTabHelper::ResourceCoordinatorTabHelper(
         TabLoadTracker::Get());
   }
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
   local_site_characteristics_wc_observer_ =
       std::make_unique<LocalSiteCharacteristicsWebContentsObserver>(
           web_contents);

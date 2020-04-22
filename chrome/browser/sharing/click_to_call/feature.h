@@ -14,7 +14,7 @@
 extern const base::Feature kClickToCallReceiver;
 #endif  // defined(OS_ANDROID)
 
-#if BUILDFLAG(ENABLE_CLICK_TO_CALL)
+#if BUILDFLAG(ENABLE_CLICK_TO_CALL) || true
 // Feature to allow click to call gets processed on desktop.
 extern const base::Feature kClickToCallUI;
 

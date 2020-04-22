@@ -106,7 +106,7 @@
 #include "ui/gfx/system_fonts_win.h"
 #endif
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 #include "content/browser/host_zoom_map_impl.h"
 #endif
 
@@ -704,7 +704,7 @@ void RenderViewHostImpl::ClosePage() {
 
     // TODO(creis): Should this be moved to Shutdown?  It may not be called for
     // RenderViewHosts that have been swapped out.
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
     static_cast<HostZoomMapImpl*>(HostZoomMap::Get(GetSiteInstance()))
         ->WillCloseRenderView(GetProcess()->GetID(), GetRoutingID());
 #endif
@@ -905,7 +905,7 @@ void RenderViewHostImpl::OnDocumentAvailableInMainFrame(
   if (!uses_temporary_zoom_level)
     return;
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
   HostZoomMapImpl* host_zoom_map =
       static_cast<HostZoomMapImpl*>(HostZoomMap::Get(GetSiteInstance()));
   host_zoom_map->SetTemporaryZoomLevel(GetProcess()->GetID(),

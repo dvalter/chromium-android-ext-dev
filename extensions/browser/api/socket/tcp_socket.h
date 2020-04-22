@@ -170,8 +170,6 @@ class TCPSocket : public Socket {
   // ApiResourceManager which is a BrowserContextKeyedAPI.
   content::BrowserContext* browser_context_;
 
-  SocketMode socket_mode_;
-
   // CLIENT mode.
   mojo::Remote<network::mojom::TCPConnectedSocket> client_socket_;
   // SERVER mode.

@@ -2190,9 +2190,11 @@ jumbo_source_set("browser") {
       "renderer_host/pepper/pepper_truetype_font_host.cc",
       "renderer_host/pepper/pepper_truetype_font_host.h",
       "renderer_host/pepper/pepper_truetype_font_linux.cc",
+      "renderer_host/pepper/pepper_truetype_font_android.cc",
       "renderer_host/pepper/pepper_truetype_font_list.h",
       "renderer_host/pepper/pepper_truetype_font_list_host.cc",
       "renderer_host/pepper/pepper_truetype_font_list_host.h",
+      "renderer_host/pepper/pepper_truetype_font_list_android.cc",
       "renderer_host/pepper/pepper_truetype_font_list_mac.mm",
       "renderer_host/pepper/pepper_truetype_font_list_win.cc",
       "renderer_host/pepper/pepper_truetype_font_mac.mm",
@@ -2417,7 +2419,7 @@ jumbo_source_set("browser") {
     }
     defines += [ "APPCACHE_USE_SIMPLE_CACHE" ]
     libs += [ "jnigraphics" ]
-  } else {
+
     # Not Android.
     sources += [
       # The WebAuthn devtools protocol API is not supported in Android yet.
@@ -2425,8 +2427,6 @@ jumbo_source_set("browser") {
       "$target_gen_dir/devtools/protocol/web_authn.h",
 
       # Devtools frontend not included in Android
-      "devtools/devtools_frontend_host_impl.cc",
-      "devtools/devtools_frontend_host_impl.h",
       "devtools/protocol/webauthn_handler.cc",
       "devtools/protocol/webauthn_handler.h",
       "host_zoom_level_context.cc",
@@ -2564,7 +2564,8 @@ jumbo_source_set("browser") {
     ]
   }
 
-  if (use_aura || is_mac) {
+  if (true || use_aura || is_mac) {
+if (false) {
     sources += [
       "compositor/browser_compositor_output_surface.cc",
       "compositor/browser_compositor_output_surface.h",
@@ -2574,8 +2575,6 @@ jumbo_source_set("browser") {
       "compositor/gpu_process_transport_factory.h",
       "compositor/gpu_surfaceless_browser_compositor_output_surface.cc",
       "compositor/gpu_surfaceless_browser_compositor_output_surface.h",
-      "compositor/image_transport_factory.cc",
-      "compositor/image_transport_factory.h",
       "compositor/offscreen_browser_compositor_output_surface.cc",
       "compositor/offscreen_browser_compositor_output_surface.h",
       "compositor/owned_mailbox.cc",
@@ -2588,6 +2587,11 @@ jumbo_source_set("browser") {
       "compositor/software_browser_compositor_output_surface.h",
       "compositor/viz_process_transport_factory.cc",
       "compositor/viz_process_transport_factory.h",
+    ]
+}
+    sources += [
+      "compositor/image_transport_factory.cc",
+      "compositor/image_transport_factory.h",
       "context_factory.cc",
       "renderer_host/browser_compositor_view_mac.h",
       "renderer_host/browser_compositor_view_mac.mm",

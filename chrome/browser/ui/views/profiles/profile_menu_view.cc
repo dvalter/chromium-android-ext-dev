@@ -257,8 +257,10 @@ void ProfileMenuView::OnPasswordsButtonClicked() {
   // TODO(crbug.com/995757): Remove user action.
   base::RecordAction(
       base::UserMetricsAction("ProfileChooser_PasswordsClicked"));
+#if 0
   NavigateToManagePasswordsPage(
       browser(), password_manager::ManagePasswordsReferrer::kProfileChooser);
+#endif
 }
 
 void ProfileMenuView::OnCreditCardsButtonClicked() {

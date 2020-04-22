@@ -54,7 +54,7 @@
 #include "extensions/browser/extension_system.h"
 #endif  // BUILDFLAG(ENABLE_EXTENSIONS)
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 #include "chrome/browser/ui/browser_finder.h"
 #include "chrome/browser/ui/browser_list.h"
 #include "chrome/browser/ui/browser_list_observer.h"
@@ -253,7 +253,7 @@ void OpenBrowserWindowForProfile(ProfileManager::CreateCallback callback,
                                             is_first_run, true);
 }
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 
 void LoadProfileAsync(const base::FilePath& path,
                       ProfileManager::CreateCallback callback) {

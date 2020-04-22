@@ -16,6 +16,8 @@
 #include "ui/base/dragdrop/os_exchange_data_provider_win.h"
 #endif
 
+#include "ui/base/dragdrop/os_exchange_data_provider_android.h"
+
 namespace ui {
 
 //static
@@ -34,7 +36,7 @@ OSExchangeDataProviderFactory::CreateProvider() {
   NOTIMPLEMENTED();
   return nullptr;
 #else
-#error "Unknown operating system"
+  return std::make_unique<OSExchangeDataProviderAndroid>();
 #endif
 }
 

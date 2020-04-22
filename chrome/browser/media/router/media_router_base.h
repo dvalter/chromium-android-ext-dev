@@ -19,7 +19,7 @@
 #include "chrome/common/media_router/media_route.h"
 #include "third_party/blink/public/mojom/presentation/presentation.mojom.h"
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 #include "chrome/common/media_router/mojom/media_controller.mojom.h"
 #include "mojo/public/cpp/bindings/pending_receiver.h"
 #include "mojo/public/cpp/bindings/pending_remote.h"
@@ -42,7 +42,7 @@ class MediaRouterBase : public MediaRouter {
   std::vector<MediaRoute> GetCurrentRoutes() const override;
   std::unique_ptr<media::FlingingController> GetFlingingController(
       const MediaRoute::Id& route_id) override;
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
   void GetMediaController(
       const MediaRoute::Id& route_id,
       mojo::PendingReceiver<mojom::MediaController> controller,

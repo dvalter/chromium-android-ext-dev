@@ -27,15 +27,13 @@ const DesktopMediaID::Id DesktopMediaID::kNullId = 0;
 // static
 const DesktopMediaID::Id DesktopMediaID::kFakeId = -3;
 
-#if defined(USE_AURA) || defined(OS_MACOSX)
+#if defined(USE_AURA) || defined(OS_MACOSX) || true
 // static
 DesktopMediaID DesktopMediaID::RegisterNativeWindow(DesktopMediaID::Type type,
                                                     gfx::NativeWindow window) {
   DCHECK(type == TYPE_SCREEN || type == TYPE_WINDOW);
   DCHECK(window);
   DesktopMediaID media_id(type, kNullId);
-  media_id.window_id =
-      DesktopMediaWindowRegistry::GetInstance()->RegisterWindow(window);
   return media_id;
 }
 

@@ -73,26 +73,33 @@ void ChromeMainDelegateAndroid::SecureDataDirectory() {
 int ChromeMainDelegateAndroid::RunProcess(
     const std::string& process_type,
     const content::MainFunctionParams& main_function_params) {
+  LOG(ERROR) << "[Kiwi] ChromeMainDelegateAndroid::RunProcess - Step 1";
   TRACE_EVENT0("startup", "ChromeMainDelegateAndroid::RunProcess");
   // Defer to the default main method outside the browser process.
   if (!process_type.empty())
     return -1;
 
+  LOG(ERROR) << "[Kiwi] ChromeMainDelegateAndroid::RunProcess - Step 2";
   SecureDataDirectory();
 
+  LOG(ERROR) << "[Kiwi] ChromeMainDelegateAndroid::RunProcess - Step 3";
   // Because the browser process can be started asynchronously as a series of
   // UI thread tasks a second request to start it can come in while the
   // first request is still being processed. Chrome must keep the same
   // browser runner for the second request.
   // Also only record the start time the first time round, since this is the
   // start time of the application, and will be same for all requests.
+  LOG(ERROR) << "[Kiwi] ChromeMainDelegateAndroid::RunProcess - Step 4";
   if (!browser_runner_) {
     startup_metric_utils::RecordMainEntryPointTime(
         chrome::android::GetMainEntryPointTimeTicks());
     browser_runner_ = content::BrowserMainRunner::Create();
+    LOG(ERROR) << "[Kiwi] ChromeMainDelegateAndroid::RunProcess - Step 5";
   }
+  LOG(ERROR) << "[Kiwi] ChromeMainDelegateAndroid::RunProcess - Step 6";
 
   int exit_code = browser_runner_->Initialize(main_function_params);
+  LOG(ERROR) << "[Kiwi] ChromeMainDelegateAndroid::RunProcess - Step 7";
   // On Android we do not run BrowserMain(), so the above initialization of a
   // BrowserMainRunner is all we want to occur. Return >= 0 to avoid running
   // BrowserMain, while preserving any error codes > 0.

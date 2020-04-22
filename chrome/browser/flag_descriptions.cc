@@ -2853,8 +2853,6 @@ const char kAndroidNightModeDescription[] =
 
 // Non-Android -----------------------------------------------------------------
 
-#else  // !defined(OS_ANDROID)
-
 const char kShowSyncPausedReasonCookiesClearedOnExitName[] =
     "Show sync paused reason is the setup of cookie settings.";
 const char kShowSyncPausedReasonCookiesClearedOnExitDescription[] =

@@ -25,7 +25,7 @@ class ClientHintsControllerDelegate;
 class DownloadManagerDelegate;
 class PermissionControllerDelegate;
 class ShellDownloadManagerDelegate;
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 class ZoomLevelDelegate;
 #endif  // !defined(OS_ANDROID)
 
@@ -44,7 +44,7 @@ class ShellBrowserContext : public BrowserContext {
 
   // BrowserContext implementation.
   base::FilePath GetPath() override;
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
   std::unique_ptr<ZoomLevelDelegate> CreateZoomLevelDelegate(
       const base::FilePath& partition_path) override;
 #endif  // !defined(OS_ANDROID)

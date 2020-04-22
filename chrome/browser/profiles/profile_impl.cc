@@ -186,7 +186,6 @@
 
 #if defined(OS_ANDROID)
 #include "chrome/browser/android/profile_key_startup_accessor.h"
-#else
 #include "components/zoom/zoom_event_manager.h"
 #include "content/public/common/page_zoom.h"
 #endif
@@ -366,12 +365,14 @@ const char ProfileImpl::kPrefExitTypeNormal[] = "Normal";
 // static
 void ProfileImpl::RegisterProfilePrefs(
     user_prefs::PrefRegistrySyncable* registry) {
+  LOG(ERROR) << "[Kiwi] ProfileImpl::RegisterProfilePrefs - Step 1";
   registry->RegisterBooleanPref(prefs::kSavingBrowserHistoryDisabled, false);
   registry->RegisterBooleanPref(prefs::kAllowDeletingBrowserHistory, true);
   registry->RegisterBooleanPref(prefs::kForceGoogleSafeSearch, false);
   registry->RegisterIntegerPref(prefs::kForceYouTubeRestrict,
                                 safe_search_util::YOUTUBE_RESTRICT_OFF);
   registry->RegisterStringPref(prefs::kAllowedDomainsForApps, std::string());
+  LOG(ERROR) << "[Kiwi] ProfileImpl::RegisterProfilePrefs - Step 2";
 
   registry->RegisterIntegerPref(prefs::kProfileAvatarIndex, -1);
   // Whether a profile is using an avatar without having explicitely chosen it
@@ -392,6 +393,7 @@ void ProfileImpl::RegisterProfilePrefs(
                                home_page_flags);
   registry->RegisterStringPref(prefs::kNewTabPageLocationOverride,
                                std::string());
+  LOG(ERROR) << "[Kiwi] ProfileImpl::RegisterProfilePrefs - Step 3";
 
 #if BUILDFLAG(ENABLE_PRINTING)
   registry->RegisterBooleanPref(prefs::kPrintingEnabled, true);
@@ -406,9 +408,10 @@ void ProfileImpl::RegisterProfilePrefs(
       prefs::kOobeMarketingOptInScreenFinished, false,
       user_prefs::PrefRegistrySyncable::SYNCABLE_OS_PREF);
 #endif  // defined(OS_CHROMEOS)
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
   registry->RegisterBooleanPref(prefs::kShowCastIconInToolbar, false);
 #endif  // !defined(OS_ANDROID)
+  LOG(ERROR) << "[Kiwi] ProfileImpl::RegisterProfilePrefs - Step 4";
 }
 
 ProfileImpl::ProfileImpl(
@@ -807,7 +810,7 @@ Profile::ProfileType ProfileImpl::GetProfileType() const {
   return REGULAR_PROFILE;
 }
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 std::unique_ptr<content::ZoomLevelDelegate>
 ProfileImpl::CreateZoomLevelDelegate(const base::FilePath& partition_path) {
   return std::make_unique<ChromeZoomLevelPrefs>(
@@ -1062,7 +1065,7 @@ const PrefService* ProfileImpl::GetPrefs() const {
   return prefs_.get();
 }
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 ChromeZoomLevelPrefs* ProfileImpl::GetZoomLevelPrefs() {
   return static_cast<ChromeZoomLevelPrefs*>(
       GetDefaultStoragePartition(this)->GetZoomLevelDelegate());

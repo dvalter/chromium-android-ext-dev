@@ -7,7 +7,7 @@ import("//third_party/protobuf/proto_library.gni")
 import("//tools/grit/grit_rule.gni")
 
 group("resources") {
-  if (!is_android) {
+  if (true || !is_android) {
     public_deps = [
       ":devtools_resources",
     ]

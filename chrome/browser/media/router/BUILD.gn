@@ -209,7 +209,7 @@ static_library("test_support") {
     "test/test_helper.h",
   ]
 
-  if (enable_extensions) {
+  if (false && enable_extensions) {
     deps += [
       "discovery",
       "//chrome/common/media_router/mojom:media_router",

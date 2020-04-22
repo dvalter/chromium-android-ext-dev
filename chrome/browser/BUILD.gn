@@ -407,7 +407,6 @@ jumbo_static_library("browser") {
     "download/download_core_service_factory.h",
     "download/download_core_service_impl.cc",
     "download/download_core_service_impl.h",
-    "download/download_crx_util_android.cc",
     "download/download_file_picker.cc",
     "download/download_file_picker.h",
     "download/download_history.cc",
@@ -1221,6 +1220,8 @@ jumbo_static_library("browser") {
     "plugins/pdf_plugin_placeholder_observer.h",
     "policy/browser_dm_token_storage.cc",
     "policy/browser_dm_token_storage.h",
+    "policy/browser_dm_token_storage_android.cc",
+    "policy/browser_dm_token_storage_android.h",
     "policy/browser_dm_token_storage_linux.cc",
     "policy/browser_dm_token_storage_linux.h",
     "policy/browser_dm_token_storage_mac.h",
@@ -1567,7 +1568,6 @@ jumbo_static_library("browser") {
     "sessions/session_common_utils.h",
     "sessions/session_data_deleter.cc",
     "sessions/session_data_deleter.h",
-    "sessions/session_restore_android.cc",
     "sessions/session_tab_helper.cc",
     "sessions/session_tab_helper.h",
     "sessions/tab_restore_service_factory.cc",
@@ -3011,7 +3011,8 @@ jumbo_static_library("browser") {
       ]
       deps += [ "//chrome/android/modules/dev_ui/provider:native" ]
     }
-  } else {  # !is_android
+  }
+  if (true) {  # !is_android
     sources += [
       "accessibility/invert_bubble_prefs.cc",
       "accessibility/invert_bubble_prefs.h",
@@ -3059,12 +3060,6 @@ jumbo_static_library("browser") {
       "badging/badge_manager_delegate.h",
       "badging/badge_manager_factory.cc",
       "badging/badge_manager_factory.h",
-      "banners/app_banner_manager_desktop.cc",
-      "banners/app_banner_manager_desktop.h",
-      "bluetooth/bluetooth_chooser_context.cc",
-      "bluetooth/bluetooth_chooser_context.h",
-      "bluetooth/bluetooth_chooser_context_factory.cc",
-      "bluetooth/bluetooth_chooser_context_factory.h",
       "bookmarks/bookmark_html_writer.cc",
       "bookmarks/bookmark_html_writer.h",
       "certificate_viewer.h",
@@ -3295,7 +3290,6 @@ jumbo_static_library("browser") {
       "metrics/desktop_session_duration/desktop_session_duration_tracker.h",
       "metrics/first_web_contents_profiler.cc",
       "metrics/first_web_contents_profiler.h",
-      "metrics/incognito_observer_desktop.cc",
       "metrics/tab_stats_data_store.cc",
       "metrics/tab_stats_data_store.h",
       "metrics/tab_stats_tracker.cc",
@@ -3308,6 +3302,7 @@ jumbo_static_library("browser") {
       "notifications/profile_notification.cc",
       "notifications/profile_notification.h",
       "obsolete_system/obsolete_system.h",
+      "obsolete_system/obsolete_system_android.cc",
       "obsolete_system/obsolete_system_linux.cc",
       "obsolete_system/obsolete_system_mac.cc",
       "obsolete_system/obsolete_system_win.cc",
@@ -3676,7 +3671,7 @@ jumbo_static_library("browser") {
         "chrome_browser_main_posix.h",
         "first_run/first_run_internal_posix.cc",
         "importer/firefox_profile_lock_posix.cc",
-        "process_singleton_posix.cc",
+#        "process_singleton_posix.cc",
         "task_manager/sampling/shared_sampler_posix.cc",
       ]
     }
@@ -4142,7 +4137,7 @@ jumbo_static_library("browser") {
     defines += [ "USE_CRAS" ]
   }
 
-  if (!is_android && !is_chromeos) {
+  if (true || (!is_android && !is_chromeos)) {
     sources += [
       "first_run/upgrade_util.cc",
       "first_run/upgrade_util.h",
@@ -4165,14 +4160,6 @@ jumbo_static_library("browser") {
       "notifications/screen_lock_notification_blocker.cc",
       "notifications/screen_lock_notification_blocker.h",
       "platform_util.cc",
-      "policy/chrome_browser_cloud_management_controller.cc",
-      "policy/chrome_browser_cloud_management_controller.h",
-      "policy/chrome_browser_cloud_management_register_watcher.cc",
-      "policy/chrome_browser_cloud_management_register_watcher.h",
-      "policy/cloud/chrome_browser_cloud_management_helper.cc",
-      "policy/cloud/chrome_browser_cloud_management_helper.h",
-      "policy/cloud/user_policy_signin_service.cc",
-      "policy/cloud/user_policy_signin_service.h",
       "policy/cloud/user_policy_signin_service_internal.h",
       "profiles/avatar_menu.cc",
       "profiles/avatar_menu.h",
@@ -4202,7 +4189,8 @@ jumbo_static_library("browser") {
       "upgrade_detector/upgrade_detector_impl.cc",
       "upgrade_detector/upgrade_detector_impl.h",
     ]
-  } else {
+  }
+  if (true) {
     sources += [
       "media/protected_media_identifier_permission_context.cc",
       "media/protected_media_identifier_permission_context.h",
@@ -4265,6 +4253,10 @@ jumbo_static_library("browser") {
     deps += [ "//ui/views" ]
   }
 
+  sources += [
+    "download/drag_download_item_android.cc",
+  ]
+
   if (use_aura) {
     # Cross-platform Aura files.
     sources += [
@@ -4297,6 +4289,7 @@ jumbo_static_library("browser") {
       "background/background_application_list_model.h",
       "background/background_mode_manager.cc",
       "background/background_mode_manager.h",
+      "background/background_mode_manager_android.cc",
       "background/background_mode_manager_aura.cc",
       "background/background_mode_manager_chromeos.cc",
       "background/background_mode_manager_mac.mm",
@@ -5067,7 +5060,7 @@ jumbo_static_library("browser") {
     }
   }
 
-  if (enable_session_service) {
+  if (true || enable_session_service) {
     sources += [
       "sessions/session_restore.cc",
       "sessions/session_restore.h",
@@ -5438,7 +5431,7 @@ grit("resources") {
     }
   }
 
-  if (is_win || is_mac || is_desktop_linux || is_chromeos) {
+  if (true || is_win || is_mac || is_desktop_linux || is_chromeos) {
     deps += [
       "//chrome/browser/resources/discards:discards_resources_gen",
       "//chrome/browser/resources/management:polymer3_elements",
@@ -5471,7 +5464,7 @@ grit("resources") {
     ]
   }
 
-  if (is_chromeos && optimize_webui) {
+  if (false && optimize_webui) {
     deps += [
       "//chrome/browser/resources/chromeos/bluetooth_pairing_dialog:build",
       "//chrome/browser/resources/chromeos/internet_config_dialog:build",

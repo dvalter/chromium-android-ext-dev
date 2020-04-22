@@ -1072,7 +1072,7 @@ const PolicyToPreferenceMapEntry kSimplePolicyMap[] = {
     base::Value::Type::BOOLEAN },
 #endif
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
   { key::kRelaunchNotification,
     prefs::kRelaunchNotification,
     base::Value::Type::INTEGER },

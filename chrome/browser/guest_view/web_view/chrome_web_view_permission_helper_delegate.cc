@@ -87,10 +87,12 @@ void ChromeWebViewPermissionHelperDelegate::OnPermissionResponse(
     const std::string& identifier,
     bool allow,
     const std::string& input) {
+#if 0
   if (allow) {
     ChromePluginServiceFilter::GetInstance()->AuthorizeAllPlugins(
         web_contents(), true, identifier);
   }
+#endif
 }
 
 #endif  // BUILDFLAG(ENABLE_PLUGINS)

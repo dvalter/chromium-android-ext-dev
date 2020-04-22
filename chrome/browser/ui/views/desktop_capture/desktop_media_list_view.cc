@@ -170,7 +170,7 @@ void DesktopMediaListView::OnSourceAdded(size_t index) {
   source_view->SetName(source.name);
   source_view->SetGroup(kDesktopMediaSourceViewGroupId);
   if (source.id.type == DesktopMediaID::TYPE_WINDOW) {
-    gfx::ImageSkia icon_image = GetWindowIcon(source.id);
+    gfx::ImageSkia icon_image = gfx::ImageSkia();
 #if defined(OS_CHROMEOS)
     // Empty icons are used to represent default icon for aura windows. By
     // detecting this, we load the default icon from resource.

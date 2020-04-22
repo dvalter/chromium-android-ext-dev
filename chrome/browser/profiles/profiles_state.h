@@ -43,7 +43,7 @@ void RegisterPrefs(PrefRegistrySimple* registry);
 // System Profile directory, which is an invalid last used profile.
 void SetLastUsedProfile(const std::string& profile_dir);
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 // Returns the display name of the specified on-the-record profile (or guest),
 // specified by |profile_path|, used in the avatar button or user manager. If
 // |profile_path| is the guest path, it will return IDS_GUEST_PROFILE_NAME. If

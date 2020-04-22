@@ -157,7 +157,7 @@
 #include "ui/gfx/text_elider.h"
 #include "ui/strings/grit/ui_strings.h"
 
-#if BUILDFLAG(USE_RENDERER_SPELLCHECKER)
+#if true || BUILDFLAG(USE_RENDERER_SPELLCHECKER)
 #include "chrome/browser/renderer_context_menu/spelling_options_submenu_observer.h"
 #endif
 
@@ -1746,16 +1746,6 @@ void RenderViewContextMenu::AppendLanguageSettings() {
 #if defined(OS_MACOSX)
   menu_model_.AddItemWithStringId(IDC_CONTENT_CONTEXT_LANGUAGE_SETTINGS,
                                   IDS_CONTENT_CONTEXT_LANGUAGE_SETTINGS);
-#else
-  if (!spelling_options_submenu_observer_) {
-    const int kLanguageRadioGroup = 1;
-    spelling_options_submenu_observer_ =
-        std::make_unique<SpellingOptionsSubMenuObserver>(this, this,
-                                                         kLanguageRadioGroup);
-  }
-
-  spelling_options_submenu_observer_->InitMenu(params_);
-  observers_.AddObserver(spelling_options_submenu_observer_.get());
 #endif
 }
 

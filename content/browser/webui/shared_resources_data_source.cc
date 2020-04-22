@@ -87,7 +87,7 @@ const std::map<std::string, std::string> CreatePathPrefixAliasesMap() {
     return aliases;
 #endif  // defined(OS_CHROMEOS)
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
   aliases["../../../third_party/polymer/v1_0/components-chromium/polymer2/"] =
       "polymer/v1_0/polymer/";
 #endif  // !defined(OS_ANDROID)
@@ -179,7 +179,7 @@ const std::map<int, std::string> CreateChromeosMojoResourceIdToAliasMap() {
 }
 #endif  // !defined(OS_CHROMEOS)
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 bool ShouldIgnore(std::string resource) {
 #if defined(OS_CHROMEOS)
   if (UsingMultiplePolymerVersions())
@@ -211,7 +211,7 @@ void AddResourcesToMap(ResourcesMap* resources_map) {
   for (size_t i = 0; i < kWebuiResourcesSize; ++i) {
     const auto& resource = kWebuiResources[i];
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
     if (ShouldIgnore(resource.name))
       continue;
 #endif  // !defined(OS_ANDROID)

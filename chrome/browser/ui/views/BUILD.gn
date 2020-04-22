@@ -5,8 +5,6 @@
 import("//build/config/ui.gni")
 import("//ui/views/features.gni")
 
-assert(toolkit_views)
-
 component("views") {
   output_name = "browser_ui_views"
   sources = [

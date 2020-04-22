@@ -44,7 +44,7 @@ HostContentSettingsMapFactory::HostContentSettingsMapFactory()
 #if BUILDFLAG(ENABLE_SUPERVISED_USERS)
   DependsOn(SupervisedUserSettingsServiceFactory::GetInstance());
 #endif
-#if BUILDFLAG(ENABLE_EXTENSIONS)
+#if false && BUILDFLAG(ENABLE_EXTENSIONS)
   DependsOn(
       extensions::ExtensionsBrowserClient::Get()->GetExtensionSystemFactory());
 #endif
@@ -85,7 +85,7 @@ scoped_refptr<RefcountedKeyedService>
       /*store_last_modified=*/true,
       base::FeatureList::IsEnabled(features::kPermissionDelegation)));
 
-#if BUILDFLAG(ENABLE_EXTENSIONS)
+#if false && BUILDFLAG(ENABLE_EXTENSIONS)
   // These must be registered before before the HostSettings are passed over to
   // the IOThread.  Simplest to do this on construction.
   extensions::ExtensionService::RegisterContentSettings(settings_map.get(),

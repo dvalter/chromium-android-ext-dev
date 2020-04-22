@@ -34,6 +34,13 @@ source_set("views") {
     "//ui/views",
   ]
 
+  sources += [
+    "dom_agent_android.cc",
+    "dom_agent_android.h",
+    "overlay_agent_android.cc",
+    "overlay_agent_android.h",
+  ]
+
   if (use_aura) {
     sources += [
       "dom_agent_aura.cc",

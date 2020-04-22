@@ -9,7 +9,7 @@ const base::Feature kClickToCallReceiver{"ClickToCallReceiver",
                                          base::FEATURE_ENABLED_BY_DEFAULT};
 #endif  // defined(OS_ANDROID)
 
-#if BUILDFLAG(ENABLE_CLICK_TO_CALL)
+#if BUILDFLAG(ENABLE_CLICK_TO_CALL) || true
 const base::Feature kClickToCallUI{"ClickToCallUI",
                                    base::FEATURE_ENABLED_BY_DEFAULT};
 

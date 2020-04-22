@@ -62,6 +62,7 @@ BrowserMainRunnerImpl::~BrowserMainRunnerImpl() {
 }
 
 int BrowserMainRunnerImpl::Initialize(const MainFunctionParams& parameters) {
+  LOG(ERROR) << "[Kiwi] BrowserMainRunnerImpl::Initialize - Step 1";
   SCOPED_UMA_HISTOGRAM_LONG_TIMER(
       "Startup.BrowserMainRunnerImplInitializeLongTime");
   TRACE_EVENT0("startup", "BrowserMainRunnerImpl::Initialize");
@@ -75,6 +76,7 @@ int BrowserMainRunnerImpl::Initialize(const MainFunctionParams& parameters) {
 
     const base::TimeTicks start_time_step1 = base::TimeTicks::Now();
 
+    LOG(ERROR) << "[Kiwi] BrowserMainRunnerImpl::Initialize - Step 2";
     SkGraphics::Init();
 
     if (parameters.command_line.HasSwitch(switches::kWaitForDebugger))
@@ -93,6 +95,7 @@ int BrowserMainRunnerImpl::Initialize(const MainFunctionParams& parameters) {
 #endif  // OS_WIN
 
     gfx::InitializeFonts();
+    LOG(ERROR) << "[Kiwi] BrowserMainRunnerImpl::Initialize - Step 3";
 
     main_loop_.reset(
         new BrowserMainLoop(parameters, std::move(scoped_execution_fence_)));

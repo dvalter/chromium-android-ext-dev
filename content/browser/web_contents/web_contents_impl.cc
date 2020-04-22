@@ -176,7 +176,7 @@
 #include "content/browser/android/nfc_host.h"
 #include "content/browser/web_contents/web_contents_android.h"
 #include "services/device/public/mojom/nfc.mojom.h"
-#else  // !OS_ANDROID
+
 #include "content/browser/host_zoom_map_impl.h"
 #endif  // OS_ANDROID
 
@@ -599,7 +599,7 @@ WebContentsImpl::WebContentsImpl(BrowserContext* browser_context)
       audio_stream_monitor_(this),
       media_web_contents_observer_(
           std::make_unique<MediaWebContentsObserver>(this)),
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
       page_scale_factor_is_one_(true),
 #endif  // !defined(OS_ANDROID)
       is_overlay_content_(false),
@@ -1192,7 +1192,7 @@ FindRequestManager* WebContentsImpl::GetFindRequestManagerForTesting() {
   return GetFindRequestManager();
 }
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 void WebContentsImpl::UpdateZoom() {
   RenderWidgetHostImpl* rwh = GetRenderViewHost()->GetWidget();
   if (rwh->GetView())
@@ -5638,7 +5638,7 @@ WebContents* WebContentsImpl::GetAsWebContents() {
   return this;
 }
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 double WebContentsImpl::GetPendingPageZoomLevel() {
   NavigationEntry* pending_entry = GetController().GetPendingEntry();
   if (!pending_entry)

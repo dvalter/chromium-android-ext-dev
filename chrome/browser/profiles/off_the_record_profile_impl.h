@@ -17,7 +17,7 @@
 #include "components/domain_reliability/clear_mode.h"
 #include "content/public/browser/content_browser_client.h"
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 #include "chrome/browser/ui/zoom/chrome_zoom_level_prefs.h"
 #include "content/public/browser/host_zoom_map.h"
 #endif
@@ -93,7 +93,7 @@ class OffTheRecordProfileImpl : public Profile {
   base::FilePath GetPath() override;
   base::FilePath GetPath() const override;
   base::Time GetCreationTime() const override;
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
   std::unique_ptr<content::ZoomLevelDelegate> CreateZoomLevelDelegate(
       const base::FilePath& partition_path) override;
 #endif  // !defined(OS_ANDROID)
@@ -129,12 +129,12 @@ class OffTheRecordProfileImpl : public Profile {
  private:
   void InitIoData();
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
   // Allows a profile to track changes in zoom levels in its parent profile.
   void TrackZoomLevelsFromParent();
 #endif  // !defined(OS_ANDROID)
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
   // Callback function for tracking parent's zoom level changes.
   void OnParentZoomLevelChanged(
       const content::HostZoomMap::ZoomLevelChange& change);
@@ -146,7 +146,7 @@ class OffTheRecordProfileImpl : public Profile {
 
   std::unique_ptr<sync_preferences::PrefServiceSyncable> prefs_;
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
   std::unique_ptr<content::HostZoomMap::Subscription> track_zoom_subscription_;
   std::unique_ptr<ChromeZoomLevelPrefs::DefaultZoomLevelSubscription>
       parent_default_zoom_level_subscription_;

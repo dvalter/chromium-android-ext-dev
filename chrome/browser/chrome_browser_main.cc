@@ -847,9 +847,11 @@ int ChromeBrowserMainParts::PreEarlyInitialization() {
 }
 
 void ChromeBrowserMainParts::PostEarlyInitialization() {
+  LOG(ERROR) << "[Kiwi] ChromeBrowserMainParts::PostEarlyInitialization - Step 1";
   TRACE_EVENT0("startup", "ChromeBrowserMainParts::PostEarlyInitialization");
   for (size_t i = 0; i < chrome_extra_parts_.size(); ++i)
     chrome_extra_parts_[i]->PostEarlyInitialization();
+  LOG(ERROR) << "[Kiwi] ChromeBrowserMainParts::PostEarlyInitialization - Step 2";
 }
 
 void ChromeBrowserMainParts::ToolkitInitialized() {
@@ -888,6 +890,7 @@ void ChromeBrowserMainParts::PostMainMessageLoopStart() {
 }
 
 int ChromeBrowserMainParts::PreCreateThreads() {
+LOG(ERROR) << "[Kiwi] ChromeBrowserMainParts::PreCreateThreads - Step 1";
   // IMPORTANT
   // Calls in this function should not post tasks or create threads as
   // components used to handle those tasks are not yet available. This work
@@ -995,18 +998,22 @@ int ChromeBrowserMainParts::ApplyFirstRunPrefs() {
 }
 
 int ChromeBrowserMainParts::PreCreateThreadsImpl() {
+  LOG(ERROR) << "ChromeBrowserMainParts::PreCreateThreadsImpl - Step 1";
   TRACE_EVENT0("startup", "ChromeBrowserMainParts::PreCreateThreadsImpl")
   run_message_loop_ = false;
+  LOG(ERROR) << "ChromeBrowserMainParts::PreCreateThreadsImpl - Step 2";
 
   if (browser_process_->GetApplicationLocale().empty()) {
     ShowMissingLocaleMessageBox();
     return chrome::RESULT_CODE_MISSING_DATA;
   }
+  LOG(ERROR) << "ChromeBrowserMainParts::PreCreateThreadsImpl - Step 3";
 
 #if !defined(OS_ANDROID)
   chrome::MaybeShowInvalidUserDataDirWarningDialog();
 #endif  // !defined(OS_ANDROID)
 
+  LOG(ERROR) << "ChromeBrowserMainParts::PreCreateThreadsImpl - Step 4";
   DCHECK(!user_data_dir_.empty());
 
   // Force MediaCaptureDevicesDispatcher to be created on UI thread.
@@ -1021,22 +1028,28 @@ int ChromeBrowserMainParts::PreCreateThreadsImpl() {
   first_run::IsChromeFirstRun();
 
 #endif  // !defined(OS_ANDROID)
+  LOG(ERROR) << "ChromeBrowserMainParts::PreCreateThreadsImpl - Step 5";
 
   PrefService* local_state = browser_process_->local_state();
 
+  LOG(ERROR) << "ChromeBrowserMainParts::PreCreateThreadsImpl - Step 6";
 #if defined(OS_CHROMEOS)
   chromeos::CrosSettings::Initialize(local_state);
   chromeos::StatsReportingController::Initialize(local_state);
   arc::StabilityMetricsManager::Initialize(local_state);
 #endif  // defined(OS_CHROMEOS)
+  LOG(ERROR) << "ChromeBrowserMainParts::PreCreateThreadsImpl - Step 7";
 
   {
     TRACE_EVENT0(
         "startup",
         "ChromeBrowserMainParts::PreCreateThreadsImpl:InitBrowserProcessImpl");
+  LOG(ERROR) << "ChromeBrowserMainParts::PreCreateThreadsImpl - Step 8";
     browser_process_->Init();
+  LOG(ERROR) << "ChromeBrowserMainParts::PreCreateThreadsImpl - Step 9";
   }
 
+  LOG(ERROR) << "ChromeBrowserMainParts::PreCreateThreadsImpl - Step 10";
 #if !defined(OS_ANDROID)
   // Create the RunLoop for MainMessageLoopRun() to use, and pass a copy of
   // its QuitClosure to the BrowserProcessImpl to call when it is time to exit.
@@ -1056,12 +1069,14 @@ int ChromeBrowserMainParts::PreCreateThreadsImpl() {
   base::trace_event::TraceEventETWExport::EnableETWExport();
 #endif  // OS_WIN
 
+  LOG(ERROR) << "ChromeBrowserMainParts::PreCreateThreadsImpl - Step 11";
   // Reset the command line in the crash report details, since we may have
   // just changed it to include experiments.
   crash_keys::SetCrashKeysFromCommandLine(
       *base::CommandLine::ForCurrentProcess());
 
   browser_process_->browser_policy_connector()->OnResourceBundleCreated();
+  LOG(ERROR) << "ChromeBrowserMainParts::PreCreateThreadsImpl - Step 12";
 
 // Android does first run in Java instead of native.
 // Chrome OS has its own out-of-box-experience code.
@@ -1085,6 +1100,7 @@ int ChromeBrowserMainParts::PreCreateThreadsImpl() {
 #endif  // defined(OS_MACOSX) || defined(OS_LINUX)
   }
 #endif  // !defined(OS_ANDROID) && !defined(OS_CHROMEOS)
+  LOG(ERROR) << "ChromeBrowserMainParts::PreCreateThreadsImpl - Step 13";
 
 #if defined(OS_LINUX) || defined(OS_OPENBSD)
   // Set the product channel for crash reports.
@@ -1113,6 +1129,7 @@ int ChromeBrowserMainParts::PreCreateThreadsImpl() {
       new vr::XRSessionRequestConsentManagerImpl());
 #endif  // defined(OS_WIN)
 #endif  // BUILDFLAG(ENABLE_VR)
+  LOG(ERROR) << "ChromeBrowserMainParts::PreCreateThreadsImpl - Step 14";
 
   // Enable Navigation Tracing only if a trace upload url is specified.
   if (parsed_command_line_.HasSwitch(switches::kEnableNavigationTracing) &&
@@ -1120,11 +1137,13 @@ int ChromeBrowserMainParts::PreCreateThreadsImpl() {
     tracing::SetupNavigationTracing();
   }
 
+  LOG(ERROR) << "ChromeBrowserMainParts::PreCreateThreadsImpl - Step 15";
 #if defined(OS_WIN) || defined(OS_MACOSX) || \
     (defined(OS_LINUX) && !defined(OS_CHROMEOS))
   metrics::DesktopSessionDurationTracker::Initialize();
   ProfileActivityMetricsRecorder::Initialize();
 #endif
+  LOG(ERROR) << "ChromeBrowserMainParts::PreCreateThreadsImpl - Step 16";
   metrics::RendererUptimeTracker::Initialize();
 
   // Add Site Isolation switches as dictated by policy.
@@ -1150,16 +1169,19 @@ int ChromeBrowserMainParts::PreCreateThreadsImpl() {
         switches::kDisableSiteIsolationForPolicy);
   }
 #endif
+  LOG(ERROR) << "ChromeBrowserMainParts::PreCreateThreadsImpl - Step 19";
 
   // ChromeOS needs ui::ResourceBundle::InitSharedInstance to be called before
   // this.
   browser_process_->PreCreateThreads(parsed_command_line());
+  LOG(ERROR) << "ChromeBrowserMainParts::PreCreateThreadsImpl - Step 20";
 
   // This must occur in PreCreateThreads() because it initializes global state
   // which is then read by all threads without synchronization. It must be after
   // browser_process_->PreCreateThreads() as that instantiates the IOThread
   // which is used in SetupMetrics().
   SetupMetrics();
+  LOG(ERROR) << "ChromeBrowserMainParts::PreCreateThreadsImpl - Step 21";
 
   return service_manager::RESULT_CODE_NORMAL_EXIT;
 }

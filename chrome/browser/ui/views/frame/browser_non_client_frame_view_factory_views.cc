@@ -61,7 +61,6 @@ BrowserNonClientFrameView* CreateBrowserNonClientFrameView(
 #endif
   OpaqueBrowserFrameView* view =
       CreateOpaqueBrowserFrameView(frame, browser_view);
-  view->InitViews();
   return view;
 }
 

@@ -126,7 +126,7 @@ void PaymentRequest::Init(
     mojo::PendingRemote<mojom::PaymentRequestClient> client,
     std::vector<mojom::PaymentMethodDataPtr> method_data,
     mojom::PaymentDetailsPtr details,
-    mojom::PaymentOptionsPtr options) {
+    mojom::PaymentOptionsPtr options, bool google_pay_bridge_eligible) {
   DCHECK_CURRENTLY_ON(content::BrowserThread::UI);
 
   if (is_initialized_) {

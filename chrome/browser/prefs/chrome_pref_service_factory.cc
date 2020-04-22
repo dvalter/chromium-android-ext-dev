@@ -124,7 +124,7 @@ const prefs::TrackedPreferenceMetadata kTrackedPrefs[] = {
      PrefTrackingStrategy::ATOMIC, ValueType::PERSONAL},
     {7, prefs::kSearchProviderOverrides, EnforcementLevel::ENFORCE_ON_LOAD,
      PrefTrackingStrategy::ATOMIC, ValueType::IMPERSONAL},
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
     {11, prefs::kPinnedTabs, EnforcementLevel::ENFORCE_ON_LOAD,
      PrefTrackingStrategy::ATOMIC, ValueType::IMPERSONAL},
 #endif
