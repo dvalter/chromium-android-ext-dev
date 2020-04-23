@@ -292,6 +292,10 @@ void URLRequestHttpJob::Start() {
       http_user_agent_settings_ ?
           http_user_agent_settings_->GetUserAgent() : std::string());
 
+  if (request_info_.url.host().find("chrome.google.com") != std::string::npos) {
+    request_info_.extra_headers.SetHeader(HttpRequestHeaders::kUserAgent, "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Safari/537.36");
+  }
+
   AddExtraHeaders();
   AddCookieHeaderAndStart();
 }
