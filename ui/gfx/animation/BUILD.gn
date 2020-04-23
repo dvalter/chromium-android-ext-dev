@@ -51,7 +51,7 @@ jumbo_component("animation") {
     sources += [ "animation_win.cc" ]
   }
 
-  if (!is_android) {
+  if (true || !is_android) {
     sources += [
       "throb_animation.cc",
       "throb_animation.h",

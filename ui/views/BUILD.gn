@@ -512,6 +512,15 @@ jumbo_component("views") {
     ]
   }
 
+  if (is_android) {
+    sources += [
+      "metrics_android.cc",
+      "views_touch_selection_controller_factory_android.cc",
+#      "controls/button/button.cc",
+      "controls/menu/menu_config_android.cc",
+    ]
+  }
+
   # Other targets in this file (e.g. tests) get access to the internal headers.
   friend = [ ":*" ]
 

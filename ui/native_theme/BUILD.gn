@@ -33,6 +33,8 @@ jumbo_component("native_theme") {
     sources += [
       "native_theme_android.cc",
       "native_theme_android.h",
+      "native_theme_dark_aura.cc",
+      "native_theme_aura.cc",
     ]
   }
 

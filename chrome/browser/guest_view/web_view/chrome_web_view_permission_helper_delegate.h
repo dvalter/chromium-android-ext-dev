@@ -51,7 +51,7 @@ class ChromeWebViewPermissionHelperDelegate
       const GURL& url,
       bool allowed_by_default,
       base::OnceCallback<void(bool)> callback) override;
-#if true || BUILDFLAG(ENABLE_PLUGINS)
+#if BUILDFLAG(ENABLE_PLUGINS)
   // content::WebContentsObserver implementation.
   bool OnMessageReceived(const IPC::Message& message,
                          content::RenderFrameHost* render_frame_host) override;
