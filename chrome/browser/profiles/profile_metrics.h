@@ -190,7 +190,7 @@ class ProfileMetrics {
   static void LogProfileAvatarSelection(size_t icon_index);
   static void LogProfileDeleteUser(ProfileDelete metric);
   static void LogProfileOpenMethod(ProfileOpen metric);
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
   static void LogProfileSwitch(ProfileOpen metric,
                                ProfileManager* manager,
                                const base::FilePath& profile_path);

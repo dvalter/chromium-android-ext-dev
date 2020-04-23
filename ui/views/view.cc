@@ -2307,6 +2307,7 @@ void View::PropagateRemoveNotifications(View* old_parent,
 
 void View::PropagateAddNotifications(const ViewHierarchyChangedDetails& details,
                                      bool is_added_to_widget) {
+#if 0
   {
     internal::ScopedChildrenLock lock(this);
     for (auto* child : children_)
@@ -2318,6 +2319,7 @@ void View::PropagateAddNotifications(const ViewHierarchyChangedDetails& details,
     for (ViewObserver& observer : observers_)
       observer.OnViewAddedToWidget(this);
   }
+#endif
 }
 
 void View::PropagateNativeViewHierarchyChanged() {

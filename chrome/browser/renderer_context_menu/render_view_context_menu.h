@@ -33,6 +33,8 @@
 #include "chrome/browser/extensions/menu_manager.h"
 #endif
 
+#include "chrome/browser/renderer_context_menu/spelling_options_submenu_observer.h"
+
 class AccessibilityLabelsMenuObserver;
 class ClickToCallContextMenuObserver;
 class PrintPreviewContextMenuObserver;

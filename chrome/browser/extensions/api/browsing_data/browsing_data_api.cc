@@ -347,20 +347,7 @@ bool BrowsingDataRemoverFunction::RunAsync() {
     return false;
   }
 
-  if (removal_mask_ &
-      ChromeBrowsingDataRemoverDelegate::DATA_TYPE_PLUGIN_DATA) {
-    // If we're being asked to remove plugin data, check whether it's actually
-    // supported.
-    PostTask(FROM_HERE,
-             {base::ThreadPool(), base::MayBlock(),
-              base::TaskShutdownBehavior::SKIP_ON_SHUTDOWN,
-              base::TaskPriority::USER_VISIBLE},
-             base::BindOnce(
-                 &BrowsingDataRemoverFunction::CheckRemovingPluginDataSupported,
-                 this, PluginPrefs::GetForProfile(GetProfile())));
-  } else {
-    StartRemoving();
-  }
+  StartRemoving();
 
   // Will finish asynchronously.
   return true;

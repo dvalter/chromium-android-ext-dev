@@ -135,12 +135,12 @@ without changes to the corresponding grd file. -->
                use_base_dir="false" type="BINDATA" compress="gzip"
                preprocess="true" />
 
-      <if expr="not is_android">
+      <if expr="is_android or not is_android">
         <part file="cr_components/cr_components_images.grdp" />
         <part file="cr_elements_images.grdp" />
       </if>
 
-      <if expr="not is_android and not is_ios">
+      <if expr="is_android or not is_android and not is_ios">
         <part file="cr_components/cr_components_resources_v3.grdp" />
         <part file="cr_elements_resources_v3.grdp" />
         <part file="cr_polymer_resources_v3.grdp" />
@@ -462,7 +462,7 @@ without changes to the corresponding grd file. -->
                    compress="gzip" />
       </if>
 
-      <if expr="not is_android and not is_ios">
+      <if expr="is_android or not is_android and not is_ios">
         <part file="cr_components/cr_components_resources.grdp" />
         <part file="cr_elements_resources.grdp" />
         <part file="cr_polymer_resources.grdp" />

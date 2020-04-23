@@ -58,24 +58,9 @@ void ChangePasswordHandler::HandleInitialize(const base::ListValue* args) {
 }
 
 void ChangePasswordHandler::HandleChangePassword(const base::ListValue* args) {
-  service_->OnUserAction(
-      web_ui()->GetWebContents(),
-      service_->reused_password_account_type_for_last_shown_warning(),
-      RequestOutcome::UNKNOWN,
-      LoginReputationClientResponse::VERDICT_TYPE_UNSPECIFIED, "unused_token",
-      safe_browsing::WarningUIType::CHROME_SETTINGS,
-      safe_browsing::WarningAction::CHANGE_PASSWORD);
 }
 
 void ChangePasswordHandler::UpdateChangePasswordCardVisibility() {
-  FireWebUIListener(
-      "change-password-visibility",
-      base::Value(
-          service_->IsWarningEnabled(
-              service_
-                  ->reused_password_account_type_for_last_shown_warning()) &&
-          safe_browsing::ChromePasswordProtectionService::
-              ShouldShowChangePasswordSettingUI(profile_)));
 }
 
 }  // namespace settings

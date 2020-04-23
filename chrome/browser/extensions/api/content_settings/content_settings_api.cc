@@ -320,15 +320,18 @@ bool ContentSettingsContentSettingGetResourceIdentifiersFunction::RunAsync() {
     return true;
   }
 
+#if 0
   PluginService::GetInstance()->GetPlugins(base::BindOnce(
       &ContentSettingsContentSettingGetResourceIdentifiersFunction::
           OnGotPlugins,
       this));
+#endif
   return true;
 }
 
 void ContentSettingsContentSettingGetResourceIdentifiersFunction::OnGotPlugins(
     const std::vector<content::WebPluginInfo>& plugins) {
+#if 0
   PluginFinder* finder = PluginFinder::GetInstance();
   std::set<std::string> group_identifiers;
   std::unique_ptr<base::ListValue> list(new base::ListValue());
@@ -353,6 +356,7 @@ void ContentSettingsContentSettingGetResourceIdentifiersFunction::OnGotPlugins(
           &ContentSettingsContentSettingGetResourceIdentifiersFunction::
               SendResponse,
           this, true));
+#endif
 }
 
 }  // namespace extensions

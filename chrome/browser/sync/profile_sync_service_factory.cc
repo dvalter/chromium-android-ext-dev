@@ -136,47 +136,76 @@ ProfileSyncServiceFactory::ProfileSyncServiceFactory()
   // when it is shut down.  Specify those dependencies here to build the proper
   // destruction order. Note that some of the dependencies are listed here but
   // actually plumbed in ChromeSyncClient, which this factory constructs.
+  LOG(ERROR) << "[Kiwi] ProfileSyncServiceFactory::ProfileSyncServiceFactory - Step 1";
   DependsOn(AboutSigninInternalsFactory::GetInstance());
+  LOG(ERROR) << "[Kiwi] ProfileSyncServiceFactory::ProfileSyncServiceFactory - Step 2";
   DependsOn(AccountPasswordStoreFactory::GetInstance());
+  LOG(ERROR) << "[Kiwi] ProfileSyncServiceFactory::ProfileSyncServiceFactory - Step 3";
   DependsOn(autofill::PersonalDataManagerFactory::GetInstance());
+  LOG(ERROR) << "[Kiwi] ProfileSyncServiceFactory::ProfileSyncServiceFactory - Step 4";
   DependsOn(BookmarkModelFactory::GetInstance());
+  LOG(ERROR) << "[Kiwi] ProfileSyncServiceFactory::ProfileSyncServiceFactory - Step 5";
   DependsOn(BookmarkSyncServiceFactory::GetInstance());
+  LOG(ERROR) << "[Kiwi] ProfileSyncServiceFactory::ProfileSyncServiceFactory - Step 6";
   DependsOn(BookmarkUndoServiceFactory::GetInstance());
+  LOG(ERROR) << "[Kiwi] ProfileSyncServiceFactory::ProfileSyncServiceFactory - Step 7";
   DependsOn(browser_sync::UserEventServiceFactory::GetInstance());
+  LOG(ERROR) << "[Kiwi] ProfileSyncServiceFactory::ProfileSyncServiceFactory - Step 8";
   DependsOn(ConsentAuditorFactory::GetInstance());
+  LOG(ERROR) << "[Kiwi] ProfileSyncServiceFactory::ProfileSyncServiceFactory - Step 9";
   DependsOn(DeviceInfoSyncServiceFactory::GetInstance());
+  LOG(ERROR) << "[Kiwi] ProfileSyncServiceFactory::ProfileSyncServiceFactory - Step 10";
   DependsOn(FaviconServiceFactory::GetInstance());
+  LOG(ERROR) << "[Kiwi] ProfileSyncServiceFactory::ProfileSyncServiceFactory - Step 11";
   DependsOn(gcm::GCMProfileServiceFactory::GetInstance());
+  LOG(ERROR) << "[Kiwi] ProfileSyncServiceFactory::ProfileSyncServiceFactory - Step 12";
   DependsOn(HistoryServiceFactory::GetInstance());
+  LOG(ERROR) << "[Kiwi] ProfileSyncServiceFactory::ProfileSyncServiceFactory - Step 13";
   DependsOn(IdentityManagerFactory::GetInstance());
+  LOG(ERROR) << "[Kiwi] ProfileSyncServiceFactory::ProfileSyncServiceFactory - Step 14";
   DependsOn(invalidation::DeprecatedProfileInvalidationProviderFactory::
                 GetInstance());
+  LOG(ERROR) << "[Kiwi] ProfileSyncServiceFactory::ProfileSyncServiceFactory - Step 15";
   DependsOn(invalidation::ProfileInvalidationProviderFactory::GetInstance());
+  LOG(ERROR) << "[Kiwi] ProfileSyncServiceFactory::ProfileSyncServiceFactory - Step 16";
   DependsOn(ModelTypeStoreServiceFactory::GetInstance());
+  LOG(ERROR) << "[Kiwi] ProfileSyncServiceFactory::ProfileSyncServiceFactory - Step 17";
   DependsOn(PasswordStoreFactory::GetInstance());
+  LOG(ERROR) << "[Kiwi] ProfileSyncServiceFactory::ProfileSyncServiceFactory - Step 18";
   DependsOn(SecurityEventRecorderFactory::GetInstance());
+  LOG(ERROR) << "[Kiwi] ProfileSyncServiceFactory::ProfileSyncServiceFactory - Step 19";
   DependsOn(SendTabToSelfSyncServiceFactory::GetInstance());
+  LOG(ERROR) << "[Kiwi] ProfileSyncServiceFactory::ProfileSyncServiceFactory - Step 20";
   DependsOn(SpellcheckServiceFactory::GetInstance());
-#if BUILDFLAG(ENABLE_SUPERVISED_USERS)
+  LOG(ERROR) << "[Kiwi] ProfileSyncServiceFactory::ProfileSyncServiceFactory - Step 21";
+#if false && BUILDFLAG(ENABLE_SUPERVISED_USERS)
   DependsOn(SupervisedUserServiceFactory::GetInstance());
+  LOG(ERROR) << "[Kiwi] ProfileSyncServiceFactory::ProfileSyncServiceFactory - Step 22";
   DependsOn(SupervisedUserSettingsServiceFactory::GetInstance());
+  LOG(ERROR) << "[Kiwi] ProfileSyncServiceFactory::ProfileSyncServiceFactory - Step 23";
 #endif  // BUILDFLAG(ENABLE_SUPERVISED_USERS)
   DependsOn(SessionSyncServiceFactory::GetInstance());
+  LOG(ERROR) << "[Kiwi] ProfileSyncServiceFactory::ProfileSyncServiceFactory - Step 24";
   DependsOn(TemplateURLServiceFactory::GetInstance());
+  LOG(ERROR) << "[Kiwi] ProfileSyncServiceFactory::ProfileSyncServiceFactory - Step 25";
 #if !defined(OS_ANDROID)
   DependsOn(ThemeServiceFactory::GetInstance());
 #endif  // !defined(OS_ANDROID)
+  LOG(ERROR) << "[Kiwi] ProfileSyncServiceFactory::ProfileSyncServiceFactory - Step 26";
   DependsOn(WebDataServiceFactory::GetInstance());
-#if BUILDFLAG(ENABLE_EXTENSIONS)
+  LOG(ERROR) << "[Kiwi] ProfileSyncServiceFactory::ProfileSyncServiceFactory - Step 27";
+#if false && BUILDFLAG(ENABLE_EXTENSIONS)
   DependsOn(
       extensions::ExtensionsBrowserClient::Get()->GetExtensionSystemFactory());
   DependsOn(extensions::StorageFrontend::GetFactoryInstance());
   DependsOn(web_app::WebAppProviderFactory::GetInstance());
 #endif  // BUILDFLAG(ENABLE_EXTENSIONS)
+  LOG(ERROR) << "[Kiwi] ProfileSyncServiceFactory::ProfileSyncServiceFactory - Step 28";
 #if defined(OS_CHROMEOS)
   DependsOn(chromeos::SyncedPrintersManagerFactory::GetInstance());
   DependsOn(WifiConfigurationSyncServiceFactory::GetInstance());
 #endif  // defined(OS_CHROMEOS)
+  LOG(ERROR) << "[Kiwi] ProfileSyncServiceFactory::ProfileSyncServiceFactory - Step 29";
 }
 
 ProfileSyncServiceFactory::~ProfileSyncServiceFactory() = default;

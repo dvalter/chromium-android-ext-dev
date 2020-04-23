@@ -248,6 +248,7 @@ void LockProfileAndShowUserManager(const base::FilePath& profile_path) {
 void OnSyncSetupComplete(Profile* profile,
                          const std::string& username,
                          const std::string& password) {
+#if 0
   DCHECK(signin_util::IsForceSigninEnabled());
   signin::IdentityManager* identity_manager =
       IdentityManagerFactory::GetForProfile(profile);
@@ -273,6 +274,7 @@ void OnSyncSetupComplete(Profile* profile,
         BrowserList::CloseCallback(),
         /*skip_beforeunload=*/true);
   }
+#endif
 }
 
 }  // namespace
@@ -409,11 +411,13 @@ void InlineSigninHelper::OnClientOAuthSuccessAndBrowserOpened(
       // Display a confirmation dialog to the user.
       base::RecordAction(
           base::UserMetricsAction("Signin_Show_UntrustedSigninPrompt"));
+#if 0
       Browser* browser = chrome::FindLastActiveWithProfile(profile_);
       browser->window()->ShowOneClickSigninConfirmation(
           base::UTF8ToUTF16(email_),
           base::BindOnce(&InlineSigninHelper::UntrustedSigninConfirmed,
                          base::Unretained(this), result.refresh_token));
+#endif
       return;
     }
     CreateSyncStarter(result.refresh_token);

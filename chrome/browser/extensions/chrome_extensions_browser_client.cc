@@ -90,13 +90,20 @@ bool ExtensionsDisabled(const base::CommandLine& command_line) {
 }  // namespace
 
 ChromeExtensionsBrowserClient::ChromeExtensionsBrowserClient() {
+  LOG(ERROR) << "ChromeExtensionsBrowserClient::ChromeExtensionsBrowserClient - Step 1";
   AddAPIProvider(std::make_unique<CoreExtensionsBrowserAPIProvider>());
+  LOG(ERROR) << "ChromeExtensionsBrowserClient::ChromeExtensionsBrowserClient - Step 2";
   AddAPIProvider(std::make_unique<ChromeExtensionsBrowserAPIProvider>());
+  LOG(ERROR) << "ChromeExtensionsBrowserClient::ChromeExtensionsBrowserClient - Step 3";
 
   process_manager_delegate_.reset(new ChromeProcessManagerDelegate);
+  LOG(ERROR) << "ChromeExtensionsBrowserClient::ChromeExtensionsBrowserClient - Step 4";
   api_client_.reset(new ChromeExtensionsAPIClient);
+  LOG(ERROR) << "ChromeExtensionsBrowserClient::ChromeExtensionsBrowserClient - Step 5";
   SetCurrentChannel(chrome::GetChannel());
+  LOG(ERROR) << "ChromeExtensionsBrowserClient::ChromeExtensionsBrowserClient - Step 6";
   resource_manager_.reset(new ChromeComponentExtensionResourceManager());
+  LOG(ERROR) << "ChromeExtensionsBrowserClient::ChromeExtensionsBrowserClient - Step 7";
 }
 
 ChromeExtensionsBrowserClient::~ChromeExtensionsBrowserClient() {}

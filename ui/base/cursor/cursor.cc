@@ -36,7 +36,7 @@ void Cursor::SetPlatformCursor(const PlatformCursor& platform) {
     RefCustomCursor();
 }
 
-#if !defined(USE_AURA)
+#if false && !defined(USE_AURA)
 void Cursor::RefCustomCursor() {
   NOTIMPLEMENTED();
 }

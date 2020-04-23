@@ -240,6 +240,7 @@ BrowserProcessImpl::BrowserProcessImpl(StartupData* startup_data) {
 }
 
 void BrowserProcessImpl::Init() {
+  LOG(ERROR) << "BrowserProcessImpl::Init - Step 1";
 #if defined(OS_CHROMEOS)
   // Forces creation of |metrics_services_manager_client_| if neccessary
   // (typically this call is a no-op as MetricsServicesManager has already been
@@ -268,13 +269,16 @@ void BrowserProcessImpl::Init() {
 #if BUILDFLAG(ENABLE_EXTENSIONS)
   extensions::AppWindowClient::Set(ChromeAppWindowClient::GetInstance());
 
+  LOG(ERROR) << "BrowserProcessImpl::Init - Step 2";
   extension_event_router_forwarder_ =
       base::MakeRefCounted<extensions::EventRouterForwarder>();
 
   EnsureExtensionsClientInitialized();
 
+  LOG(ERROR) << "BrowserProcessImpl::Init - Step 3";
   extensions_browser_client_ =
       std::make_unique<extensions::ChromeExtensionsBrowserClient>();
+  LOG(ERROR) << "BrowserProcessImpl::Init - Step 4: " << extensions_browser_client_;
   extensions_browser_client_->AddAPIProvider(
       std::make_unique<chrome_apps::ChromeAppsBrowserAPIProvider>());
   extensions::ExtensionsBrowserClient::Set(extensions_browser_client_.get());

@@ -49,7 +49,7 @@ void BrowserContentSettingBubbleModelDelegate::ShowLearnMorePage(
   GURL learn_more_url;
   switch (type) {
     case ContentSettingsType::PLUGINS:
-      learn_more_url = GURL(chrome::kBlockedPluginLearnMoreURL);
+      learn_more_url = GURL("https://www.kiwibrowser.com/");
       break;
     case ContentSettingsType::ADS:
       learn_more_url = GURL(subresource_filter::kLearnMoreLink);

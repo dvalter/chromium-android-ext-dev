@@ -123,7 +123,7 @@
 #if defined(OS_ANDROID)
 #include "chrome/browser/android/metrics/android_profile_session_durations_service_factory.h"
 #include "chrome/browser/ntp_snippets/content_suggestions_service_factory.h"
-#else
+
 #include "chrome/browser/first_run/first_run.h"
 #include "chrome/browser/ui/browser.h"
 #include "chrome/browser/ui/browser_finder.h"
@@ -235,7 +235,7 @@ void ProfileSizeTask(const base::FilePath& path, int enabled_app_count) {
     UMA_HISTOGRAM_COUNTS_10000("Profile.AppCount", enabled_app_count);
 }
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 // Schedule a profile for deletion if it isn't already scheduled.
 // Returns whether the profile has been newly scheduled.
 bool ScheduleProfileDirectoryForDeletion(const base::FilePath& path) {
@@ -803,7 +803,7 @@ ProfileShortcutManager* ProfileManager::profile_shortcut_manager() {
   return profile_shortcut_manager_.get();
 }
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 void ProfileManager::MaybeScheduleProfileForDeletion(
     const base::FilePath& profile_dir,
     ProfileLoadedCallback callback,
@@ -1408,7 +1408,7 @@ Profile* ProfileManager::CreateAndInitializeProfile(
   return profile_ptr;
 }
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 void ProfileManager::EnsureActiveProfileExistsBeforeDeletion(
     ProfileLoadedCallback callback,
     const base::FilePath& profile_dir) {

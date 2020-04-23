@@ -34,10 +34,12 @@ ChromeBrowserMainPartsAndroid::~ChromeBrowserMainPartsAndroid() {
 }
 
 int ChromeBrowserMainPartsAndroid::PreCreateThreads() {
+LOG(ERROR) << "[Kiwi] ChromeBrowserMainPartsAndroid::PreCreateThreads - Step 1";
   TRACE_EVENT0("startup", "ChromeBrowserMainPartsAndroid::PreCreateThreads")
 
   int result_code = ChromeBrowserMainParts::PreCreateThreads();
 
+LOG(ERROR) << "[Kiwi] ChromeBrowserMainPartsAndroid::PreCreateThreads - Step 2";
   // The ChildExitObserver needs to be created before any child process is
   // created because it needs to be notified during process creation.
   crash_reporter::ChildExitObserver::Create();

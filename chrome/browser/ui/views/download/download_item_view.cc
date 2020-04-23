@@ -1445,7 +1445,9 @@ base::string16 DownloadItemView::ElidedFilename() {
 }
 
 void DownloadItemView::OpenDownloadDuringAsyncScanning() {
+#if 0
   model_->CompleteSafeBrowsingScan();
+#endif
   should_open_while_scanning_ = true;
 }
 

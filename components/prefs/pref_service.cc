@@ -97,12 +97,16 @@ PrefService::PrefService(
       user_pref_store_(std::move(user_prefs)),
       read_error_callback_(std::move(read_error_callback)),
       pref_registry_(std::move(pref_registry)) {
+  LOG(ERROR) << "[Kiwi] PrefService::PrefService - Step 1";
   pref_notifier_->SetPrefService(this);
+  LOG(ERROR) << "[Kiwi] PrefService::PrefService - Step 2";
 
   DCHECK(pref_registry_);
   DCHECK(pref_value_store_);
 
+  LOG(ERROR) << "[Kiwi] PrefService::PrefService - Step 3";
   InitFromStorage(async);
+  LOG(ERROR) << "[Kiwi] PrefService::PrefService - Step 4";
 }
 
 PrefService::~PrefService() {

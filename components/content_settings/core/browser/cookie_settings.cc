@@ -57,6 +57,7 @@ void CookieSettings::GetCookieSettings(
 
 void CookieSettings::RegisterProfilePrefs(
     user_prefs::PrefRegistrySyncable* registry) {
+  LOG(ERROR) << "[Kiwi] CookieSettings::RegisterProfilePrefs";
   registry->RegisterBooleanPref(
       prefs::kBlockThirdPartyCookies, false,
       user_prefs::PrefRegistrySyncable::SYNCABLE_PREF);

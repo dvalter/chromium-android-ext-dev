@@ -26,7 +26,7 @@
 #include "net/base/url_util.h"
 #include "ui/base/clipboard/scoped_clipboard_writer.h"
 
-#if defined(OS_WIN) || defined(OS_LINUX) || defined(OS_MACOSX)
+#if defined(OS_WIN) || defined(OS_LINUX) || defined(OS_MACOSX) || true
 #include "chrome/browser/ui/browser.h"
 #include "chrome/browser/ui/browser_finder.h"
 #include "chrome/browser/ui/scoped_tabbed_browser_displayer.h"
@@ -153,7 +153,7 @@ void DownloadCommands::ExecuteCommand(Command command) {
   model_->ExecuteCommand(this, command);
 }
 
-#if defined(OS_WIN) || defined(OS_MACOSX) || defined(OS_LINUX)
+#if defined(OS_WIN) || defined(OS_MACOSX) || defined(OS_LINUX) || true
 
 Browser* DownloadCommands::GetBrowser() const {
   chrome::ScopedTabbedBrowserDisplayer browser_displayer(model_->profile());
@@ -167,18 +167,7 @@ bool DownloadCommands::IsDownloadPdf() const {
 }
 
 bool DownloadCommands::CanOpenPdfInSystemViewer() const {
-#if defined(OS_WIN)
-  bool is_adobe_pdf_reader_up_to_date = false;
-  if (IsDownloadPdf() && IsAdobeReaderDefaultPDFViewer()) {
-    is_adobe_pdf_reader_up_to_date =
-        DownloadTargetDeterminer::IsAdobeReaderUpToDate();
-  }
-  return IsDownloadPdf() &&
-         (IsAdobeReaderDefaultPDFViewer() ? is_adobe_pdf_reader_up_to_date
-                                          : true);
-#elif defined(OS_MACOSX) || defined(OS_LINUX)
-  return IsDownloadPdf();
-#endif
+  return false;
 }
 
 #endif  // defined(OS_WIN) || defined(OS_MACOSX) || defined(OS_LINUX)

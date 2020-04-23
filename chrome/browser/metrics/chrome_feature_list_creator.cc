@@ -55,11 +55,17 @@ ChromeFeatureListCreator::ChromeFeatureListCreator() = default;
 ChromeFeatureListCreator::~ChromeFeatureListCreator() = default;
 
 void ChromeFeatureListCreator::CreateFeatureList() {
+  LOG(ERROR) << "[Kiwi] ChromeFeatureListCreator::CreateFeatureList - Step 1";
   CreatePrefService();
+  LOG(ERROR) << "[Kiwi] ChromeFeatureListCreator::CreateFeatureList - Step 2";
   ConvertFlagsToSwitches();
+  LOG(ERROR) << "[Kiwi] ChromeFeatureListCreator::CreateFeatureList - Step 3";
   CreateMetricsServices();
+  LOG(ERROR) << "[Kiwi] ChromeFeatureListCreator::CreateFeatureList - Step 4";
   SetupMasterPrefs();
+  LOG(ERROR) << "[Kiwi] ChromeFeatureListCreator::CreateFeatureList - Step 5";
   SetupFieldTrials();
+  LOG(ERROR) << "[Kiwi] ChromeFeatureListCreator::CreateFeatureList - Step 6";
 }
 
 void ChromeFeatureListCreator::SetApplicationLocale(const std::string& locale) {

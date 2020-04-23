@@ -587,7 +587,7 @@ jumbo_static_library("ui") {
   allow_circular_includes_from +=
       [ "//chrome/browser/ui/webui/bluetooth_internals" ]
 
-  if (is_win || is_mac || is_desktop_linux || is_chromeos) {
+  if (true || is_win || is_mac || is_desktop_linux || is_chromeos) {
     deps += [ "//chrome/browser/ui/webui/discards:mojo_bindings" ]
   }
 
@@ -804,7 +804,9 @@ jumbo_static_library("ui") {
       "//services/device/public/mojom:usb",
       "//ui/android",
     ]
-  } else {
+  }
+  if (true)
+  {
     # !is_android
     sources += [
       "apps/app_info_dialog.h",
@@ -1016,6 +1018,8 @@ jumbo_static_library("ui") {
       "media_router/ui_media_sink.cc",
       "media_router/ui_media_sink.h",
       "native_window_tracker.h",
+      "native_window_tracker_android.cc",
+      "native_window_tracker_android.h",
       "omnibox/alternate_nav_infobar_delegate.cc",
       "omnibox/alternate_nav_infobar_delegate.h",
       "omnibox/chrome_omnibox_client.cc",
@@ -2049,7 +2053,7 @@ jumbo_static_library("ui") {
     }
   }
 
-  if (is_win || is_mac || is_desktop_linux || is_chromeos) {
+  if (is_win || is_mac || is_desktop_linux || is_chromeos || true) {
     sources += [
       "autofill/payments/webauthn_dialog_controller.h",
       "autofill/payments/webauthn_dialog_controller_impl.cc",
@@ -2098,13 +2102,17 @@ jumbo_static_library("ui") {
     deps += [ "//ui/webui" ]
   }
 
-  if (is_win || is_mac || is_desktop_linux) {
+  if (is_win || is_mac || is_desktop_linux || is_android) {
     sources += [
       "avatar_button_error_controller.cc",
       "avatar_button_error_controller.h",
       "avatar_button_error_controller_delegate.h",
       "bookmarks/bookmark_bubble_sign_in_delegate.cc",
       "bookmarks/bookmark_bubble_sign_in_delegate.h",
+#      "signin_view_controller.cc",
+#      "signin_view_controller.h",
+#      "signin_view_controller_delegate.cc",
+#      "signin_view_controller_delegate.h",
       "startup/default_browser_infobar_delegate.cc",
       "startup/default_browser_infobar_delegate.h",
       "startup/default_browser_prompt.cc",
@@ -2114,8 +2122,6 @@ jumbo_static_library("ui") {
       "sync/one_click_signin_links_delegate_impl.h",
       "user_manager.cc",
       "user_manager.h",
-      "views/external_protocol_dialog.cc",
-      "views/external_protocol_dialog.h",
       "views/profiles/badged_profile_photo.cc",
       "views/profiles/badged_profile_photo.h",
       "views/profiles/profile_menu_view.cc",
@@ -2500,6 +2506,11 @@ jumbo_static_library("ui") {
     }
   }
 
+  sources += [
+    "views/chrome_views_delegate_android.cc",
+    "views/frame/native_browser_frame_factory_android.cc",
+  ]
+
   if (is_desktop_linux) {
     sources += [
       "views/apps/chrome_app_window_client_views_linux.cc",
@@ -2602,8 +2613,9 @@ jumbo_static_library("ui") {
       sources += [ "views/tabs/window_finder_ozone.cc" ]
     }
   }
+  sources += [ "views/tabs/window_finder_android.cc" ]
 
-  if (toolkit_views) {
+  if (true || toolkit_views) {
     sources += [
       "autofill/payments/local_card_migration_bubble.h",
       "autofill/payments/local_card_migration_bubble_controller_impl.cc",
@@ -2667,10 +2679,6 @@ jumbo_static_library("ui") {
       "views/autofill/autofill_bubble_handler_impl.h",
       "views/autofill/autofill_popup_base_view.cc",
       "views/autofill/autofill_popup_base_view.h",
-      "views/autofill/autofill_popup_view_native_views.cc",
-      "views/autofill/autofill_popup_view_native_views.h",
-      "views/autofill/payments/card_unmask_prompt_views.cc",
-      "views/autofill/payments/card_unmask_prompt_views.h",
       "views/autofill/payments/dialog_view_ids.h",
       "views/autofill/payments/local_card_migration_bubble_views.cc",
       "views/autofill/payments/local_card_migration_bubble_views.h",
@@ -2776,6 +2784,7 @@ jumbo_static_library("ui") {
       "views/download/download_started_animation_views.cc",
       "views/dropdown_bar_host.cc",
       "views/dropdown_bar_host.h",
+      "views/dropdown_bar_host_android.cc",
       "views/dropdown_bar_host_delegate.h",
       "views/elevation_icon_setter.cc",
       "views/elevation_icon_setter.h",
@@ -2906,8 +2915,6 @@ jumbo_static_library("ui") {
       "views/importer/import_lock_dialog_view.h",
       "views/infobars/alternate_nav_infobar_view.cc",
       "views/infobars/alternate_nav_infobar_view.h",
-      "views/infobars/confirm_infobar.cc",
-      "views/infobars/confirm_infobar.h",
       "views/infobars/infobar_container_view.cc",
       "views/infobars/infobar_container_view.h",
       "views/infobars/infobar_view.cc",
@@ -2963,12 +2970,8 @@ jumbo_static_library("ui") {
       "views/media_router/cast_dialog_view.h",
       "views/media_router/cast_toolbar_button.cc",
       "views/media_router/cast_toolbar_button.h",
-      "views/media_router/cloud_services_dialog_view.cc",
-      "views/media_router/cloud_services_dialog_view.h",
       "views/media_router/media_remoting_dialog_view.cc",
       "views/media_router/media_remoting_dialog_view.h",
-      "views/media_router/media_router_dialog_controller_views.cc",
-      "views/media_router/media_router_dialog_controller_views.h",
       "views/media_router/media_router_views_ui.cc",
       "views/media_router/media_router_views_ui.h",
       "views/media_router/presentation_receiver_window_factory.cc",
@@ -3010,8 +3013,6 @@ jumbo_static_library("ui") {
       "views/overlay/back_to_tab_image_button.h",
       "views/overlay/close_image_button.cc",
       "views/overlay/close_image_button.h",
-      "views/overlay/overlay_window_views.cc",
-      "views/overlay/overlay_window_views.h",
       "views/overlay/playback_image_button.cc",
       "views/overlay/playback_image_button.h",
       "views/overlay/resize_handle_button.cc",
@@ -3042,8 +3043,6 @@ jumbo_static_library("ui") {
       "views/page_info/permission_selector_row.cc",
       "views/page_info/permission_selector_row.h",
       "views/page_info/permission_selector_row_observer.h",
-      "views/page_info/safety_tip_page_info_bubble_view.cc",
-      "views/page_info/safety_tip_page_info_bubble_view.h",
       "views/passwords/account_chooser_dialog_view.cc",
       "views/passwords/account_chooser_dialog_view.h",
       "views/passwords/auto_signin_first_run_dialog_view.cc",
@@ -3058,8 +3057,6 @@ jumbo_static_library("ui") {
       "views/passwords/password_auto_sign_in_view.h",
       "views/passwords/password_bubble_view_base.cc",
       "views/passwords/password_bubble_view_base.h",
-      "views/passwords/password_generation_popup_view_views.cc",
-      "views/passwords/password_generation_popup_view_views.h",
       "views/passwords/password_items_view.cc",
       "views/passwords/password_items_view.h",
       "views/passwords/password_pending_view.cc",
@@ -3154,8 +3151,6 @@ jumbo_static_library("ui") {
       "views/sharing/sharing_dialog_view.h",
       "views/sharing/sharing_icon_view.cc",
       "views/sharing/sharing_icon_view.h",
-      "views/simple_message_box_views.cc",
-      "views/simple_message_box_views.h",
       "views/status_bubble_views.cc",
       "views/status_bubble_views.h",
       "views/subtle_notification_view.cc",
@@ -3369,8 +3364,6 @@ jumbo_static_library("ui") {
       sources += [
         "views/create_application_shortcut_view.cc",
         "views/create_application_shortcut_view.h",
-        "views/ssl_client_certificate_selector.cc",
-        "views/ssl_client_certificate_selector.h",
       ]
     }
 
@@ -3457,6 +3450,14 @@ jumbo_static_library("ui") {
       deps += [ "//chrome/browser/ui/media_router/internal/vector_icons" ]
     }
   }
+
+  sources += [
+      "views/accelerator_utils_android.cc",
+      "window_sizer/window_sizer_android.cc",
+      "views/frame/browser_non_client_frame_view_factory_views.cc",
+      "views/frame/desktop_browser_frame_android.cc",
+      "views/frame/desktop_browser_frame_android.h",
+  ]
 
   if (use_aura) {
     sources += [

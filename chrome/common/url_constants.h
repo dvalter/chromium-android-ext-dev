@@ -341,12 +341,12 @@ extern const char kChromeCleanerLearnMoreURL[];
 extern const char kWindowsXPVistaDeprecationURL[];
 #endif
 
-#if BUILDFLAG(ENABLE_ONE_CLICK_SIGNIN)
+#if true || BUILDFLAG(ENABLE_ONE_CLICK_SIGNIN)
 // "Learn more" URL for the one click signin infobar.
 extern const char kChromeSyncLearnMoreURL[];
 #endif
 
-#if BUILDFLAG(ENABLE_PLUGINS)
+#if true || BUILDFLAG(ENABLE_PLUGINS)
 // The URL for the "Learn more" page for the blocked plugin infobar.
 extern const char kBlockedPluginLearnMoreURL[];
 

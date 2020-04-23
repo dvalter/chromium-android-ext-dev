@@ -61,7 +61,7 @@ const base::Feature kAppNotificationStatusMessaging{
     "AppNotificationStatusMessaging", base::FEATURE_DISABLED_BY_DEFAULT};
 #endif  // defined(OS_ANDROID)
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 // App Service related flags. See chrome/services/app_service/README.md.
 const base::Feature kAppServiceInstanceRegistry{
     "AppServiceInstanceRegistry", base::FEATURE_DISABLED_BY_DEFAULT};
@@ -345,7 +345,7 @@ const base::Feature kEnableAmbientAuthenticationInGuestSession{
     "EnableAmbientAuthenticationInGuestSession",
     base::FEATURE_ENABLED_BY_DEFAULT};
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 // Upload enterprise cloud reporting without the extension.
 const base::Feature kEnterpriseReportingInBrowser{
     "EnterpriseReportingInBrowser", base::FEATURE_DISABLED_BY_DEFAULT};
@@ -423,7 +423,7 @@ const base::Feature kHappinessTrackingSystem{"HappinessTrackingSystem",
                                              base::FEATURE_DISABLED_BY_DEFAULT};
 #endif
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 // Enables or disables the Happiness Tracking System for Desktop Chrome.
 const base::Feature kHappinessTrackingSurveysForDesktop{
     "HappinessTrackingSurveysForDesktop", base::FEATURE_DISABLED_BY_DEFAULT};
@@ -524,14 +524,7 @@ const base::Feature kAcknowledgeNtpOverrideOnDeactivate{
     "AcknowledgeNtpOverrideOnDeactivate", base::FEATURE_DISABLED_BY_DEFAULT};
 #endif
 
-// Enables showing an entry for mixed content in site settings, which controls
-// allowing blockable mixed content. When enabled, the mixed content shield is
-// not shown on the omnibox, since its functionality is replaced by the
-// setting.
-const base::Feature kMixedContentSiteSetting{"MixedContentSiteSetting",
-                                             base::FEATURE_DISABLED_BY_DEFAULT};
-
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 const base::Feature kOnConnectNative{"OnConnectNative",
                                      base::FEATURE_DISABLED_BY_DEFAULT};
 #endif

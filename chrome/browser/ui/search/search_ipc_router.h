@@ -21,10 +21,6 @@
 #include "content/public/browser/web_contents_observer.h"
 #include "mojo/public/cpp/bindings/associated_receiver.h"
 
-#if defined(OS_ANDROID)
-#error "Instant is only used on desktop";
-#endif
-
 class GURL;
 
 namespace content {

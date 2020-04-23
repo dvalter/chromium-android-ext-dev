@@ -21,6 +21,7 @@ ExtensionsBrowserClient::ExtensionsBrowserClient() {}
 ExtensionsBrowserClient::~ExtensionsBrowserClient() = default;
 
 ExtensionsBrowserClient* ExtensionsBrowserClient::Get() {
+  LOG(ERROR) << "[Kiwi] ExtensionsBrowserClient::Get - Step: " << g_extension_browser_client;
   return g_extension_browser_client;
 }
 

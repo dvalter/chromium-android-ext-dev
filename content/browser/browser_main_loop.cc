@@ -573,6 +573,7 @@ BrowserMainLoop::~BrowserMainLoop() {
 }
 
 void BrowserMainLoop::Init() {
+  LOG(ERROR) << "[Kiwi] BrowserMainLoop::Init - Step 1";
   TRACE_EVENT0("startup", "BrowserMainLoop::Init");
 
   // |startup_data| is optional. If set, the thread owned by the data
@@ -588,6 +589,7 @@ void BrowserMainLoop::Init() {
     service_manager_shutdown_closure_ =
         std::move(startup_data->service_manager_shutdown_closure);
   }
+  LOG(ERROR) << "[Kiwi] BrowserMainLoop::Init - Step 2";
 
   parts_ = GetContentClient()->browser()->CreateBrowserMainParts(parameters_);
 }
@@ -827,6 +829,7 @@ void BrowserMainLoop::PostMainMessageLoopStart() {
 }
 
 int BrowserMainLoop::PreCreateThreads() {
+  LOG(ERROR) << "[Kiwi] BrowserMainLoop::PreCreateThreads - Step 1";
   if (parts_) {
     TRACE_EVENT0("startup",
         "BrowserMainLoop::CreateThreads:PreCreateThreads");
@@ -886,6 +889,7 @@ int BrowserMainLoop::PreCreateThreads() {
 
   // Record metrics about which site isolation flags have been turned on.
   SiteIsolationPolicy::StartRecordingSiteIsolationFlagUsage();
+  LOG(ERROR) << "[Kiwi] BrowserMainLoop::PreCreateThreads - Step 2";
 
   return result_code_;
 }
@@ -895,6 +899,7 @@ void BrowserMainLoop::PreShutdown() {
 }
 
 void BrowserMainLoop::CreateStartupTasks() {
+  LOG(ERROR) << "BrowserMainLoop::CreateStartupTasks - Step 1";
   TRACE_EVENT0("startup", "BrowserMainLoop::CreateStartupTasks");
 
   DCHECK(!startup_task_runner_);
@@ -963,11 +968,13 @@ void BrowserMainLoop::SynchronouslyFlushStartupTasks() {
 #endif  // OS_ANDROID
 
 int BrowserMainLoop::CreateThreads() {
+  LOG(ERROR) << "[Kiwi] BrowserMainLoop::CreateThreads - Step 1";
   TRACE_EVENT0("startup,rail", "BrowserMainLoop::CreateThreads");
 
   // Release the ThreadPool's threads.
   scoped_execution_fence_.reset();
 
+  LOG(ERROR) << "[Kiwi] BrowserMainLoop::CreateThreads - Step 2";
   // The |io_thread| can have optionally been injected into Init(), but if not,
   // create it here. Thre thread is only tagged as BrowserThread::IO here in
   // order to prevent any code from statically posting to it before
@@ -976,9 +983,12 @@ int BrowserMainLoop::CreateThreads() {
   if (!io_thread_) {
     io_thread_ = BrowserTaskExecutor::CreateIOThread();
   }
+  LOG(ERROR) << "[Kiwi] BrowserMainLoop::CreateThreads - Step 3";
   io_thread_->RegisterAsBrowserThread();
+  LOG(ERROR) << "[Kiwi] BrowserMainLoop::CreateThreads - Step 4";
   BrowserTaskExecutor::InitializeIOThread();
 
+  LOG(ERROR) << "[Kiwi] BrowserMainLoop::CreateThreads - Step 5";
   // TODO(https://crbug.com/863341): Replace with a better API
   GetContentClient()->browser()->PostAfterStartupTask(
       FROM_HERE, base::SequencedTaskRunnerHandle::Get(),
@@ -995,20 +1005,24 @@ int BrowserMainLoop::CreateThreads() {
           // Accessing an Unretained pointer to BrowserMainLoop from a main
           // thread task is therefore safe.
           base::Unretained(this)));
+  LOG(ERROR) << "[Kiwi] BrowserMainLoop::CreateThreads - Step 6";
 
   created_threads_ = true;
   return result_code_;
 }
 
 int BrowserMainLoop::PostCreateThreads() {
+  LOG(ERROR) << "[Kiwi] BrowserMainLoop::PostCreateThreads - Step 1";
   tracing_controller_ = std::make_unique<content::TracingControllerImpl>();
   content::BackgroundTracingManagerImpl::GetInstance()
       ->AddMetadataGeneratorFunction();
 
+  LOG(ERROR) << "[Kiwi] BrowserMainLoop::PostCreateThreads - Step 2";
   if (parts_) {
     TRACE_EVENT0("startup", "BrowserMainLoop::PostCreateThreads");
     parts_->PostCreateThreads();
   }
+  LOG(ERROR) << "[Kiwi] BrowserMainLoop::PostCreateThreads - Step 3";
 
   return result_code_;
 }
@@ -1247,16 +1261,19 @@ void BrowserMainLoop::InitializeMainThread() {
 }
 
 int BrowserMainLoop::BrowserThreadsStarted() {
+  LOG(ERROR) << "[Kiwi] BrowserMainLoop::BrowserThreadsStarted - Step 1";
   TRACE_EVENT0("startup", "BrowserMainLoop::BrowserThreadsStarted");
 
   // Bring up Mojo IPC and the embedded Service Manager as early as possible.
   // Initializaing mojo requires the IO thread to have been initialized first,
   // so this cannot happen any earlier than now.
   InitializeMojo();
+  LOG(ERROR) << "[Kiwi] BrowserMainLoop::BrowserThreadsStarted - Step 2";
 
   data_decoder_service_provider_ = std::make_unique<OopDataDecoder>();
 
   HistogramSynchronizer::GetInstance();
+  LOG(ERROR) << "[Kiwi] BrowserMainLoop::BrowserThreadsStarted - Step 3";
 
   // cc assumes a single client name for metrics in a process, which is
   // is inconsistent with single process mode where both the renderer and
@@ -1276,6 +1293,7 @@ int BrowserMainLoop::BrowserThreadsStarted() {
   InitShaderCacheFactorySingleton(
       base::CreateSingleThreadTaskRunner({BrowserThread::IO}));
 
+  LOG(ERROR) << "[Kiwi] BrowserMainLoop::BrowserThreadsStarted - Step 4";
   // Initialize the FontRenderParams on IO thread. This needs to be initialized
   // before gpu process initialization below.
   base::PostTask(FROM_HERE, {BrowserThread::IO},
@@ -1283,6 +1301,7 @@ int BrowserMainLoop::BrowserThreadsStarted() {
                                 gfx::GetFontRenderParams(
                                     gfx::FontRenderParamsQuery(), nullptr)));
 
+  LOG(ERROR) << "[Kiwi] BrowserMainLoop::BrowserThreadsStarted - Step 5";
   bool always_uses_gpu = true;
   bool established_gpu_channel = false;
 #if defined(OS_ANDROID)
@@ -1297,6 +1316,7 @@ int BrowserMainLoop::BrowserThreadsStarted() {
       parsed_command_line_.HasSwitch(switches::kDisableGpuEarlyInit)) {
     established_gpu_channel = always_uses_gpu = false;
   }
+  LOG(ERROR) << "[Kiwi] BrowserMainLoop::BrowserThreadsStarted - Step 6";
 
   host_frame_sink_manager_ = std::make_unique<viz::HostFrameSinkManager>();
   BrowserGpuChannelHostFactory::Initialize(established_gpu_channel);
@@ -1329,6 +1349,7 @@ int BrowserMainLoop::BrowserThreadsStarted() {
             compositing_mode_reporter_impl_.get(),
             server_shared_bitmap_manager_.get(), GetResizeTaskRunner()));
   }
+  LOG(ERROR) << "[Kiwi] BrowserMainLoop::BrowserThreadsStarted - Step 7";
 
 #if defined(USE_AURA)
   env_->set_context_factory(GetContextFactory());
@@ -1341,6 +1362,7 @@ int BrowserMainLoop::BrowserThreadsStarted() {
       tracing::GraphicsMemoryDumpProvider::GetInstance(), "AndroidGraphics",
       nullptr);
 #endif
+  LOG(ERROR) << "[Kiwi] BrowserMainLoop::BrowserThreadsStarted - Step 8";
 
   {
     TRACE_EVENT0("startup", "BrowserThreadsStarted::Subsystem:AudioMan");
@@ -1358,6 +1380,7 @@ int BrowserMainLoop::BrowserThreadsStarted() {
         GetSystemConnector()->Clone());
   }
 
+  LOG(ERROR) << "[Kiwi] BrowserMainLoop::BrowserThreadsStarted - Step 9";
 #if defined(OS_WIN)
   HDRProxy::Initialize();
   system_message_window_.reset(new media::SystemMessageWindowWin);
@@ -1378,6 +1401,7 @@ int BrowserMainLoop::BrowserThreadsStarted() {
   // created; namely, WebRtcEventLogManager.
   // Allowed to leak when the browser exits.
   WebRTCInternals::CreateSingletonInstance();
+  LOG(ERROR) << "[Kiwi] BrowserMainLoop::BrowserThreadsStarted - Step 10";
 
   // MediaStreamManager needs the IO thread to be created.
   {
@@ -1422,6 +1446,7 @@ int BrowserMainLoop::BrowserThreadsStarted() {
     save_file_manager_ = new SaveFileManager();
   }
 
+  LOG(ERROR) << "[Kiwi] BrowserMainLoop::BrowserThreadsStarted - Step 11";
   // Alert the clipboard class to which threads are allowed to access the
   // clipboard:
   std::vector<base::PlatformThreadId> allowed_clipboard_threads;
@@ -1442,6 +1467,7 @@ int BrowserMainLoop::BrowserThreadsStarted() {
         base::BindOnce(base::IgnoreResult(&GpuProcessHost::Get),
                        GPU_PROCESS_KIND_SANDBOXED, true /* force_create */));
   }
+  LOG(ERROR) << "[Kiwi] BrowserMainLoop::BrowserThreadsStarted - Step 12";
 
 #if defined(OS_WIN)
   if (!parsed_command_line_.HasSwitch(
@@ -1464,6 +1490,7 @@ int BrowserMainLoop::BrowserThreadsStarted() {
   ThemeHelperMac::GetInstance();
 #endif  // defined(OS_MACOSX)
 
+  LOG(ERROR) << "[Kiwi] BrowserMainLoop::BrowserThreadsStarted - Step 13";
 #if defined(OS_ANDROID)
   media::SetMediaDrmBridgeClient(GetContentClient()->GetMediaDrmBridgeClient());
   if (base::FeatureList::IsEnabled(features::kFontSrcLocalMatching)) {
@@ -1474,6 +1501,7 @@ int BrowserMainLoop::BrowserThreadsStarted() {
 #if defined(ENABLE_IPC_FUZZER)
   SetFileUrlPathAliasForIpcFuzzer();
 #endif
+  LOG(ERROR) << "[Kiwi] BrowserMainLoop::BrowserThreadsStarted - Step 14";
   return result_code_;
 }
 

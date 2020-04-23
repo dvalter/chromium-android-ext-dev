@@ -851,6 +851,7 @@ void BrowserView::OnActiveTabChanged(content::WebContents* old_contents,
                                      content::WebContents* new_contents,
                                      int index,
                                      int reason) {
+#if 0
   DCHECK(new_contents);
   TRACE_EVENT0("ui", "BrowserView::OnActiveTabChanged");
 
@@ -955,10 +956,12 @@ void BrowserView::OnActiveTabChanged(content::WebContents* old_contents,
   UpdateTitleBar();
 
   TranslateBubbleView::CloseCurrentBubble();
+#endif
 }
 
 void BrowserView::OnTabDetached(content::WebContents* contents,
                                 bool was_active) {
+#if 0
   if (was_active) {
     // We need to reset the current tab contents to null before it gets
     // freed. This is because the focus manager performs some operations
@@ -969,6 +972,7 @@ void BrowserView::OnTabDetached(content::WebContents* contents,
     app_banner_manager_observer_.RemoveAll();
     UpdateDevToolsForContents(nullptr, true);
   }
+#endif
 }
 
 void BrowserView::OnTabRestored(int command_id) {
@@ -1098,11 +1102,14 @@ void BrowserView::OnExclusiveAccessUserInput() {
 }
 
 bool BrowserView::ShouldHideUIForFullscreen() const {
+#if 0
   // Immersive mode needs UI for the slide-down top panel.
   if (immersive_mode_controller_->IsEnabled())
+#endif
     return false;
-
+#if 0
   return frame_->GetFrameView()->ShouldHideTopUIForFullscreen();
+#endif
 }
 
 bool BrowserView::IsFullscreen() const {
@@ -1178,28 +1185,36 @@ void BrowserView::SetFocusToLocationBar(bool select_all) {
 }
 
 void BrowserView::UpdateReloadStopState(bool is_loading, bool force) {
+#if 0
   if (toolbar_button_provider_->GetReloadButton()) {
     toolbar_button_provider_->GetReloadButton()->ChangeMode(
         is_loading ? ReloadButton::Mode::kStop : ReloadButton::Mode::kReload,
         force);
   }
+#endif
 }
 
 void BrowserView::UpdateToolbar(content::WebContents* contents) {
+#if 0
   // We may end up here during destruction.
   if (toolbar_)
     toolbar_->Update(contents);
+#endif
 }
 
 void BrowserView::UpdateCustomTabBarVisibility(bool visible, bool animate) {
+#if 0
   if (toolbar_)
     toolbar_->UpdateCustomTabBarVisibility(visible, animate);
+#endif
 }
 
 void BrowserView::ResetToolbarTabState(content::WebContents* contents) {
+#if 0
   // We may end up here during destruction.
   if (toolbar_)
     toolbar_->ResetTabState(contents);
+#endif
 }
 
 void BrowserView::FocusToolbar() {
@@ -1225,8 +1240,10 @@ ToolbarActionsBar* BrowserView::GetToolbarActionsBar() {
 }
 
 ExtensionsContainer* BrowserView::GetExtensionsContainer() {
+#if 0
   if (toolbar_ && toolbar_->extensions_container())
     return toolbar_->extensions_container();
+#endif
   return GetToolbarActionsBar();
 }
 
@@ -1281,6 +1298,7 @@ void BrowserView::FocusBookmarksToolbar() {
 }
 
 void BrowserView::FocusInactivePopupForAccessibility() {
+#if 0
   if (GetLocationBarView()->ActivateFirstInactiveBubbleForAccessibility())
     return;
 
@@ -1293,6 +1311,7 @@ void BrowserView::FocusInactivePopupForAccessibility() {
 
   if (!infobar_container_->children().empty())
     infobar_container_->SetPaneFocusAndFocusDefault();
+#endif
 }
 
 void BrowserView::FocusAppMenu() {

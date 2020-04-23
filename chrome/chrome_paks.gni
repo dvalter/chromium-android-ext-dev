@@ -121,7 +121,7 @@ template("chrome_extra_paks") {
       sources += invoker.additional_paks
     }
 
-    if (!is_android) {
+    if (true || !is_android) {
       # New paks should be added here by default.
       sources += [
         "$root_gen_dir/chrome/bookmarks_resources.pak",

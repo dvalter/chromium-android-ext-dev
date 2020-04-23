@@ -31,6 +31,7 @@ class ScopedBrowserMainEvent {
 
 // Main routine for running as the Browser process.
 int BrowserMain(const MainFunctionParams& parameters) {
+  LOG(ERROR) << "[Kiwi] BrowserMain - Step 1";
   ScopedBrowserMainEvent scoped_browser_main_event;
 
   base::trace_event::TraceLog::GetInstance()->set_process_name("Browser");
@@ -39,13 +40,16 @@ int BrowserMain(const MainFunctionParams& parameters) {
 
   std::unique_ptr<BrowserMainRunnerImpl> main_runner(
       BrowserMainRunnerImpl::Create());
+  LOG(ERROR) << "[Kiwi] BrowserMain - Step 2";
 
   int exit_code = main_runner->Initialize(parameters);
   if (exit_code >= 0)
     return exit_code;
 
+  LOG(ERROR) << "[Kiwi] BrowserMain - Step 3";
   exit_code = main_runner->Run();
 
+  LOG(ERROR) << "[Kiwi] BrowserMain - Step 4";
   main_runner->Shutdown();
 
   return exit_code;

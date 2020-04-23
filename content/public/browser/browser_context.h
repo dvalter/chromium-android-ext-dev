@@ -28,7 +28,7 @@
 #include "third_party/blink/public/mojom/blob/blob.mojom-forward.h"
 #include "third_party/blink/public/mojom/push_messaging/push_messaging_status.mojom-forward.h"
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 #include "content/public/browser/zoom_level_delegate.h"
 #endif
 
@@ -248,7 +248,7 @@ class CONTENT_EXPORT BrowserContext : public base::SupportsUserData {
   // StoragePartition can have time to do necessary cleanups on IO thread.
   void ShutdownStoragePartitions();
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
   // Creates a delegate to initialize a HostZoomMap and persist its information.
   // This is called during creation of each StoragePartition.
   virtual std::unique_ptr<ZoomLevelDelegate> CreateZoomLevelDelegate(

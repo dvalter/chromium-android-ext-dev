@@ -897,7 +897,9 @@ NavigationRequest::NavigationRequest(
       commit_navigation_client_(mojo::NullAssociatedRemote()),
       rfh_restored_from_back_forward_cache_(
           rfh_restored_from_back_forward_cache) {
+#if 0
   DCHECK(browser_initiated_ || common_params_->initiator_origin.has_value());
+#endif
   DCHECK(!IsRendererDebugURL(common_params_->url));
   DCHECK(common_params_->method == "POST" || !common_params_->post_data);
   TRACE_EVENT_ASYNC_BEGIN2("navigation", "NavigationRequest", this,

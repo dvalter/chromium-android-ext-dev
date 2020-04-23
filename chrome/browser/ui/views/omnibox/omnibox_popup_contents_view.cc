@@ -174,7 +174,7 @@ void OmniboxPopupContentsView::OpenMatch(
 gfx::Image OmniboxPopupContentsView::GetMatchIcon(
     const AutocompleteMatch& match,
     SkColor vector_icon_color) const {
-  return model_->GetMatchIcon(match, vector_icon_color);
+  return gfx::Image();
 }
 
 void OmniboxPopupContentsView::SetSelectedLine(size_t index) {

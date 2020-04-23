@@ -110,6 +110,7 @@ void AppendExtensionPolicyInfoIntoProfileReport(
 
 void AppendMachineLevelUserCloudPolicyFetchTimestamp(
     em::ChromeUserProfileInfo* profile_info) {
+#if 0
 #if !defined(OS_CHROMEOS)
   policy::MachineLevelUserCloudPolicyManager* manager =
       g_browser_process->browser_policy_connector()
@@ -121,6 +122,7 @@ void AppendMachineLevelUserCloudPolicyFetchTimestamp(
       policy::dm_protocol::kChromeMachineLevelExtensionCloudPolicyType);
   timestamp->set_timestamp(
       manager->core()->client()->last_policy_timestamp().ToJavaTime());
+#endif
 #endif
 }
 

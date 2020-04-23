@@ -11,9 +11,7 @@
 #include "content/public/browser/page_navigator.h"
 #include "ui/gfx/image/image.h"
 
-#if !defined(OS_ANDROID)
 class Browser;
-#endif
 
 class DownloadUIModel;
 
@@ -45,7 +43,7 @@ class DownloadCommands {
   bool IsCommandVisible(Command command) const;
   void ExecuteCommand(Command command);
 
-#if defined(OS_WIN) || defined(OS_LINUX) || defined(OS_MACOSX)
+#if defined(OS_WIN) || defined(OS_LINUX) || defined(OS_MACOSX) || true
   bool IsDownloadPdf() const;
   bool CanOpenPdfInSystemViewer() const;
   Browser* GetBrowser() const;

@@ -31,7 +31,7 @@
 
 #if defined(OS_ANDROID)
 #include "chrome/browser/android/android_theme_resources.h"
-#else
+
 #include "chrome/app/vector_icons/vector_icons.h"
 #include "chrome/browser/profiles/profile.h"
 #include "chrome/common/pref_names.h"
@@ -50,7 +50,7 @@ namespace {
 
 const int kInvalidResourceID = -1;
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 // The icon size is actually 16, but the vector icons being used generally all
 // have additional internal padding. Account for this difference by asking for
 // the vectors in 18x18dip sizes.
@@ -110,7 +110,7 @@ static_assert(base::size(kPermissionButtonTextIDDefaultSetting) ==
                   CONTENT_SETTING_NUM_SETTINGS,
               "kPermissionButtonTextIDDefaultSetting array size is incorrect");
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 // The resource IDs for the strings that are displayed on the sound permission
 // button if the sound permission setting is managed by the user.
 const int kSoundPermissionButtonTextIDUserManaged[] = {
@@ -176,7 +176,7 @@ base::span<const PermissionsUIInfo> GetContentSettingsUIInfo() {
          ? IDS_PAGE_INFO_TYPE_SENSORS
          : IDS_PAGE_INFO_TYPE_MOTION_SENSORS},
     {ContentSettingsType::USB_GUARD, IDS_PAGE_INFO_TYPE_USB},
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
     {ContentSettingsType::SERIAL_GUARD, IDS_PAGE_INFO_TYPE_SERIAL},
 #endif
     {ContentSettingsType::NATIVE_FILE_SYSTEM_WRITE_GUARD,
@@ -552,7 +552,7 @@ int PageInfoUI::GetConnectionIconID(PageInfo::SiteConnectionStatus status) {
   }
   return resource_id;
 }
-#else  // !defined(OS_ANDROID)
+
 // static
 const gfx::ImageSkia PageInfoUI::GetPermissionIcon(const PermissionInfo& info,
                                                    SkColor related_text_color) {

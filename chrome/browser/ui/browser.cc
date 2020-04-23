@@ -280,6 +280,7 @@ const int kUIUpdateCoalescingTimeMS = 200;
 
 BrowserWindow* CreateBrowserWindow(std::unique_ptr<Browser> browser,
                                    bool user_gesture) {
+  LOG(ERROR) << "[Kiwi] BrowserWindow* CreateBrowserWindow";
   return BrowserWindow::CreateBrowserWindow(std::move(browser), user_gesture);
 }
 
@@ -1946,6 +1947,7 @@ void Browser::RequestPpapiBrokerPermission(
     return;
   }
 
+#if 0
   TabSpecificContentSettings* tab_content_settings =
       TabSpecificContentSettings::FromWebContents(web_contents);
 
@@ -1977,7 +1979,8 @@ void Browser::RequestPpapiBrokerPermission(
                          ? base::UserMetricsAction("PPAPI.BrokerSettingAllow")
                          : base::UserMetricsAction("PPAPI.BrokerSettingDeny"));
   tab_content_settings->SetPepperBrokerAllowed(allowed);
-  std::move(callback).Run(allowed);
+#endif
+  std::move(callback).Run(false);
   return;
 }
 
@@ -2587,6 +2590,7 @@ void Browser::SetAsDelegate(WebContents* web_contents, bool set_delegate) {
   web_contents->SetDelegate(delegate);
 
   // ...and all the helpers.
+#if 0
   WebContentsModalDialogManager::FromWebContents(web_contents)
       ->SetDelegate(delegate);
   translate::ContentTranslateDriver* content_translate_driver =
@@ -2600,6 +2604,7 @@ void Browser::SetAsDelegate(WebContents* web_contents, bool set_delegate) {
     content_translate_driver->RemoveObserver(this);
     BookmarkTabHelper::FromWebContents(web_contents)->RemoveObserver(this);
   }
+#endif
 }
 
 void Browser::CloseFrame() {

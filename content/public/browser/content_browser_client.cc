@@ -853,7 +853,7 @@ void ContentBrowserClient::CreateWebUsbService(
     RenderFrameHost* render_frame_host,
     mojo::PendingReceiver<blink::mojom::WebUsbService> receiver) {}
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 SerialDelegate* ContentBrowserClient::GetSerialDelegate() {
   return nullptr;
 }

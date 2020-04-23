@@ -42,6 +42,7 @@ void AddStringsForIdentity(base::DictionaryValue* dict) {
 
 void AddStringsForPdf(base::DictionaryValue* dict) {
   static constexpr webui::LocalizedString kPdfResources[] = {
+#if 0
     {"passwordDialogTitle", IDS_PDF_PASSWORD_DIALOG_TITLE},
     {"passwordPrompt", IDS_PDF_NEED_PASSWORD},
     {"passwordSubmit", IDS_PDF_PASSWORD_SUBMIT},
@@ -111,6 +112,7 @@ void AddStringsForPdf(base::DictionaryValue* dict) {
     {"annotationFormWarningKeepEditing", IDS_PDF_KEEP_EDITING},
     {"annotationFormWarningDiscard", IDS_PDF_DISCARD},
 #endif  // defined(OS_CHROMEOS)
+#endif
   };
   for (const auto& resource : kPdfResources)
     dict->SetString(resource.name, l10n_util::GetStringUTF16(resource.id));

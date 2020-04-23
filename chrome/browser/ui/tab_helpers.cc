@@ -350,8 +350,10 @@ void TabHelpers::AttachTabHelpers(WebContents* web_contents) {
 
 #if BUILDFLAG(ENABLE_EXTENSIONS)
   extensions::TabHelper::CreateForWebContents(web_contents);
+#if 0
   if (web_app::AreWebAppsEnabled(profile))
     web_app::WebAppTabHelper::CreateForWebContents(web_contents);
+#endif
   if (SiteEngagementService::IsEnabled())
     web_app::WebAppMetrics::Get(profile);
 #endif

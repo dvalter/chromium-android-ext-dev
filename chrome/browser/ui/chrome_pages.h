@@ -13,7 +13,7 @@
 #include "components/content_settings/core/common/content_settings_types.h"
 #include "url/gurl.h"
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 #include "chrome/browser/signin/signin_promo.h"
 #endif
 
@@ -135,7 +135,7 @@ void ShowEnterpriseManagementPageInTabbedBrowser(Browser* browser);
 GURL GetOSSettingsUrl(const std::string& sub_page);
 #endif
 
-#if !defined(OS_ANDROID) && !defined(OS_CHROMEOS)
+#if true || (!defined(OS_ANDROID) && !defined(OS_CHROMEOS))
 // Initiates signin in a new browser tab.
 void ShowBrowserSignin(Browser* browser,
                        signin_metrics::AccessPoint access_point);

@@ -175,7 +175,7 @@
     </message>
 
     <!-- Certificate Viewer link -->
-    <if expr="not is_android">
+    <if expr="is_android or not is_android">
       <message name="IDS_PAGE_INFO_CERTIFICATE" desc="Title of the certificate area in the Page Info bubble, shown when a HTTPS site is loaded.">
         Certificate
       </message>
@@ -203,7 +203,7 @@
     </if>
 
     <!-- Cookies -->
-    <if expr="not is_android">
+    <if expr="is_android or not is_android">
       <message name="IDS_PAGE_INFO_COOKIES" desc="The label for the Cookies setting in the Page Information Window.">
         Cookies
       </message>
@@ -405,8 +405,8 @@
     </message>
 
     <!-- Permission change infobar. -->
-    <if expr="not is_android">
-      <message name="IDS_PAGE_INFO_INFOBAR_TEXT" desc="The string shown in the infobar after the user has changed site permissions settings, reminding them to reload the page in order for the new settings to take effect.">
+    <if expr="is_android or not is_android">
+      <message name=" IDS_PAGE_INFO_INFOBAR_TEXT" desc="The string shown in the infobar after the user has changed site permissions settings, reminding them to reload the page in order for the new settings to take effect.">
         To apply your updated settings to this site, reload this page
       </message>
       <message name="IDS_PAGE_INFO_INFOBAR_BUTTON" desc="The string used in the infobar button allowing the user to reload the page directly from the infobar.">
@@ -415,7 +415,7 @@
     </if>
 
     <!-- Password Protection -->
-    <if expr="not is_android">
+    <if expr="is_android or not is_android">
       <message name="IDS_PAGE_INFO_CHANGE_PASSWORD_SUMMARY" desc="A one-line summary at the top of the Page Info bubble (which shows when you click the security indicator) if user has reuse their google password on current website.">
         Your password may be compromised
       </message>

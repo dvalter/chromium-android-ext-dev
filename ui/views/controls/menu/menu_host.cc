@@ -80,13 +80,6 @@ class PreMenuEventDispatchHandler : public ui::EventHandler,
 #endif  // OS_MACOSX
 
 void TransferGesture(Widget* source, Widget* target) {
-#if defined(OS_MACOSX)
-  NOTIMPLEMENTED();
-#else   // !defined(OS_MACOSX)
-  source->GetGestureRecognizer()->TransferEventsTo(
-      source->GetNativeView(), target->GetNativeView(),
-      ui::TransferTouchesBehavior::kDontCancel);
-#endif  // defined(OS_MACOSX)
 }
 
 }  // namespace internal
@@ -138,12 +131,6 @@ void MenuHost::InitMenuHost(Widget* parent,
 #endif
   Init(std::move(params));
 
-#if !defined(OS_MACOSX)
-  pre_dispatch_handler_ =
-      std::make_unique<internal::PreMenuEventDispatchHandler>(
-          menu_controller, submenu_, GetNativeView());
-#endif
-
   DCHECK(!owner_);
   owner_ = parent;
   if (owner_)
@@ -158,32 +145,6 @@ bool MenuHost::IsMenuHostVisible() {
 }
 
 void MenuHost::ShowMenuHost(bool do_capture) {
-  // Doing a capture may make us get capture lost. Ignore it while we're in the
-  // process of showing.
-  base::AutoReset<bool> reseter(&ignore_capture_lost_, true);
-  ShowInactive();
-  if (do_capture) {
-    MenuController* menu_controller =
-        submenu_->GetMenuItem()->GetMenuController();
-    if (menu_controller && menu_controller->send_gesture_events_to_owner()) {
-      // TransferGesture when owner needs gesture events so that the incoming
-      // touch events after MenuHost is created are properly translated into
-      // gesture events instead of being dropped.
-      internal::TransferGesture(owner_, this);
-    } else {
-      GetGestureRecognizer()->CancelActiveTouchesExcept(nullptr);
-    }
-#if defined(MACOSX)
-    // Cancel existing touches, so we don't miss some touch release/cancel
-    // events due to the menu taking capture.
-    GetGestureRecognizer()->CancelActiveTouchesExcept(nullptr);
-#endif  // defined (OS_MACOSX)
-    // If MenuHost has no parent widget, it needs to call Show to get focus,
-    // so that it will get keyboard events.
-    if (owner_ == nullptr)
-      Show();
-    native_widget_private()->SetCapture();
-  }
 }
 
 void MenuHost::HideMenuHost() {
@@ -203,9 +164,6 @@ void MenuHost::DestroyMenuHost() {
   HideMenuHost();
   destroying_ = true;
   static_cast<MenuHostRootView*>(GetRootView())->ClearSubmenu();
-#if !defined(OS_MACOSX)
-  pre_dispatch_handler_.reset();
-#endif
   Close();
 }
 

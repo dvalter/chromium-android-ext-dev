@@ -149,7 +149,7 @@ If you update this file, be sure also to update google_chrome_strings.grd. -->
   <release seq="1" allow_pseudo="false">
     <messages fallback_to_english="true">
       <!-- Settings specific strings -->
-      <if expr="not is_android">
+      <if expr="is_android or not is_android">
         <part file="settings_chromium_strings.grdp" />
       </if>
 
@@ -610,7 +610,7 @@ Chromium is unable to recover your settings.
       </if>
 
       <!-- Enterprise sign-in dialog -->
-      <if expr="toolkit_views">
+      <if expr="is_android or toolkit_views">
         <message name="IDS_ENTERPRISE_SIGNIN_TITLE" desc="The title of the dialog to confirm linking the browser profile with the signed-in enterprise account">
           Link your Chromium data to this account?
         </message>
@@ -623,7 +623,7 @@ Chromium is unable to recover your settings.
       </if>
 
       <!-- about:browser-switch strings -->
-      <if expr="is_win or is_macosx or (is_linux and not is_chromeos)">
+      <if expr="is_android or is_win or is_macosx or (is_linux and not is_chromeos)">
         <message name="IDS_ABOUT_BROWSER_SWITCH_DESCRIPTION_UNKNOWN_BROWSER" desc="Description shown while waiting for an alternative browser to open, when the browser name is not auto-detected">
           Your system administrator has configured Chromium to open an alternative browser to access <ph name="TARGET_URL_HOSTNAME">$1<ex>example.com</ex></ph>.
         </message>
@@ -741,7 +741,7 @@ Chromium is unable to recover your settings.
       </if>
 
       <!-- Material Design User Manager -->
-      <if expr="not is_android and not chromeos">
+      <if expr="is_android or not is_android and not chromeos">
         <!-- User pod remove sync warning text -->
         <message name="IDS_LOGIN_POD_USER_REMOVE_WARNING_SYNC" desc="Main text shown as a warning when attempting to remove an user.">
           This person's browsing data will be deleted from this device. To recover the data, sign in to Chromium as <ph name="USER_EMAIL">$2<ex>foo@example.com</ex></ph>.
@@ -818,7 +818,7 @@ Chromium is unable to recover your settings.
         </message>
       </if>
 
-      <if expr="not is_android">
+      <if expr="is_android or not is_android">
         <message name="IDS_CONTENT_CONTEXT_ACCESSIBILITY_LABELS_BUBBLE_TEXT" desc="The text of a bubble that confirms users allows integrating the accessibility labels service of Google to Chromium.">
           If an image doesn’t have a useful description, Chromium will try to provide one for you. To create descriptions, images are sent to Google. You can turn this off in settings at any time.
         </message>
@@ -914,7 +914,7 @@ Chromium is unable to recover your settings.
       </message>
 
       <!-- Sync errors. Android uses native UI to handle Sync settings -->
-      <if expr="not is_android">
+      <if expr="is_android or not is_android">
         <message name="IDS_SYNC_UPGRADE_CLIENT" desc="Message indicating client needs to be upgraded to the latest version.">
           Update Chromium to start sync
         </message>
@@ -1002,7 +1002,7 @@ Chromium is unable to recover your settings.
       </if>
 
       <!-- Welcome page (chrome://welcome) strings -->
-      <if expr="not chromeos and not is_android">
+      <if expr="is_android or not chromeos and not is_android">
         <message name="IDS_WELCOME_HEADER" desc="A message which will appear as the header on the Welcome UI if the user has never run Chromium before.">
           Welcome to Chromium
         </message>
@@ -1015,7 +1015,7 @@ Chromium is unable to recover your settings.
         </message>
       </if>
       <!-- Relaunch notification bubble and dialog. -->
-      <if expr="not is_android">
+      <if expr="is_android or not is_android">
         <if expr="not chromeos">
           <message name="IDS_RELAUNCH_RECOMMENDED_TITLE" desc="The title of a dialog that tells users that a browser relaunch is recommended for an update available for some number of days.">
             {0, plural,
@@ -1059,7 +1059,7 @@ Chromium is unable to recover your settings.
         </if>
       </if>
       <!-- Chromium launch blocking dialog. -->
-      <if expr="not is_android and not chromeos">
+      <if expr="is_android or not is_android and not chromeos">
          <message name="IDS_ENTERPRISE_STARTUP_CLOUD_POLICY_ENROLLMENT_TOOLTIP" desc="The information message of Chromium launch blocking dialog for machine level user cloud policy enrollment.">
           Launching Chromium...
         </message>
@@ -1074,7 +1074,7 @@ Chromium is unable to recover your settings.
         Share a Chromium tab
       </message>
       <!-- User happiness tracking survey UI -->
-      <if expr="not is_android">
+      <if expr="is_android or not is_android">
         <message name="IDS_HATS_BUBBLE_TITLE" translateable="false" desc="The title of Happiness Tracking Survey's invitation banner, it invites users to take a survey">
           Help us improve Chromium
         </message>

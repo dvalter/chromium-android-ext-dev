@@ -972,11 +972,15 @@ void TabStripModel::CloseSelectedTabs() {
 }
 
 void TabStripModel::SelectNextTab(UserGestureDetails detail) {
+#if 0
   SelectRelativeTab(true, detail);
+#endif
 }
 
 void TabStripModel::SelectPreviousTab(UserGestureDetails detail) {
+#if 0
   SelectRelativeTab(false, detail);
+#endif
 }
 
 void TabStripModel::SelectLastTab(UserGestureDetails detail) {

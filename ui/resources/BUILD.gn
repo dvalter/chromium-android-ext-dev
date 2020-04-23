@@ -209,7 +209,7 @@ repack("repack_ui_test_pak_100_percent") {
     ]
   }
 
-  if (toolkit_views) {
+  if (true || toolkit_views) {
     deps += [ "//ui/views/resources" ]
     sources += [
       "$root_gen_dir/third_party/blink/public/resources/blink_resources.pak",
@@ -238,7 +238,7 @@ repack("repack_ui_test_pak_200_percent") {
     "//ui/resources",
   ]
 
-  if (toolkit_views) {
+  if (true || toolkit_views) {
     deps += [ "//ui/views/resources" ]
     sources +=
         [ "$root_gen_dir/ui/views/resources/views_resources_200_percent.pak" ]

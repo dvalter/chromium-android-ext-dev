@@ -1031,7 +1031,7 @@ const char kSpeechRecognitionFilterProfanities[] =
 // permitted.
 const char kAllowDeletingBrowserHistory[] = "history.deleting_enabled";
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 // Whether the "Click here to clear your browsing data" tooltip promo has been
 // shown on the History page.
 const char kHistoryMenuPromoShown[] = "history.menu_promo_shown";
@@ -1188,7 +1188,7 @@ const char kContentSettingsPluginWhitelist[] =
     "profile.content_settings.plugin_whitelist";
 #endif
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 // Double that indicates the default zoom level.
 const char kPartitionDefaultZoomLevel[] = "partition.default_zoom_level";
 
@@ -1466,7 +1466,7 @@ const char kWebRtcEventLogCollectionAllowed[] = "webrtc.event_logs_collection";
 // in ICE candidates.
 const char kWebRtcLocalIpsAllowedUrls[] = "webrtc.local_ips_allowed_urls";
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 // Whether or not this profile has been shown the Welcome page.
 const char kHasSeenWelcomePage[] = "browser.has_seen_welcome_page";
 #endif
@@ -1635,7 +1635,7 @@ const char kDefaultTasksBySuffix[] =
 // send text across devices.
 const char kSharedClipboardEnabled[] = "browser.shared_clipboard_enabled";
 
-#if BUILDFLAG(ENABLE_CLICK_TO_CALL)
+#if BUILDFLAG(ENABLE_CLICK_TO_CALL) || true
 // A flag to enable/disable the Click to Call feature which enables users to
 // send phone numbers from desktop to Android phones.
 const char kClickToCallEnabled[] = "browser.click_to_call_enabled";
@@ -1669,7 +1669,7 @@ const char kShutdownNumProcessesSlow[] = "shutdown.num_processes_slow";
 // before shutting everything down.
 const char kRestartLastSessionOnShutdown[] = "restart.last.session.on.shutdown";
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 #if !defined(OS_CHROMEOS)
 // Pref name for the policy controlling presentation of full-tab promotional
 // and/or educational content.
@@ -1712,7 +1712,7 @@ const char kNtpCollapsedSnapshotDocument[] = "ntp.collapsed_snapshot_document";
 
 // Keeps track of sync promo collapsed state in the Other Devices menu.
 const char kNtpCollapsedSyncPromo[] = "ntp.collapsed_sync_promo";
-#else
+
 // Holds info for New Tab Page custom background
 const char kNtpCustomBackgroundDict[] = "ntp.custom_background_dict";
 const char kNtpCustomBackgroundLocalToDevice[] =
@@ -1779,7 +1779,7 @@ const char kDevToolsTCPDiscoveryConfig[] = "devtools.tcp_discovery_config";
 // A dictionary with generic DevTools settings.
 const char kDevToolsPreferences[] = "devtools.preferences";
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 // Tracks the number of times the dice signin promo has been shown in the user
 // menu.
 const char kDiceSigninUserMenuPromoCount[] = "sync_promo.user_menu_show_count";
@@ -2276,13 +2276,13 @@ const char kSystemTimezoneAutomaticDetectionPolicy[] =
 
 // Pref name for the policy controlling whether to enable Media Router.
 const char kEnableMediaRouter[] = "media_router.enable_media_router";
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 // Pref name for the policy controlling whether to force the Cast icon to be
 // shown in the toolbar/overflow menu.
 const char kShowCastIconInToolbar[] = "media_router.show_cast_icon_in_toolbar";
 #endif  // !defined(OS_ANDROID)
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 // Pref name for the policy controlling the way in which users are notified of
 // the need to relaunch the browser for a pending update.
 const char kRelaunchNotification[] = "browser.relaunch_notification";
@@ -2395,7 +2395,7 @@ const char kCustomHandlersEnabled[] = "custom_handlers.enabled";
 // by the cloud policy subsystem.
 const char kDevicePolicyRefreshRate[] = "policy.device_refresh_rate";
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 // A boolean where true means that the browser has previously attempted to
 // enable autoupdate and failed, so the next out-of-date browser start should
 // not prompt the user to enable autoupdate, it should offer to reinstall Chrome
@@ -2524,7 +2524,7 @@ const char kRecoveryComponentNeedsElevation[] =
 const char kRegisteredSupervisedUserWhitelists[] =
     "supervised_users.whitelists";
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 // Boolean that indicates whether Chrome enterprise cloud reporting is enabled
 // or not.
 const char kCloudReportingEnabled[] =
@@ -2791,7 +2791,7 @@ const char kSitePerProcess[] = "site_isolation.site_per_process";
 const char kUserTriggeredIsolatedOrigins[] =
     "site_isolation.user_triggered_isolated_origins";
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 // Boolean that specifies whether media (audio/video) autoplay is allowed.
 const char kAutoplayAllowed[] = "media.autoplay_allowed";
 
@@ -2863,7 +2863,7 @@ const char kSharingSyncedDevices[] = "sharing.synced_devices";
 const char kSharingFCMRegistration[] = "sharing.fcm_registration";
 const char kSharingLocalSharingInfo[] = "sharing.local_sharing_info";
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 // Dictionary that contains all of the Hats Survey Metadata.
 const char kHatsSurveyMetadata[] = "hats.survey_metadata";
 #endif  // !defined(OS_ANDROID)

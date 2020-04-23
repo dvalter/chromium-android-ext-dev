@@ -378,7 +378,9 @@ void AutofillPopupItemView::OnMouseReleased(const ui::MouseEvent& event) {
 }
 
 void AutofillPopupItemView::CreateContent() {
+#if 0
   AutofillPopupController* controller = popup_view()->controller();
+#endif
 
   auto* layout_manager = SetLayoutManager(std::make_unique<views::BoxLayout>(
       views::BoxLayout::Orientation::kHorizontal,
@@ -387,8 +389,7 @@ void AutofillPopupItemView::CreateContent() {
   layout_manager->set_cross_axis_alignment(
       views::BoxLayout::CrossAxisAlignment::kCenter);
 
-  const gfx::ImageSkia icon =
-      controller->layout_model().GetIconImage(line_number());
+  const gfx::ImageSkia icon = gfx::ImageSkia();
 
   if (!icon.isNull()) {
     AddIcon(icon);
@@ -624,7 +625,9 @@ void AutofillPopupFooterView::CreateContent() {
       /*right=*/0,
       /*color=*/popup_view()->GetSeparatorColor()));
 
+#if 0
   AutofillPopupController* controller = popup_view()->controller();
+#endif
 
   views::BoxLayout* layout_manager =
       SetLayoutManager(std::make_unique<views::BoxLayout>(
@@ -634,8 +637,7 @@ void AutofillPopupFooterView::CreateContent() {
   layout_manager->set_cross_axis_alignment(
       views::BoxLayout::CrossAxisAlignment::kStretch);
 
-  const gfx::ImageSkia icon =
-      controller->layout_model().GetIconImage(line_number());
+  const gfx::ImageSkia icon = gfx::ImageSkia();
 
   // A FooterView shows an icon, if any, on the trailing (right in LTR) side,
   // but the Show Account Cards context is an anomaly. Its icon is on the

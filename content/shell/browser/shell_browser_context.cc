@@ -139,7 +139,7 @@ void ShellBrowserContext::FinishInitWhileIOAllowed() {
   SimpleKeyMap::GetInstance()->Associate(this, key_.get());
 }
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 std::unique_ptr<ZoomLevelDelegate> ShellBrowserContext::CreateZoomLevelDelegate(
     const base::FilePath&) {
   return std::unique_ptr<ZoomLevelDelegate>();

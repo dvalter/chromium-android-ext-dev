@@ -27,7 +27,7 @@
 #include "media/base/flinging_controller.h"
 #include "third_party/blink/public/mojom/presentation/presentation.mojom.h"
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 #include "chrome/common/media_router/mojom/media_controller.mojom.h"
 #include "mojo/public/cpp/bindings/pending_receiver.h"
 #include "mojo/public/cpp/bindings/pending_remote.h"
@@ -198,7 +198,7 @@ class MediaRouter : public KeyedService {
   virtual std::unique_ptr<media::FlingingController> GetFlingingController(
       const MediaRoute::Id& route_id) = 0;
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
   // Binds |controller| for sending media commands to a route. The controller
   // will notify |observer| whenever there is a change to the status of the
   // media. It may invalidate bindings from previous calls to this method.

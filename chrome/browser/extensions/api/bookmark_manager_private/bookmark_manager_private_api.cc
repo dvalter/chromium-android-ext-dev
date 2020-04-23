@@ -445,11 +445,6 @@ bool BookmarkManagerPrivateStartDragFunction::RunOnReady() {
   if (params->is_from_touch)
     source = ui::DragDropTypes::DRAG_EVENT_SOURCE_TOUCH;
 
-  chrome::DragBookmarks(GetProfile(),
-                        {std::move(nodes), params->drag_node_index,
-                         web_contents->GetContentNativeView(), source,
-                         gfx::Point(params->x, params->y)});
-
   return true;
 }
 

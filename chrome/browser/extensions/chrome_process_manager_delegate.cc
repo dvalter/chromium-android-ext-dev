@@ -30,6 +30,7 @@
 namespace extensions {
 
 ChromeProcessManagerDelegate::ChromeProcessManagerDelegate() {
+  LOG(ERROR) << "[Kiwi] ChromeProcessManagerDelegate::ChromeProcessManagerDelegate - Step 1";
   BrowserList::AddObserver(this);
   DCHECK(g_browser_process);
   // The profile manager can be null in unit tests.

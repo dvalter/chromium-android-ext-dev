@@ -25,7 +25,7 @@
 #include "components/signin/core/browser/signin_header_helper.h"
 #include "content/public/browser/browser_thread.h"
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 #include "chrome/browser/ui/browser_finder.h"
 #endif
 
@@ -33,7 +33,7 @@ namespace {
 
 const int kMaximumDaysOfDisuse = 4 * 7;  // Should be integral number of weeks.
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 size_t number_of_profile_switches_ = 0;
 #endif
 
@@ -47,7 +47,7 @@ enum ProfileOpenState {
   PROFILE_UNOPENED
 };
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 ProfileOpenState GetProfileOpenState(
     ProfileManager* manager,
     const base::FilePath& path) {
@@ -463,7 +463,7 @@ void ProfileMetrics::LogProfileOpenMethod(ProfileOpen metric) {
                             NUM_PROFILE_OPEN_METRICS);
 }
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 void ProfileMetrics::LogProfileSwitch(
     ProfileOpen metric,
     ProfileManager* manager,

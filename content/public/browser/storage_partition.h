@@ -64,7 +64,7 @@ class PlatformNotificationContext;
 class ServiceWorkerContext;
 class SharedWorkerService;
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 class HostZoomLevelContext;
 class HostZoomMap;
 class ZoomLevelDelegate;
@@ -133,7 +133,7 @@ class CONTENT_EXPORT StoragePartition {
   virtual DevToolsBackgroundServicesContext*
   GetDevToolsBackgroundServicesContext() = 0;
   virtual ContentIndexContext* GetContentIndexContext() = 0;
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
   virtual HostZoomMap* GetHostZoomMap() = 0;
   virtual HostZoomLevelContext* GetHostZoomLevelContext() = 0;
   virtual ZoomLevelDelegate* GetZoomLevelDelegate() = 0;

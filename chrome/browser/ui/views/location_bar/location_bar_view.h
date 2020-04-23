@@ -175,7 +175,9 @@ class LocationBarView : public LocationBar,
   bool HasFocus() const override;
   void GetAccessibleNodeData(ui::AXNodeData* node_data) override;
   gfx::Size GetMinimumSize() const override;
+#if 0
   gfx::Size CalculatePreferredSize() const override;
+#endif
   void Layout() override;
   void OnThemeChanged() override;
   void ChildPreferredSizeChanged(views::View* child) override;

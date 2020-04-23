@@ -48,7 +48,7 @@
 #if defined(OS_ANDROID)
 #include "chrome/browser/android/signin/signin_utils.h"
 #include "ui/android/view_android.h"
-#else
+
 #include "chrome/browser/ui/browser_commands.h"
 #include "chrome/browser/ui/browser_finder.h"
 #include "chrome/browser/ui/browser_window.h"

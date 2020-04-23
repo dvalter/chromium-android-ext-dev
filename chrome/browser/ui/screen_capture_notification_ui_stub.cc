@@ -20,8 +20,10 @@ class ScreenCaptureNotificationUIStub : public ScreenCaptureNotificationUI {
 };
 
 // static
+#if 0
 std::unique_ptr<ScreenCaptureNotificationUI>
 ScreenCaptureNotificationUI::Create(const base::string16& title) {
   return std::unique_ptr<ScreenCaptureNotificationUI>(
       new ScreenCaptureNotificationUIStub());
 }
+#endif

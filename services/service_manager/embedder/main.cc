@@ -251,6 +251,8 @@ int Main(const MainParams& params) {
   MainDelegate* delegate = params.delegate;
   DCHECK(delegate);
 
+  LOG(ERROR) << "[Kiwi] Embedder::Main - Step 1";
+
   int exit_code = -1;
   base::debug::GlobalActivityTracker* tracker = nullptr;
   ProcessType process_type = delegate->OverrideProcessType();
@@ -258,6 +260,7 @@ int Main(const MainParams& params) {
   std::unique_ptr<base::mac::ScopedNSAutoreleasePool> autorelease_pool;
 #endif
 
+  LOG(ERROR) << "[Kiwi] Embedder::Main - Step 2";
   // A flag to indicate whether Main() has been called before. On Android, we
   // may re-run Main() without restarting the browser process. This flag
   // prevents initializing things more than once.
@@ -265,12 +268,15 @@ int Main(const MainParams& params) {
 #if !defined(OS_ANDROID)
   DCHECK(!is_initialized);
 #endif
+  LOG(ERROR) << "[Kiwi] Embedder::Main - Step 3";
   if (!is_initialized) {
+    LOG(ERROR) << "[Kiwi] Embedder::Main - Step 3a";
     is_initialized = true;
 #if defined(OS_MACOSX) && BUILDFLAG(USE_ALLOCATOR_SHIM)
     base::allocator::InitializeAllocatorShim();
 #endif
     base::EnableTerminationOnOutOfMemory();
+    LOG(ERROR) << "[Kiwi] Embedder::Main - Step 3b";
 
 #if defined(OS_LINUX)
     // The various desktop environments set this environment variable that
@@ -286,6 +292,7 @@ int Main(const MainParams& params) {
     setenv("DBUS_SESSION_BUS_ADDRESS", "disabled:", kNoOverrideIfAlreadySet);
 #endif
 
+    LOG(ERROR) << "[Kiwi] Embedder::Main - Step 3c";
 #if defined(OS_WIN)
     base::win::RegisterInvalidParamHandler();
     ui::win::CreateATLModuleIfNeeded();
@@ -301,17 +308,20 @@ int Main(const MainParams& params) {
     argc = params.argc;
     argv = params.argv;
 #endif
+    LOG(ERROR) << "[Kiwi] Embedder::Main - Step 3d";
 
     base::CommandLine::Init(argc, argv);
 
 #if defined(OS_POSIX)
     PopulateFDsFromCommandLine();
 #endif
+    LOG(ERROR) << "[Kiwi] Embedder::Main - Step 3e";
 
     base::EnableTerminationOnHeapCorruption();
 
     SetProcessTitleFromCommandLine(argv);
 #endif  // !defined(OS_ANDROID)
+    LOG(ERROR) << "[Kiwi] Embedder::Main - Step 3f";
 
 // On Android setlocale() is not supported, and we don't override the signal
 // handlers so we can get a stack trace when crashing.
@@ -332,6 +342,7 @@ int Main(const MainParams& params) {
 
     SetupSignalHandlers();
 #endif
+    LOG(ERROR) << "[Kiwi] Embedder::Main - Step 3g";
 
     const auto& command_line = *base::CommandLine::ForCurrentProcess();
 
@@ -339,6 +350,7 @@ int Main(const MainParams& params) {
     base::win::SetupCRT(command_line);
 #endif
 
+    LOG(ERROR) << "[Kiwi] Embedder::Main - Step 3h";
     MainDelegate::InitializeParams init_params;
 
 #if defined(OS_MACOSX)
@@ -350,6 +362,7 @@ int Main(const MainParams& params) {
     init_params.autorelease_pool = autorelease_pool.get();
     InitializeMac();
 #endif
+    LOG(ERROR) << "[Kiwi] Embedder::Main - Step 3i";
 
     mojo::core::Configuration mojo_config;
     if (process_type == ProcessType::kDefault &&
@@ -357,16 +370,21 @@ int Main(const MainParams& params) {
             switches::kProcessTypeServiceManager) {
       mojo_config.is_broker_process = true;
     }
+    LOG(ERROR) << "[Kiwi] Embedder::Main - Step 3j";
     mojo_config.max_message_num_bytes = kMaximumMojoMessageSize;
     delegate->OverrideMojoConfiguration(&mojo_config);
     mojo::core::Init(mojo_config);
 
+    LOG(ERROR) << "[Kiwi] Embedder::Main - Step 3k";
     ui::RegisterPathProvider();
 
     tracker = base::debug::GlobalActivityTracker::Get();
+    LOG(ERROR) << "[Kiwi] Embedder::Main - Step 3l";
     exit_code = delegate->Initialize(init_params);
+    LOG(ERROR) << "[Kiwi] Embedder::Main - Step 3m";
     if (exit_code >= 0) {
       if (tracker) {
+        LOG(ERROR) << "[Kiwi] Embedder::Main - Step 3n";
         tracker->SetProcessPhase(
             base::debug::GlobalActivityTracker::PROCESS_LAUNCH_FAILED);
         tracker->process_data().SetInt("exit-code", exit_code);
@@ -374,6 +392,7 @@ int Main(const MainParams& params) {
       return exit_code;
     }
 
+    LOG(ERROR) << "[Kiwi] Embedder::Main - Step 3o";
 #if defined(OS_WIN)
     // Route stdio to parent console (if any) or create one.
     if (base::CommandLine::ForCurrentProcess()->HasSwitch(
@@ -382,6 +401,7 @@ int Main(const MainParams& params) {
     }
 #endif
 
+    LOG(ERROR) << "[Kiwi] Embedder::Main - Step 3p";
     if (base::CommandLine::ForCurrentProcess()->HasSwitch(
             ::switches::kTraceToConsole)) {
       base::trace_event::TraceConfig trace_config =
@@ -391,6 +411,7 @@ int Main(const MainParams& params) {
     }
   }
 
+  LOG(ERROR) << "[Kiwi] Embedder::Main - Step 4";
   const auto& command_line = *base::CommandLine::ForCurrentProcess();
   if (process_type == ProcessType::kDefault) {
     std::string type_switch =
@@ -403,21 +424,26 @@ int Main(const MainParams& params) {
       process_type = ProcessType::kEmbedder;
     }
   }
+  LOG(ERROR) << "[Kiwi] Embedder::Main - Step 5";
   switch (process_type) {
     case ProcessType::kDefault:
+      LOG(ERROR) << "[Kiwi] Embedder::Main - Step 5a";
       NOTREACHED();
       break;
 
     case ProcessType::kServiceManager:
+      LOG(ERROR) << "[Kiwi] Embedder::Main - Step 5b";
       exit_code = RunServiceManager(delegate);
       break;
 
     case ProcessType::kService:
+      LOG(ERROR) << "[Kiwi] Embedder::Main - Step 5c";
       CommonSubprocessInit();
       exit_code = RunService(delegate);
       break;
 
     case ProcessType::kEmbedder:
+      LOG(ERROR) << "[Kiwi] Embedder::Main - Step 5d";
       if (delegate->IsEmbedderSubprocess())
         CommonSubprocessInit();
       exit_code = delegate->RunEmbedderProcess();
@@ -425,6 +451,7 @@ int Main(const MainParams& params) {
   }
 
   if (tracker) {
+    LOG(ERROR) << "[Kiwi] Embedder::Main - Step 5e";
     if (exit_code == 0) {
       tracker->SetProcessPhaseIfEnabled(
           base::debug::GlobalActivityTracker::PROCESS_EXITED_CLEANLY);

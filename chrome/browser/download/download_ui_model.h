@@ -19,7 +19,7 @@
 #include "components/offline_items_collection/core/offline_item.h"
 #include "components/safe_browsing/buildflags.h"
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 #include "chrome/browser/download/download_commands.h"
 #endif
 
@@ -286,7 +286,7 @@ class DownloadUIModel {
   // security reasons.
   virtual bool ShouldPromoteOrigin() const;
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
   // Methods related to DownloadCommands.
   // Returns whether the given download command is enabled for this download.
   virtual bool IsCommandEnabled(const DownloadCommands* download_commands,

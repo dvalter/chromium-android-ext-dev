@@ -362,11 +362,15 @@ void LocationBarView::SelectAll() {
 // LocationBarView, public LocationBar implementation:
 
 void LocationBarView::FocusLocation(bool is_user_initiated) {
+#if 0
   omnibox_view_->SetFocus(is_user_initiated);
+#endif
 }
 
 void LocationBarView::Revert() {
+#if 0
   omnibox_view_->RevertAll();
+#endif
 }
 
 OmniboxView* LocationBarView::GetOmniboxView() {
@@ -377,7 +381,7 @@ OmniboxView* LocationBarView::GetOmniboxView() {
 // LocationBarView, public views::View implementation:
 
 bool LocationBarView::HasFocus() const {
-  return omnibox_view_ && omnibox_view_->model()->has_focus();
+  return false;
 }
 
 void LocationBarView::GetAccessibleNodeData(ui::AXNodeData* node_data) {
@@ -386,9 +390,12 @@ void LocationBarView::GetAccessibleNodeData(ui::AXNodeData* node_data) {
 
 gfx::Size LocationBarView::GetMinimumSize() const {
   const int height = GetLayoutConstant(LOCATION_BAR_HEIGHT);
+#if 0
   if (!IsInitialized())
+#endif
     return gfx::Size(0, height);
 
+#if 0
   const int inset_width = GetInsets().width();
   const int padding = GetLayoutConstant(LOCATION_BAR_ELEMENT_PADDING);
   const int leading_width = GetMinimumLeadingWidth();
@@ -435,13 +442,17 @@ gfx::Size LocationBarView::CalculatePreferredSize() const {
     width += trailing_width + padding;
 
   return gfx::Size(width, height);
+#endif
 }
 
 void LocationBarView::OnKeywordFaviconFetched(const gfx::Image& icon) {
+#if 0
   selected_keyword_view_->SetImage(icon.AsImageSkia());
+#endif
 }
 
 void LocationBarView::Layout() {
+#if 0
   if (!IsInitialized())
     return;
 
@@ -609,9 +620,11 @@ void LocationBarView::Layout() {
   }
   omnibox_view_->SetBoundsRect(location_bounds);
   View::Layout();
+#endif
 }
 
 void LocationBarView::OnThemeChanged() {
+#if 0
   // ToolbarView::Init() adds |this| to the view hierarchy before initializing,
   // which will trigger an early theme change.
   if (!IsInitialized())
@@ -630,14 +643,18 @@ void LocationBarView::OnThemeChanged() {
   location_icon_view_->Update(/*suppress_animations=*/false);
   RefreshClearAllButtonIcon();
   SchedulePaint();
+#endif
 }
 
 void LocationBarView::ChildPreferredSizeChanged(views::View* child) {
+#if 0
   Layout();
   SchedulePaint();
+#endif
 }
 
 void LocationBarView::Update(const WebContents* contents) {
+#if 0
   RefreshContentSettingViews();
 
   RefreshPageActionIconViews();
@@ -655,15 +672,17 @@ void LocationBarView::Update(const WebContents* contents) {
     send_tab_to_self_icon->SetVisible(false);
 
   OnChanged();  // NOTE: Calls Layout().
+#endif
 }
 
 void LocationBarView::ResetTabState(WebContents* contents) {
+#if 0
   omnibox_view_->ResetTabState(contents);
+#endif
 }
 
 bool LocationBarView::ActivateFirstInactiveBubbleForAccessibility() {
-  return page_action_icon_container_
-      ->ActivateFirstInactiveBubbleForAccessibility();
+  return false;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

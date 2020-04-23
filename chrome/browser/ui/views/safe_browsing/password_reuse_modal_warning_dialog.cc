@@ -30,6 +30,7 @@ using views::BoxLayout;
 namespace {
 
 // Fixed height of the illustration shown on the top of the dialog.
+#if 0
 constexpr int kSafeBrowsingIllustrationHeight = 148;
 
 // Fixed background color of the illustration shown on the top of the dialog in
@@ -108,6 +109,7 @@ base::string16 GetOkButtonLabel(
       return l10n_util::GetStringUTF16(IDS_PAGE_INFO_PROTECT_ACCOUNT_BUTTON);
   }
 }
+#endif
 
 }  // namespace
 
@@ -137,6 +139,7 @@ PasswordReuseModalWarningDialog::PasswordReuseModalWarningDialog(
       service_(service),
       url_(web_contents->GetLastCommittedURL()),
       password_type_(password_type) {
+#if 0
   DialogDelegate::set_button_label(ui::DIALOG_BUTTON_OK,
                                    GetOkButtonLabel(password_type_));
   DialogDelegate::set_button_label(
@@ -165,13 +168,17 @@ PasswordReuseModalWarningDialog::PasswordReuseModalWarningDialog(
             : l10n_util::GetStringUTF16(IDS_PAGE_INFO_CHANGE_PASSWORD_DETAILS));
     CreateGaiaPasswordReuseModalWarningDialog(message_body_label);
   }
+#endif
 }
 
 PasswordReuseModalWarningDialog::~PasswordReuseModalWarningDialog() {
+#if 0
   if (service_)
     service_->RemoveObserver(this);
+#endif
 }
 
+#if 0
 void PasswordReuseModalWarningDialog::
     CreateSavedPasswordReuseModalWarningDialog(
         const base::string16 message_body,
@@ -221,6 +228,7 @@ void PasswordReuseModalWarningDialog::CreateGaiaPasswordReuseModalWarningDialog(
   }
   AddChildView(message_body_label);
 }
+#endif
 
 gfx::Size PasswordReuseModalWarningDialog::CalculatePreferredSize() const {
   constexpr int kDialogWidth = 400;

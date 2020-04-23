@@ -329,7 +329,7 @@ void AddChromeKeySystems(
 
 #endif  // BUILDFLAG(ENABLE_LIBRARY_CDMS)
 
-#if defined(OS_ANDROID)
+#if BUILDFLAG(ENABLE_WIDEVINE) and defined(OS_ANDROID)
   cdm::AddAndroidWidevine(key_systems_properties);
 #endif  // defined(OS_ANDROID)
 }

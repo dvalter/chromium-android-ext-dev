@@ -70,6 +70,7 @@ void PermissionPromptBubbleView::AddPermissionRequestLine(
                          DISTANCE_SUBSECTION_HORIZONTAL_INDENT)),
       provider->GetDistanceMetric(views::DISTANCE_RELATED_LABEL_HORIZONTAL)));
 
+#if 0
   auto* icon =
       line_container->AddChildView(std::make_unique<views::ImageView>());
   const gfx::VectorIcon& vector_id = request->GetIconId();
@@ -78,6 +79,7 @@ void PermissionPromptBubbleView::AddPermissionRequestLine(
   constexpr int kPermissionIconSize = 18;
   icon->SetImage(
       gfx::CreateVectorIcon(vector_id, kPermissionIconSize, icon_color));
+#endif
 
   auto* label = line_container->AddChildView(
       std::make_unique<views::Label>(request->GetMessageTextFragment()));

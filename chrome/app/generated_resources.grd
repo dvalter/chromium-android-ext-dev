@@ -234,7 +234,7 @@ are declared in tools/grit/grit_rule.gni.
       </if>
 
       <!-- Settings specific strings -->
-      <if expr="not is_android">
+      <if expr="is_android or not is_android">
         <part file="settings_strings.grdp" />
       </if>
 
@@ -244,7 +244,7 @@ are declared in tools/grit/grit_rule.gni.
       </if>
 
       <!-- Welcome strings -->
-      <if expr="not chromeos and not is_android">
+      <if expr="is_android or not chromeos and not is_android">
         <part file="welcome_strings.grdp" />
       </if>
 
@@ -392,7 +392,7 @@ are declared in tools/grit/grit_rule.gni.
         Disable
       </message>
       <!-- Search strings are only used in webui, so no mobile. -->
-      <if expr="not is_android">
+      <if expr="is_android or not is_android">
         <message name="IDS_SEARCH_CLEARED" desc="Message announced to screenreader users when search is cleared.">
           Search cleared
         </message>
@@ -414,7 +414,7 @@ are declared in tools/grit/grit_rule.gni.
       </if>
 
        <!-- content area context menus. Android does not use it -->
-      <if expr="not is_android">
+      <if expr="is_android or not is_android">
         <message name="IDS_CONTENT_CONTEXT_INSPECTELEMENT" desc="The name of the Inspect Element command in the content area context menu">
           I&amp;nspect
         </message>
@@ -914,7 +914,7 @@ are declared in tools/grit/grit_rule.gni.
       </if>
 
       <!-- Page menu. Android has separate strings for its menu -->
-      <if expr="not is_android">
+      <if expr="is_android or not is_android">
         <if expr="not use_titlecase">
           <message name="IDS_NEW_TAB" desc="The text label of a menu item for opening a new tab">
             New &amp;tab
@@ -1891,7 +1891,7 @@ are declared in tools/grit/grit_rule.gni.
       </message>
 
       <!-- Download Context Menu Items -->
-      <if expr="not is_android">
+      <if expr="is_android or not is_android">
         <if expr="not use_titlecase">
           <if expr="is_macosx">
             <message name="IDS_DOWNLOAD_MENU_SHOW"
@@ -2132,7 +2132,7 @@ are declared in tools/grit/grit_rule.gni.
       </if>
 
       <!-- Desktop omnibox PWA install icon -->
-      <if expr="not is_android">
+      <if expr="is_android or not is_android">
         <message name="IDS_OMNIBOX_PWA_INSTALL_ICON_LABEL" desc="String for the omnibox icon label promoting an app installation">
           Install
         </message>
@@ -2619,7 +2619,7 @@ are declared in tools/grit/grit_rule.gni.
       </message>
 
       <!-- Win certificate selector dialog strings.  -->
-      <if expr="toolkit_views">
+      <if expr="is_android or toolkit_views">
         <message name="IDS_CERT_SELECTOR_SUBJECT_COLUMN" desc="The text of the header for the certificate subject column in the certificate selector dialog.">
           Subject
         </message>
@@ -3244,7 +3244,7 @@ are declared in tools/grit/grit_rule.gni.
       </message>
 
       <!-- Task Manager Window -->
-      <if expr="not is_android">
+      <if expr="is_android or not is_android">
         <if expr="not use_titlecase">
           <message name="IDS_TASK_MANAGER_KILL" desc="The caption of the Task Manager kill button">
             End process
@@ -3511,7 +3511,7 @@ are declared in tools/grit/grit_rule.gni.
       <message name="IDS_UTILITY_PROCESS_FILE_UTILITY_NAME" desc="The name of the utility process used for various Chrome specific file operations.">
           Chrome File Utilities
       </message>
-      <if expr="not is_android">
+      <if expr="is_android or not is_android">
         <message name="IDS_UTILITY_PROCESS_PROFILE_IMPORTER_NAME" desc="The name of the utility process used for importing profiles.">
           Profile Importer
         </message>
@@ -4897,7 +4897,7 @@ Keep your key file in a safe place. You will need it to create new versions of y
       </message>
 
       <!-- Pepper Broker Infobar -->
-      <if expr="enable_plugins">
+      <if expr="is_android or enable_plugins">
         <message name="IDS_PEPPER_BROKER_MESSAGE" desc="Message shown when a pepper plugin wants to launch its broker. This message is followed by a 'Learn more' link.">
           <ph name="PEPPER_PLUGIN_NAME">$1<ex>Flash</ex></ph> on <ph name="PEPPER_PLUGIN_DOMAIN">$2<ex>example.com</ex></ph> wants to access your computer
         </message>
@@ -4960,7 +4960,7 @@ Keep your key file in a safe place. You will need it to create new versions of y
       </message>
 
       <!-- about:system strings -->
-      <if expr="not is_android">
+      <if expr="is_android or not is_android">
         <message name="IDS_ABOUT_SYS_TITLE" desc="about:system page title">
           About System
         </message>
@@ -4991,7 +4991,7 @@ Keep your key file in a safe place. You will need it to create new versions of y
       </if>
 
       <!-- chrome://browser-switch strings -->
-      <if expr="is_win or is_macosx or (is_linux and not is_chromeos)">
+      <if expr="is_android or is_win or is_macosx or (is_linux and not is_chromeos)">
         <message name="IDS_ABOUT_BROWSER_SWITCH_TITLE" desc="about:browser-switch page title">
           Legacy Browser Support
         </message>
@@ -5466,7 +5466,7 @@ Keep your key file in a safe place. You will need it to create new versions of y
       </message>
 
       <!-- Strings for intent picker -->
-      <if expr="not is_android">
+      <if expr="is_android or not is_android">
         <message name="IDS_TOOLTIP_INTENT_PICKER_ICON" desc="The tooltip for the intent picker bubble icon">
           To open this link, choose an app
         </message>
@@ -5725,20 +5725,7 @@ the Bookmarks menu.">
           No thanks
         </message>
       </if>
-      <if expr="not is_android">
-        <message name="IDS_PASSWORD_MANAGER_SAVE_BUTTON" desc="Save button text for password manager">
-          Save
-        </message>
-        <if expr="use_titlecase">
-          <message name="IDS_PASSWORD_MANAGER_UPDATE_BUTTON" desc="In Title Case: Update button text for password manager">
-            Update Password
-          </message>
-        </if>
-        <if expr="not use_titlecase">
-          <message name="IDS_PASSWORD_MANAGER_UPDATE_BUTTON" desc="Update button text for password manager">
-            Update password
-          </message>
-        </if>
+      <if expr="is_android or not is_android">
         <message name="IDS_PASSWORD_MANAGER_BUBBLE_BLACKLIST_BUTTON" desc="Button text for the 'Save Password' bubble's 'Never remember for this site' option">
           Never
         </message>
@@ -5792,7 +5779,7 @@ the Bookmarks menu.">
       </if>
 
       <!-- Android uses custom UI for Bookmark importing -->
-      <if expr="not is_android">
+      <if expr="is_android or not is_android">
         <!-- Import Settings Dialog -->
         <if expr="is_win">
           <message name="IDS_IMPORT_FROM_IE" desc="browser combo box: Microsoft Internet Explorer">
@@ -6553,7 +6540,7 @@ the Bookmarks menu.">
       <!-- Settings related strings not specific to chrome://settings.
            (Settings specific strings are in settings_strings.grdp).
            Android uses native UI for settings -->
-      <if expr="not is_android">
+      <if expr="is_android or not is_android">
         <message name="IDS_TOOLBAR_INFORM_SET_HOME_PAGE" desc="The confirmation message when dropping a link on the Home toolbar button">
            Your home page has been set.
         </message>
@@ -6760,7 +6747,7 @@ the Bookmarks menu.">
           Generate QR code for this Image
         </message>
       </if>
-      <if expr="not is_android">
+      <if expr="is_android or not is_android">
         <message name="IDS_OMNIBOX_QRCODE_GENERATOR_ICON_LABEL" desc="String for the omnibox icon label for the QR code Generator">
           QR code
         </message>
@@ -6929,7 +6916,7 @@ the Bookmarks menu.">
       </message>
 
       <!-- Accessiblility strings for Infobars in Views -->
-      <if expr="toolkit_views">
+      <if expr="is_android or toolkit_views">
         <message name="IDS_ACCNAME_INFOBAR_CONTAINER" desc="The accessible name for the infobar container.">
           Infobar Container
         </message>
@@ -6990,7 +6977,7 @@ the Bookmarks menu.">
       </message>
 
       <!-- Managed UI on pages like chrome://settings and chrome://downloads -->
-      <if expr="not is_android">
+      <if expr="is_android or not is_android">
         <if expr="chromeos">
           <message name="IDS_DEVICE_MANAGED_WITH_HYPERLINK" desc="Message to end users in Enterprise/EDU, with a link for more info (ChromeOS)">
             Your <ph name="BEGIN_LINK">&lt;a target="_blank" href="$1"&gt;</ph><ph name="DEVICE_TYPE">$2<ex>Chromebook</ex></ph> is managed<ph name="END_LINK">&lt;/a&gt;</ph> by your organization
@@ -7139,7 +7126,7 @@ the Bookmarks menu.">
       </message>
 
       <!-- Strings used for non-Android builds -->
-      <if expr="not is_android">
+      <if expr="is_android or not is_android">
         <message name="IDS_APP_DEFAULT_PAGE_NAME"
                  desc="Default name for the first 'Apps' page on the New Tab Page.">
           Apps
@@ -7780,7 +7767,7 @@ Please help our engineers fix this problem. Tell us what happened right before y
       </if>
 
       <!-- Android uses native UI to handle Sync settings -->
-      <if expr="not is_android">
+      <if expr="is_android or not is_android">
         <!-- Sync options dialog strings -->
         <if expr="not chromeos">
           <message name="IDS_SYNC_OVERVIEW" desc="The message that appears in the options dialog when sync has not been set up by the user.">
@@ -7889,7 +7876,7 @@ Please help our engineers fix this problem. Tell us what happened right before y
       </if>
 
       <!-- Translate Bubble -->
-      <if expr="toolkit_views">
+      <if expr="is_android or toolkit_views">
         <message name="IDS_TRANSLATE_BUBBLE_BEFORE_TRANSLATE_TITLE" desc="Title text for the translate bubble when asking to translate a page.">
           Translate this page?
         </message>
@@ -9044,7 +9031,7 @@ Please help our engineers fix this problem. Tell us what happened right before y
       </message>
 
       <!-- Media Galleries. -->
-      <if expr="not is_android">
+      <if expr="is_android or not is_android">
         <message name="IDS_MEDIA_GALLERIES_DIALOG_HEADER" desc="Header for media gallery permissions dialog.">
           Media-File Permissions for "<ph name="EXTENSION">$1<ex>Photo Editor</ex></ph>"
         </message>
@@ -9565,7 +9552,7 @@ Please help our engineers fix this problem. Tell us what happened right before y
       </message>
     </if>
 
-    <if expr="not is_android">
+    <if expr="is_android or not is_android">
       <!-- Device Chooser Prompt -->
       <message name="IDS_BLUETOOTH_DEVICE_CHOOSER_PROMPT_ORIGIN" desc="The label that is used to introduce Bluetooth chooser details to the user in a popup when it is from a website.">
         <ph name="Origin">$1<ex>www.google.com</ex></ph> wants to pair
@@ -9675,7 +9662,7 @@ Please help our engineers fix this problem. Tell us what happened right before y
     </message>
 
     <!-- Serial port chooser -->
-    <if expr="not is_android">
+    <if expr="is_android or not is_android">
       <message name="IDS_SERIAL_PORT_CHOOSER_PROMPT_ORIGIN" desc="The label that is used to introduce serial port chooser details to the user in a popup when it is from a website.">
         <ph name="Origin">$1<ex>www.google.com</ex></ph> wants to connect to a serial port
       </message>
@@ -9694,7 +9681,7 @@ Please help our engineers fix this problem. Tell us what happened right before y
     </if>
 
     <!-- HID (Human Interface Device) chooser -->
-    <if expr="not is_android">
+    <if expr="is_android or not is_android">
       <message name="IDS_HID_CHOOSER_PROMPT_ORIGIN" desc="The label that is used to introduce the Human Interface Device (HID) chooser details to the user in a popup when it is from a website.">
         <ph name="Origin">$1<ex>www.google.com</ex></ph> wants to connect to a HID device
       </message>
@@ -9755,7 +9742,7 @@ Please help our engineers fix this problem. Tell us what happened right before y
     </if>
 
     <!-- Framebust / Blocked Redirection intervention message -->
-    <if expr="not is_android">
+    <if expr="is_android or not is_android">
       <!-- Android strings are declared in android_chrome_strings.grd. -->
       <message name="IDS_REDIRECT_BLOCKED_MESSAGE" desc="The message stating that a redirect (noun) was blocked on this page. This will be followed on a separate line with the address the user was being redirected to.">
         Redirect blocked:
@@ -9861,7 +9848,7 @@ Please help our engineers fix this problem. Tell us what happened right before y
     </if>
 
     <!-- Download open confirmation dialog -->
-    <if expr="not is_android">
+    <if expr="is_android or not is_android">
       <message name="IDS_DOWNLOAD_OPEN_CONFIRMATION_DIALOG_TITLE" desc="Title of the dialog prompt shown to users when an extension is trying to open a downloaded file.">
         Open download
       </message>
@@ -9983,7 +9970,7 @@ Please help our engineers fix this problem. Tell us what happened right before y
     </message>
 
     <!-- Relaunch notification bubble and dialog. -->
-    <if expr="not is_android">
+    <if expr="is_android or not is_android">
       <if expr="not chromeos">
         <message name="IDS_RELAUNCH_ACCEPT_BUTTON" desc="The text in the accept button of a dialog that causes the browser to be relaunched immediately.">
           Relaunch now
@@ -10000,7 +9987,7 @@ Please help our engineers fix this problem. Tell us what happened right before y
     </if>
 
     <!-- Web-modal dialog shown during Web Authenticaton API requests. -->
-    <if expr="is_win or is_macosx or desktop_linux or chromeos">
+    <if expr="is_android or is_win or is_macosx or desktop_linux or chromeos">
       <message name="IDS_WEBAUTHN_GENERIC_TITLE" desc="Title of most dialogs shown while the user is authenticating on a web site using a security key.">
         Use your security key with <ph name="APP_NAME">$1<ex>google.com</ex></ph>
       </message>
@@ -10284,7 +10271,7 @@ Please help our engineers fix this problem. Tell us what happened right before y
     </message>
 
     <!-- User happiness tracking survey UI -->
-    <if expr="not is_android">
+    <if expr="is_android or not is_android">
       <if expr="use_titlecase">
         <message name="IDS_HATS_BUBBLE_OK_LABEL" translateable="false" desc="Button label on Happiness Tracking Survey's invitation banner, clicking the button gives the user's consent on taking the survey.">
           Take Survey

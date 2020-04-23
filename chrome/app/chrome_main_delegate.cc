@@ -520,10 +520,13 @@ ChromeMainDelegate::~ChromeMainDelegate() {
 
 #if !defined(CHROME_MULTIPLE_DLL_CHILD)
 void ChromeMainDelegate::PostEarlyInitialization(bool is_running_tests) {
+  LOG(ERROR) << "[Kiwi] ChromeMainDelegate::PostEarlyInitialization - Step 1";
+
   // Chrome disallows cookies by default. All code paths that want to use
   // cookies need to go through one of Chrome's URLRequestContexts which have
   // a ChromeNetworkDelegate attached that selectively allows cookies again.
   net::URLRequest::SetDefaultCookiePolicyToBlock();
+  LOG(ERROR) << "[Kiwi] ChromeMainDelegate::PostEarlyInitialization - Step 2";
 
 #if defined(OS_CHROMEOS)
   // The feature list depends on BrowserPolicyConnectorChromeOS which depends
@@ -531,18 +534,24 @@ void ChromeMainDelegate::PostEarlyInitialization(bool is_running_tests) {
   // list, so initialize them separately later at the end of this function.
   chromeos::InitializeDBus();
 #endif
+  LOG(ERROR) << "[Kiwi] ChromeMainDelegate::PostEarlyInitialization - Step 3";
 
   DCHECK(startup_data_);
   auto* chrome_feature_list_creator =
       startup_data_->chrome_feature_list_creator();
   chrome_feature_list_creator->CreateFeatureList();
+  LOG(ERROR) << "[Kiwi] ChromeMainDelegate::PostEarlyInitialization - Step 4";
   PostFieldTrialInitialization();
+  LOG(ERROR) << "[Kiwi] ChromeMainDelegate::PostEarlyInitialization - Step 5";
 
   // Initializes the resource bundle and determines the locale.
   std::string actual_locale =
       LoadLocalState(chrome_feature_list_creator, is_running_tests);
+  LOG(ERROR) << "[Kiwi] ChromeMainDelegate::PostEarlyInitialization - Step 6";
   chrome_feature_list_creator->SetApplicationLocale(actual_locale);
+  LOG(ERROR) << "[Kiwi] ChromeMainDelegate::PostEarlyInitialization - Step 7";
   chrome_feature_list_creator->OverrideCachedUIStrings();
+  LOG(ERROR) << "[Kiwi] ChromeMainDelegate::PostEarlyInitialization - Step 8";
 
 #if defined(OS_CHROMEOS)
   // Initialize D-Bus clients that depend on feature list.
@@ -550,10 +559,13 @@ void ChromeMainDelegate::PostEarlyInitialization(bool is_running_tests) {
 #endif
 
 #if defined(OS_ANDROID)
+  LOG(ERROR) << "[Kiwi] ChromeMainDelegate::PostEarlyInitialization - Step 8a";
   startup_data_->CreateProfilePrefService();
   net::NetworkChangeNotifier::SetFactory(
       new net::NetworkChangeNotifierFactoryAndroid());
+  LOG(ERROR) << "[Kiwi] ChromeMainDelegate::PostEarlyInitialization - Step 8b";
 #endif
+  LOG(ERROR) << "[Kiwi] ChromeMainDelegate::PostEarlyInitialization - Step 9";
 
   if (base::FeatureList::IsEnabled(
           features::kWriteBasicSystemProfileToPersistentHistogramsFile)) {
@@ -565,6 +577,7 @@ void ChromeMainDelegate::PostEarlyInitialization(bool is_running_tests) {
     if (record)
       startup_data_->RecordCoreSystemProfile();
   }
+  LOG(ERROR) << "[Kiwi] ChromeMainDelegate::PostEarlyInitialization - Step 10";
 }
 
 bool ChromeMainDelegate::ShouldCreateFeatureList() {

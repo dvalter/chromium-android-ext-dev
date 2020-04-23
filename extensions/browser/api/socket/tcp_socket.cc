@@ -30,34 +30,7 @@ namespace extensions {
 
 namespace {
 
-// Returns true if successfully parsed the SSL protocol version that is
-// represented by a string. Returns false if |version_str| is invalid.
-bool SSLProtocolVersionFromString(const std::string& version_str,
-                                  network::mojom::SSLVersion* version_out) {
-  if (version_str == "tls1") {
-    *version_out = network::mojom::SSLVersion::kTLS1;
-    return true;
-  }
-  if (version_str == "tls1.1") {
-    *version_out = network::mojom::SSLVersion::kTLS11;
-    return true;
-  }
-  if (version_str == "tls1.2") {
-    *version_out = network::mojom::SSLVersion::kTLS12;
-    return true;
-  }
-  if (version_str == "tls1.3") {
-    *version_out = network::mojom::SSLVersion::kTLS13;
-    return true;
-  }
-  return false;
-}
-
 }  // namespace
-
-const char kTCPSocketTypeInvalidError[] =
-    "Cannot call both connect and listen on the same socket.";
-const char kSocketListenError[] = "Could not listen on the specified port.";
 
 static base::LazyInstance<BrowserContextKeyedAPIFactory<
     ApiResourceManager<ResumableTCPSocket>>>::DestructorAtExit g_factory =
@@ -85,7 +58,6 @@ TCPSocket::TCPSocket(content::BrowserContext* browser_context,
                      const std::string& owner_extension_id)
     : Socket(owner_extension_id),
       browser_context_(browser_context),
-      socket_mode_(UNKNOWN),
       mojo_data_pump_(nullptr),
       task_runner_(base::SequencedTaskRunnerHandle::Get()) {}
 
@@ -97,7 +69,6 @@ TCPSocket::TCPSocket(
     const std::string& owner_extension_id)
     : Socket(owner_extension_id),
       browser_context_(nullptr),
-      socket_mode_(CLIENT),
       client_socket_(std::move(socket)),
       mojo_data_pump_(std::make_unique<MojoDataPump>(std::move(receive_stream),
                                                      std::move(send_stream))),
@@ -113,7 +84,7 @@ TCPSocket::~TCPSocket() {
 void TCPSocket::Connect(const net::AddressList& address,
                         net::CompletionOnceCallback callback) {
   DCHECK(callback);
-
+#if 0
   if (socket_mode_ == SERVER || connect_callback_) {
     std::move(callback).Run(net::ERR_CONNECTION_FAILED);
     return;
@@ -144,6 +115,7 @@ void TCPSocket::Connect(const net::AddressList& address,
                                 storage_partition_, browser_context_, address,
                                 client_socket_.BindNewPipeAndPassReceiver(),
                                 std::move(completion_callback_ui)));
+#endif
 }
 
 void TCPSocket::Disconnect(bool socket_destroying) {
@@ -174,28 +146,6 @@ void TCPSocket::Bind(const std::string& address,
 
 void TCPSocket::Read(int count, ReadCompletionCallback callback) {
   DCHECK(callback);
-
-  const bool socket_destroying = false;
-  if (socket_mode_ != CLIENT) {
-    std::move(callback).Run(net::ERR_FAILED, nullptr, socket_destroying);
-    return;
-  }
-
-  if (!mojo_data_pump_) {
-    std::move(callback).Run(net::ERR_SOCKET_NOT_CONNECTED, nullptr,
-                            socket_destroying);
-    return;
-  }
-  if (mojo_data_pump_->HasPendingRead() || connect_callback_) {
-    // It's illegal to read a net::TCPSocket while a pending Connect or Read is
-    // already in progress.
-    std::move(callback).Run(net::ERR_IO_PENDING, nullptr, socket_destroying);
-    return;
-  }
-
-  read_callback_ = std::move(callback);
-  mojo_data_pump_->Read(count, base::BindOnce(&TCPSocket::OnReadComplete,
-                                              base::Unretained(this)));
 }
 
 void TCPSocket::RecvFrom(int count, RecvFromCompletionCallback callback) {
@@ -213,25 +163,16 @@ void TCPSocket::SendTo(scoped_refptr<net::IOBuffer> io_buffer,
 void TCPSocket::SetKeepAlive(bool enable,
                              int delay,
                              SetKeepAliveCallback callback) {
-  if (!client_socket_) {
-    std::move(callback).Run(net::ERR_FAILED);
-    return;
-  }
-  client_socket_->SetKeepAlive(enable, delay, std::move(callback));
 }
 
 void TCPSocket::SetNoDelay(bool no_delay, SetNoDelayCallback callback) {
-  if (!client_socket_) {
-    std::move(callback).Run(net::ERR_FAILED);
-    return;
-  }
-  client_socket_->SetNoDelay(no_delay, std::move(callback));
 }
 
 void TCPSocket::Listen(const std::string& address,
                        uint16_t port,
                        int backlog,
                        ListenCallback callback) {
+#if 0
   DCHECK(!server_socket_);
   DCHECK(!client_socket_);
   DCHECK(!listen_callback_);
@@ -269,9 +210,11 @@ void TCPSocket::Listen(const std::string& address,
                      browser_context_, ip_end_point, backlog,
                      server_socket_.BindNewPipeAndPassReceiver(),
                      std::move(completion_callback_ui)));
+#endif
 }
 
 void TCPSocket::Accept(AcceptCompletionCallback callback) {
+#if 0
   if (socket_mode_ != SERVER || !server_socket_) {
     std::move(callback).Run(net::ERR_FAILED, mojo::NullRemote(), base::nullopt,
                             mojo::ScopedDataPipeConsumerHandle(),
@@ -291,6 +234,7 @@ void TCPSocket::Accept(AcceptCompletionCallback callback) {
   server_socket_->Accept(
       mojo::NullRemote() /* observer */,
       base::BindOnce(&TCPSocket::OnAccept, base::Unretained(this)));
+#endif
 }
 
 bool TCPSocket::IsConnected() {
@@ -357,12 +301,6 @@ void TCPSocket::OnConnectCompleteOnUIThread(
     const base::Optional<net::IPEndPoint>& peer_addr,
     mojo::ScopedDataPipeConsumerHandle receive_stream,
     mojo::ScopedDataPipeProducerHandle send_stream) {
-  DCHECK_CURRENTLY_ON(content::BrowserThread::UI);
-
-  original_task_runner->PostTask(
-      FROM_HERE,
-      base::BindOnce(std::move(callback), result, local_addr, peer_addr,
-                     std::move(receive_stream), std::move(send_stream)));
 }
 
 void TCPSocket::OnConnectComplete(
@@ -371,18 +309,6 @@ void TCPSocket::OnConnectComplete(
     const base::Optional<net::IPEndPoint>& peer_addr,
     mojo::ScopedDataPipeConsumerHandle receive_stream,
     mojo::ScopedDataPipeProducerHandle send_stream) {
-  DCHECK(!is_connected_);
-  DCHECK(connect_callback_);
-  DCHECK(task_runner_->RunsTasksInCurrentSequence());
-
-  if (result == net::OK) {
-    is_connected_ = true;
-    local_addr_ = local_addr;
-    peer_addr_ = peer_addr;
-    mojo_data_pump_ = std::make_unique<MojoDataPump>(std::move(receive_stream),
-                                                     std::move(send_stream));
-  }
-  std::move(connect_callback_).Run(result);
 }
 
 // static
@@ -393,6 +319,7 @@ void TCPSocket::ListenOnUIThread(
     int backlog,
     mojo::PendingReceiver<network::mojom::TCPServerSocket> receiver,
     network::mojom::NetworkContext::CreateTCPServerSocketCallback callback) {
+#if 0
   DCHECK_CURRENTLY_ON(content::BrowserThread::UI);
 
   if (!storage_partition) {
@@ -404,6 +331,7 @@ void TCPSocket::ListenOnUIThread(
       net::MutableNetworkTrafficAnnotationTag(
           Socket::GetNetworkTrafficAnnotationTag()),
       std::move(receiver), std::move(callback));
+#endif
 }
 
 // static
@@ -412,25 +340,11 @@ void TCPSocket::OnListenCompleteOnUIThread(
     network::mojom::NetworkContext::CreateTCPServerSocketCallback callback,
     int result,
     const base::Optional<net::IPEndPoint>& local_addr) {
-  DCHECK_CURRENTLY_ON(content::BrowserThread::UI);
-
-  original_task_runner->PostTask(
-      FROM_HERE, base::BindOnce(std::move(callback), result, local_addr));
 }
 
 void TCPSocket::OnListenComplete(
     int result,
     const base::Optional<net::IPEndPoint>& local_addr) {
-  DCHECK(task_runner_->RunsTasksInCurrentSequence());
-  DCHECK(listen_callback_);
-
-  if (result != net::OK) {
-    server_socket_.reset();
-    std::move(listen_callback_).Run(result, kSocketListenError);
-    return;
-  }
-  local_addr_ = local_addr;
-  std::move(listen_callback_).Run(result, "");
 }
 
 content::StoragePartition* TCPSocket::GetStoragePartitionHelper() {
@@ -495,6 +409,7 @@ void TCPSocket::OnUpgradeToTLSComplete(
 
 void TCPSocket::UpgradeToTLS(api::socket::SecureOptions* options,
                              UpgradeToTLSCallback callback) {
+#if 0
   if (!client_socket_ || !mojo_data_pump_ ||
       mojo_data_pump_->HasPendingRead() || mojo_data_pump_->HasPendingWrite()) {
     std::move(callback).Run(net::ERR_FAILED, mojo::NullRemote(),
@@ -562,6 +477,7 @@ void TCPSocket::UpgradeToTLS(api::socket::SecureOptions* options,
       base::BindOnce(&TCPSocket::OnUpgradeToTLSComplete, base::Unretained(this),
                      std::move(callback), std::move(tls_socket),
                      local_addr_.value(), peer_addr_.value()));
+#endif
 }
 
 ResumableTCPSocket::ResumableTCPSocket(content::BrowserContext* browser_context,

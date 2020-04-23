@@ -33,7 +33,9 @@ namespace {
 // Preference indicating that the Dice migraton has happened.
 const char kDiceMigrationCompletePref[] = "signin.DiceMigrationComplete";
 
+#if 0
 const char kDiceMigrationStatusHistogram[] = "Signin.DiceMigrationStatus";
+#endif
 
 // Used for UMA histogram kDiceMigrationStatusHistogram.
 // Do not remove or re-order values.
@@ -47,6 +49,7 @@ enum class DiceMigrationStatus {
   kDiceMigrationStatusCount
 };
 
+#if 0
 DiceMigrationStatus GetDiceMigrationStatus(
     AccountConsistencyMethod account_consistency) {
   switch (account_consistency) {
@@ -59,6 +62,7 @@ DiceMigrationStatus GetDiceMigrationStatus(
       return DiceMigrationStatus::kDisabled;
   }
 }
+#endif
 #endif
 
 }  // namespace
@@ -93,7 +97,7 @@ AccountConsistencyModeManager::AccountConsistencyModeManager(Profile* profile)
 
   account_consistency_ = ComputeAccountConsistencyMethod(profile_);
 
-#if BUILDFLAG(ENABLE_DICE_SUPPORT)
+#if false && BUILDFLAG(ENABLE_DICE_SUPPORT)
   // New profiles don't need Dice migration. Old profiles may need it if they
   // were created before Dice.
   if (profile_->IsNewProfile())

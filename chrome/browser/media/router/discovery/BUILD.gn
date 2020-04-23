@@ -2,8 +2,6 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
-assert(!is_android)
-
 static_library("discovery") {
   inputs = [
     "$root_gen_dir/chrome/grit/generated_resources.h",
@@ -77,7 +75,7 @@ static_library("discovery") {
     sources += [ "discovery_network_list_wifi_linux.cc" ]
   }
 
-  if (is_posix) {
+  if (false && is_posix) {
     sources += [ "discovery_network_list_posix.cc" ]
   }
 

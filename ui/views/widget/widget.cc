@@ -33,6 +33,7 @@
 #include "ui/views/focus/widget_focus_manager.h"
 #include "ui/views/views_delegate.h"
 #include "ui/views/widget/native_widget_private.h"
+#include "ui/native_theme/native_theme_android.h"
 #include "ui/views/widget/root_view.h"
 #include "ui/views/widget/tooltip_manager.h"
 #include "ui/views/widget/widget_delegate.h"
@@ -175,6 +176,10 @@ ui::ZOrderLevel Widget::InitParams::EffectiveZOrderLevel() const {
 ////////////////////////////////////////////////////////////////////////////////
 // Widget, public:
 
+const ui::NativeTheme* Widget::GetNativeTheme() const {
+  return ui::NativeThemeAndroid::instance();
+}
+
 Widget::Widget() = default;
 
 Widget::~Widget() {
@@ -229,42 +234,35 @@ Widget* Widget::CreateWindowWithContextAndBounds(WidgetDelegate* delegate,
 
 // static
 Widget* Widget::GetWidgetForNativeView(gfx::NativeView native_view) {
-  internal::NativeWidgetPrivate* native_widget =
-      internal::NativeWidgetPrivate::GetNativeWidgetForNativeView(native_view);
-  return native_widget ? native_widget->GetWidget() : nullptr;
+  return NULL;
 }
 
 // static
 Widget* Widget::GetWidgetForNativeWindow(gfx::NativeWindow native_window) {
-  internal::NativeWidgetPrivate* native_widget =
-      internal::NativeWidgetPrivate::GetNativeWidgetForNativeWindow(
-          native_window);
-  return native_widget ? native_widget->GetWidget() : nullptr;
+  return NULL;
 }
 
 // static
 Widget* Widget::GetTopLevelWidgetForNativeView(gfx::NativeView native_view) {
-  internal::NativeWidgetPrivate* native_widget =
-      internal::NativeWidgetPrivate::GetTopLevelNativeWidget(native_view);
-  return native_widget ? native_widget->GetWidget() : nullptr;
+  return NULL;
 }
 
 // static
 void Widget::GetAllChildWidgets(gfx::NativeView native_view,
                                 Widgets* children) {
-  internal::NativeWidgetPrivate::GetAllChildWidgets(native_view, children);
+  return ;
 }
 
 // static
 void Widget::GetAllOwnedWidgets(gfx::NativeView native_view,
                                 Widgets* owned) {
-  internal::NativeWidgetPrivate::GetAllOwnedWidgets(native_view, owned);
+  return ;
 }
 
 // static
 void Widget::ReparentNativeView(gfx::NativeView native_view,
                                 gfx::NativeView new_parent) {
-  internal::NativeWidgetPrivate::ReparentNativeView(native_view, new_parent);
+  return ;
 }
 
 // static
@@ -344,13 +342,16 @@ void Widget::Init(InitParams params) {
   root_view_.reset(CreateRootView());
   default_theme_provider_ = std::make_unique<ui::DefaultThemeProvider>();
 
+#if 0
   // Copy the elements of params that will be used after it is moved.
   const InitParams::Type type = params.type;
   const gfx::Rect bounds = params.bounds;
   const ui::WindowShowState show_state = params.show_state;
   WidgetDelegate* delegate = params.delegate;
+#endif
 
   native_widget_->InitNativeWidget(std::move(params));
+#if 0
   if (type == InitParams::TYPE_MENU)
     is_mouse_button_pressed_ = native_widget_->IsMouseButtonDown();
   if (RequiresNonClientView(type)) {
@@ -396,6 +397,7 @@ void Widget::Init(InitParams params) {
     observer_manager_.Add(native_theme);
 #else
   observer_manager_.Add(GetNativeTheme());
+#endif
 #endif
   native_widget_initialized_ = true;
   native_widget_->OnWidgetInitDone();
@@ -1255,91 +1257,6 @@ void Widget::OnKeyEvent(ui::KeyEvent* event) {
 //                   RootView from anywhere in Widget. Use
 //                   SendEventToSink() instead. See crbug.com/348087.
 void Widget::OnMouseEvent(ui::MouseEvent* event) {
-  View* root_view = GetRootView();
-  switch (event->type()) {
-    case ui::ET_MOUSE_PRESSED: {
-      last_mouse_event_was_move_ = false;
-
-      // We may get deleted by the time we return from OnMousePressed. So we
-      // use an observer to make sure we are still alive.
-      WidgetDeletionObserver widget_deletion_observer(this);
-
-      gfx::NativeView current_capture =
-          internal::NativeWidgetPrivate::GetGlobalCapture(
-              native_widget_->GetNativeView());
-      // Make sure we're still visible before we attempt capture as the mouse
-      // press processing may have made the window hide (as happens with menus).
-      //
-      // It is possible that capture has changed as a result of a mouse-press.
-      // In these cases do not update internal state.
-      //
-      // A mouse-press may trigger a nested message-loop, and absorb the paired
-      // release. If so the code returns here. So make sure that that
-      // mouse-button is still down before attempting to do a capture.
-      if (root_view && root_view->OnMousePressed(*event) &&
-          widget_deletion_observer.IsWidgetAlive() && IsVisible() &&
-          native_widget_->IsMouseButtonDown() &&
-          current_capture == internal::NativeWidgetPrivate::GetGlobalCapture(
-                                 native_widget_->GetNativeView())) {
-        is_mouse_button_pressed_ = true;
-        if (!native_widget_->HasCapture())
-          native_widget_->SetCapture();
-        event->SetHandled();
-      }
-      return;
-    }
-
-    case ui::ET_MOUSE_RELEASED:
-      last_mouse_event_was_move_ = false;
-      is_mouse_button_pressed_ = false;
-      // Release capture first, to avoid confusion if OnMouseReleased blocks.
-      if (auto_release_capture_ && native_widget_->HasCapture()) {
-        base::AutoReset<bool> resetter(&ignore_capture_loss_, true);
-        native_widget_->ReleaseCapture();
-      }
-      if (root_view)
-        root_view->OnMouseReleased(*event);
-      if ((event->flags() & ui::EF_IS_NON_CLIENT) == 0 &&
-          // If none of the "normal" buttons are pressed, this event may be from
-          // one of the newer mice that have buttons bound to browser forward
-          // back actions. Don't squelch the event and let the default handler
-          // process it.
-          (event->flags() &
-           (ui::EF_LEFT_MOUSE_BUTTON | ui::EF_MIDDLE_MOUSE_BUTTON |
-            ui::EF_RIGHT_MOUSE_BUTTON)) != 0)
-        event->SetHandled();
-      return;
-
-    case ui::ET_MOUSE_MOVED:
-    case ui::ET_MOUSE_DRAGGED:
-      if (native_widget_->HasCapture() && is_mouse_button_pressed_) {
-        last_mouse_event_was_move_ = false;
-        if (root_view)
-          root_view->OnMouseDragged(*event);
-      } else if (!last_mouse_event_was_move_ ||
-                 last_mouse_event_position_ != event->location()) {
-        last_mouse_event_position_ = event->location();
-        last_mouse_event_was_move_ = true;
-        if (root_view)
-          root_view->OnMouseMoved(*event);
-      }
-      return;
-
-    case ui::ET_MOUSE_EXITED:
-      last_mouse_event_was_move_ = false;
-      if (root_view)
-        root_view->OnMouseExited(*event);
-      return;
-
-    case ui::ET_MOUSEWHEEL:
-      if (root_view && root_view->OnMouseWheel(
-          static_cast<const ui::MouseWheelEvent&>(*event)))
-        event->SetHandled();
-      return;
-
-    default:
-      return;
-  }
 }
 
 void Widget::OnMouseCaptureLost() {

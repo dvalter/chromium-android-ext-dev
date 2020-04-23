@@ -660,6 +660,8 @@ void SupervisedUserService::OnBlacklistLoaded() {
 }
 
 void SupervisedUserService::UpdateBlacklist() {
+  if (true)
+    return;
   bool use_blacklist = supervised_users::IsSafeSitesBlacklistEnabled(profile_);
   url_filter_.SetBlacklist(use_blacklist ? &blacklist_ : nullptr);
   for (SupervisedUserServiceObserver& observer : observer_list_)

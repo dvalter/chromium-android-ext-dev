@@ -27,7 +27,7 @@
 #include "mojo/public/cpp/bindings/remote.h"
 #include "services/identity/public/mojom/identity_service.mojom.h"
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 #include "chrome/browser/ui/zoom/chrome_zoom_level_prefs.h"
 #include "content/public/browser/host_zoom_map.h"
 #endif
@@ -76,7 +76,7 @@ class ProfileImpl : public Profile {
   static void RegisterProfilePrefs(user_prefs::PrefRegistrySyncable* registry);
 
   // content::BrowserContext implementation:
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
   std::unique_ptr<content::ZoomLevelDelegate> CreateZoomLevelDelegate(
       const base::FilePath& partition_path) override;
 #endif
@@ -133,7 +133,7 @@ class ProfileImpl : public Profile {
   ExtensionSpecialStoragePolicy* GetExtensionSpecialStoragePolicy() override;
   PrefService* GetPrefs() override;
   const PrefService* GetPrefs() const override;
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
   ChromeZoomLevelPrefs* GetZoomLevelPrefs() override;
 #endif
   PrefService* GetOffTheRecordPrefs() override;
