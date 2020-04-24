@@ -429,6 +429,7 @@ jumbo_component("views") {
     "metadata/metadata_types.cc",
     "metadata/type_conversion.cc",
     "metrics.cc",
+    "metrics_android.cc",
     "mouse_watcher.cc",
     "mouse_watcher_view_host.cc",
     "paint_info.cc",

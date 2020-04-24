@@ -33,7 +33,7 @@ bool RelaunchChromeBrowser(const base::CommandLine& command_line) {
   if (relaunch_chrome_browser_callback_for_testing)
     return relaunch_chrome_browser_callback_for_testing->Run(command_line);
 
-  return RelaunchChromeBrowserImpl(command_line);
+  return false; //RelaunchChromeBrowserImpl(command_line);
 }
 
 #if !defined(OS_MACOSX)

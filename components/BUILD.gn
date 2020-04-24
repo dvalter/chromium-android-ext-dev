@@ -587,7 +587,7 @@ if (!is_ios && !is_fuchsia) {
       data += [ "$root_out_dir/Content Shell.app/" ]
     }
 
-    if (enable_plugins) {
+    if (false && enable_plugins) {
       sources += [ "pdf/renderer/pdf_accessibility_tree_browsertest.cc" ]
       deps += [
         "//components/pdf/renderer",

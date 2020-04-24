@@ -421,6 +421,7 @@ void AboutHandler::RegisterMessages() {
 }
 
 void AboutHandler::OnJavascriptAllowed() {
+#if 0
   apply_changes_from_upgrade_observer_ = true;
   version_updater_.reset(VersionUpdater::Create(web_ui()->GetWebContents()));
   policy_registrar_ = std::make_unique<policy::PolicyChangeRegistrar>(
@@ -430,6 +431,7 @@ void AboutHandler::OnJavascriptAllowed() {
       policy::key::kDeviceAutoUpdateDisabled,
       base::Bind(&AboutHandler::OnDeviceAutoUpdatePolicyChanged,
                  base::Unretained(this)));
+#endif
 }
 
 void AboutHandler::OnJavascriptDisallowed() {

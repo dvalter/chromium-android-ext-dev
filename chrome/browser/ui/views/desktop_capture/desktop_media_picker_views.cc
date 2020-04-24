@@ -237,10 +237,10 @@ DesktopMediaPickerDialogView::DesktopMediaPickerDialogView(
   // If the picker is a separate native window, it should not be shown in the
   // source list, so its id is passed into NativeDesktopMediaList to be ignored.
   DesktopMediaID dialog_window_id;
+#if 0
   if (is_separate_native_window) {
     dialog_window_id = DesktopMediaID::RegisterNativeWindow(
         DesktopMediaID::TYPE_WINDOW, widget->GetNativeWindow());
-
 #if !defined(OS_CHROMEOS) && defined(USE_AURA)
     // Set native window ID if the windows is outside Ash.
     dialog_window_id.id = AcceleratedWidgetToDesktopMediaId(
@@ -253,6 +253,7 @@ DesktopMediaPickerDialogView::DesktopMediaPickerDialogView(
     dialog_window_id.id = dialog_window_id.window_id;
 #endif
   }
+#endif
 
   for (const auto& list_controller : list_controllers_)
     list_controller->StartUpdating(dialog_window_id);

@@ -28,8 +28,10 @@ void PrintingHandler::OnJavascriptAllowed() {}
 void PrintingHandler::OnJavascriptDisallowed() {}
 
 void PrintingHandler::HandleOpenSystemPrintDialog(const base::ListValue* args) {
+#if 0
   printing::PrinterManagerDialog::ShowPrinterManagerDialog(
       Profile::FromWebUI(web_ui()));
+#endif
 }
 
 }  // namespace settings

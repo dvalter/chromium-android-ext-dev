@@ -24,7 +24,8 @@ ViewsDelegate* views_delegate = nullptr;
 }  // namespace
 
 ViewsDelegate::ViewsDelegate()
-    : editing_controller_factory_(new ViewsTouchEditingControllerFactory) {
+    : editing_controller_factory_(nullptr) {
+//    : editing_controller_factory_(new ViewsTouchEditingControllerFactory) {
   DCHECK(!views_delegate);
   views_delegate = this;
 

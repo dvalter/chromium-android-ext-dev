@@ -98,6 +98,14 @@ source_set("components") {
     ]
   }
 
+  if (is_android) {
+    sources += [
+      "web_app_shortcut_android.h",
+      "web_app_shortcut_android.cc",
+    ]
+  }
+
+
   if (is_win) {
     sources += [
       "web_app_file_handler_registration_win.cc",

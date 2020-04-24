@@ -204,24 +204,6 @@ jumbo_static_library("renderer") {
   }
   if (enable_plugins) {
     sources += [
-      "pepper/chrome_renderer_pepper_host_factory.cc",
-      "pepper/chrome_renderer_pepper_host_factory.h",
-      "pepper/pepper_flash_drm_renderer_host.cc",
-      "pepper/pepper_flash_drm_renderer_host.h",
-      "pepper/pepper_flash_font_file_host.cc",
-      "pepper/pepper_flash_font_file_host.h",
-      "pepper/pepper_flash_fullscreen_host.cc",
-      "pepper/pepper_flash_fullscreen_host.h",
-      "pepper/pepper_flash_menu_host.cc",
-      "pepper/pepper_flash_menu_host.h",
-      "pepper/pepper_flash_renderer_host.cc",
-      "pepper/pepper_flash_renderer_host.h",
-      "pepper/pepper_helper.cc",
-      "pepper/pepper_helper.h",
-      "pepper/pepper_shared_memory_message_filter.cc",
-      "pepper/pepper_shared_memory_message_filter.h",
-      "pepper/pepper_uma_host.cc",
-      "pepper/pepper_uma_host.h",
       "plugins/chrome_plugin_placeholder.cc",
       "plugins/chrome_plugin_placeholder.h",
       "plugins/plugin_preroller.cc",
@@ -230,7 +212,7 @@ jumbo_static_library("renderer") {
       "plugins/power_saver_info.h",
     ]
     deps += [
-      "//components/pdf/renderer",
+#      "//components/pdf/renderer",
       "//components/strings",
       "//media:media_buildflags",
       "//ppapi/host",

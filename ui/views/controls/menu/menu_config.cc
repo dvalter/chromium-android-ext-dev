@@ -12,7 +12,7 @@
 namespace views {
 
 MenuConfig::MenuConfig() {
-  Init();
+//  Init();
 }
 
 MenuConfig::~MenuConfig() = default;

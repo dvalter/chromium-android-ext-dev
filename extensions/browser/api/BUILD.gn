@@ -103,7 +103,7 @@ source_set("api") {
   # TODO(michaelpg): Move these deps to the individual APIs that require them.
   deps += [
     "//components/onc",
-    "//components/storage_monitor",
+#    "//components/storage_monitor",
     "//device/bluetooth",
   ]
 

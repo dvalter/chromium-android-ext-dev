@@ -89,8 +89,8 @@ void DiscoveryNetworkMonitor::GetNetworkId(NetworkIdCallback callback) {
       std::move(callback));
 }
 
-DiscoveryNetworkMonitor::DiscoveryNetworkMonitor()
-    : DiscoveryNetworkMonitor(&GetDiscoveryNetworkInfoList) {}
+DiscoveryNetworkMonitor::DiscoveryNetworkMonitor() {}
+//    : DiscoveryNetworkMonitor(&GetDiscoveryNetworkInfoList) {}
 
 DiscoveryNetworkMonitor::DiscoveryNetworkMonitor(NetworkInfoFunction strategy)
     : network_id_(kNetworkIdDisconnected),

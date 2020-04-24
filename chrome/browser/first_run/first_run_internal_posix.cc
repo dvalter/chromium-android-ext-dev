@@ -96,7 +96,7 @@ void ForceFirstRunDialogShownForTesting(bool shown) {
 }
 
 void DoPostImportPlatformSpecificTasks(Profile* profile) {
-#if !defined(OS_CHROMEOS)
+#if false && !defined(OS_CHROMEOS)
   if (!ShouldShowFirstRunDialog())
     return;
 

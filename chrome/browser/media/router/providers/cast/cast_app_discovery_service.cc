@@ -171,7 +171,9 @@ void CastAppDiscoveryServiceImpl::UpdateAppAvailability(
     cast_channel::GetAppAvailabilityResult availability) {
   DCHECK_CALLED_ON_VALID_SEQUENCE(sequence_checker_);
   RecordAppAvailabilityResult(availability, clock_->NowTicks() - start_time);
+#if 0
   if (!media_sink_service_->GetSinkById(sink_id))
+#endif
     return;
 
   DVLOG(1) << "App " << app_id << " on sink " << sink_id << " is "
@@ -197,11 +199,13 @@ void CastAppDiscoveryServiceImpl::UpdateSinkQueries(
 std::vector<MediaSinkInternal> CastAppDiscoveryServiceImpl::GetSinksByIds(
     const base::flat_set<MediaSink::Id>& sink_ids) const {
   std::vector<MediaSinkInternal> sinks;
+#if 0
   for (const auto& sink_id : sink_ids) {
     const MediaSinkInternal* sink = media_sink_service_->GetSinkById(sink_id);
     if (sink)
       sinks.push_back(*sink);
   }
+#endif
   return sinks;
 }
 

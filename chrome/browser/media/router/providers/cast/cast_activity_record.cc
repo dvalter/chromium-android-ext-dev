@@ -131,7 +131,7 @@ void CastActivityRecord::SendStopSessionMessageToReceiver(
     const std::string& hash_token,
     mojom::MediaRouteProvider::TerminateRouteCallback callback) {
   const std::string& sink_id = route_.media_sink_id();
-  const MediaSinkInternal* sink = media_sink_service_->GetSinkById(sink_id);
+  const MediaSinkInternal* sink = nullptr; //media_sink_service_->GetSinkById(sink_id);
   DCHECK(sink);
   DCHECK(session_id_);
 
@@ -240,7 +240,7 @@ void CastActivityRecord::OnInternalMessage(
     const cast_channel::InternalMessage& message) {}
 
 int CastActivityRecord::GetCastChannelId() {
-  const MediaSinkInternal* sink = media_sink_service_->GetSinkByRoute(route_);
+  const MediaSinkInternal* sink = nullptr;//media_sink_service_->GetSinkByRoute(route_);
   if (!sink) {
     // TODO(crbug.com/905002): Add UMA metrics for this and other error
     // conditions.

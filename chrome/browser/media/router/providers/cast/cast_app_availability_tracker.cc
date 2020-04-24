@@ -67,8 +67,8 @@ std::vector<CastMediaSource> CastAppAvailabilityTracker::UpdateAppAvailability(
 
   std::vector<CastMediaSource> affected_sources;
   for (const auto& source : registered_sources_) {
-    if (source.second.ContainsApp(app_id))
-      affected_sources.push_back(source.second);
+//    if (source.second.ContainsApp(app_id))
+//      affected_sources.push_back(source.second);
   }
   return affected_sources;
 }

@@ -1535,10 +1535,12 @@ void DevToolsUIBindings::ReadyToCommitNavigation(
       if (!opener_bindings || !opener_bindings->frontend_host_)
         return;
     }
+#if 0
     frontend_host_ = content::DevToolsFrontendHost::Create(
         navigation_handle->GetRenderFrameHost(),
         base::Bind(&DevToolsUIBindings::HandleMessageFromDevToolsFrontend,
                    base::Unretained(this)));
+#endif
     return;
   }
 
@@ -1549,7 +1551,9 @@ void DevToolsUIBindings::ReadyToCommitNavigation(
     return;
   std::string script = base::StringPrintf("%s(\"%s\")", it->second.c_str(),
                                           base::GenerateGUID().c_str());
+#if 0
   content::DevToolsFrontendHost::SetupExtensionsAPI(frame, script);
+#endif
 }
 
 void DevToolsUIBindings::DocumentOnLoadCompletedInMainFrame() {

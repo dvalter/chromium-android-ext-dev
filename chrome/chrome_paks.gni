@@ -124,28 +124,28 @@ template("chrome_extra_paks") {
     if (true || !is_android) {
       # New paks should be added here by default.
       sources += [
-        "$root_gen_dir/chrome/bookmarks_resources.pak",
+#        "$root_gen_dir/chrome/bookmarks_resources.pak",
         "$root_gen_dir/chrome/component_extension_resources.pak",
-        "$root_gen_dir/chrome/dev_ui_resources.pak",
-        "$root_gen_dir/chrome/downloads_resources.pak",
-        "$root_gen_dir/chrome/history_resources.pak",
-        "$root_gen_dir/chrome/local_ntp_resources.pak",
-        "$root_gen_dir/chrome/new_tab_page_resources.pak",
+#        "$root_gen_dir/chrome/dev_ui_resources.pak",
+#        "$root_gen_dir/chrome/downloads_resources.pak",
+#        "$root_gen_dir/chrome/history_resources.pak",
+#        "$root_gen_dir/chrome/local_ntp_resources.pak",
+#        "$root_gen_dir/chrome/new_tab_page_resources.pak",
         "$root_gen_dir/chrome/settings_resources.pak",
-        "$root_gen_dir/content/browser/devtools/devtools_resources.pak",
-        "$root_gen_dir/headless/headless_lib_resources.pak",
+#        "$root_gen_dir/content/browser/devtools/devtools_resources.pak",
+#        "$root_gen_dir/headless/headless_lib_resources.pak",
       ]
       deps += [
-        "//chrome/browser/resources:bookmarks_resources",
-        "//chrome/browser/resources:component_extension_resources",
-        "//chrome/browser/resources:dev_ui_paks",
-        "//chrome/browser/resources:downloads_resources",
-        "//chrome/browser/resources:history_resources",
-        "//chrome/browser/resources:local_ntp_resources",
-        "//chrome/browser/resources:new_tab_page_resources",
-        "//chrome/browser/resources:settings_resources",
-        "//content/browser/devtools:devtools_resources",
-        "//headless:resources",
+#        "//chrome/browser/resources:bookmarks_resources",
+         "//chrome/browser/resources:component_extension_resources",
+#        "//chrome/browser/resources:dev_ui_paks",
+#        "//chrome/browser/resources:downloads_resources",
+#        "//chrome/browser/resources:history_resources",
+#        "//chrome/browser/resources:local_ntp_resources",
+#        "//chrome/browser/resources:new_tab_page_resources",
+         "//chrome/browser/resources:settings_resources",
+#        "//content/browser/devtools:devtools_resources",
+#        "//headless:resources",
       ]
     }
     if (is_chromeos) {

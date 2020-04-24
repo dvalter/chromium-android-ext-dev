@@ -232,7 +232,7 @@ bool ShouldManagePasswordsinGooglePasswordManager(Profile* profile) {
 }
 
 // Navigation is handled differently on Android.
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 void NavigateToGooglePasswordManager(Profile* profile,
                                      ManagePasswordsReferrer referrer) {
   NavigateParams params(profile, GetGooglePasswordManagerURL(referrer),
@@ -245,6 +245,7 @@ void NavigateToManagePasswordsPage(Browser* browser,
                                    ManagePasswordsReferrer referrer) {
   UMA_HISTOGRAM_ENUMERATION("PasswordManager.ManagePasswordsReferrer",
                             referrer);
+#if 0
   if (IsSignedInAndSyncingPasswordsNormally(browser->profile())) {
     UMA_HISTOGRAM_ENUMERATION(
         "PasswordManager.ManagePasswordsReferrerSignedInAndSyncing", referrer);
@@ -255,6 +256,7 @@ void NavigateToManagePasswordsPage(Browser* browser,
   }
 
   chrome::ShowPasswordManager(browser);
+ #endif
 }
 
 void NavigateToPasswordCheckupPage(Profile* profile) {

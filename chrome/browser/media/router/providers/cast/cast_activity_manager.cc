@@ -38,6 +38,7 @@ CastActivityManager::CastActivityManager(
   DCHECK(media_router_);
   DCHECK(session_tracker_);
   message_handler_->AddObserver(this);
+#if 0
   for (const auto& sink_id_session : session_tracker_->GetSessions()) {
     const MediaSinkInternal* sink =
         media_sink_service_->GetSinkById(sink_id_session.first);
@@ -45,6 +46,7 @@ CastActivityManager::CastActivityManager(
       break;
     AddNonLocalActivityRecord(*sink, *sink_id_session.second);
   }
+#endif
   session_tracker_->AddObserver(this);
 }
 
@@ -119,8 +121,9 @@ void CastActivityManager::DoLaunchSession(DoLaunchSessionParams params) {
 
   // TODO(crbug.com/904995): In the case of multiple app IDs (e.g. mirroring),
   // we need to choose an appropriate app ID to launch based on capabilities.
-  std::string app_id = cast_source.GetAppIds()[0];
-
+  std::string app_id = "";//cast_source.GetAppIds()[0];
+  return;
+#if 0
   DVLOG(2) << "Launching session with route ID = " << route_id
            << ", source ID = " << cast_source.source_id()
            << ", sink ID = " << sink.sink().id() << ", app ID = " << app_id
@@ -155,6 +158,7 @@ void CastActivityManager::DoLaunchSession(DoLaunchSessionParams params) {
   std::move(params.callback)
       .Run(route, std::move(presentation_connection),
            /* error_text */ base::nullopt, RouteRequestResult::ResultCode::OK);
+#endif
 }
 
 void CastActivityManager::LaunchSessionAfterTerminatingExisting(
@@ -178,7 +182,7 @@ void CastActivityManager::LaunchSessionAfterTerminatingExisting(
 bool CastActivityManager::CanJoinSession(const ActivityRecord& activity,
                                          const CastMediaSource& cast_source,
                                          bool incognito) const {
-  if (!cast_source.ContainsApp(activity.app_id()))
+//  if (!cast_source.ContainsApp(activity.app_id()))
     return false;
 
   if (base::Contains(activity.connected_clients(), cast_source.client_id()))
@@ -234,8 +238,9 @@ ActivityRecord* CastActivityManager::FindActivityForAutoJoin(
         const ActivityRecord* record = activity.second.get();
         if (!record->route().is_local())
           return false;
-        if (!cast_source.ContainsApp(record->app_id()))
+//        if (!cast_source.ContainsApp(record->app_id()))
           return false;
+#if 0
         const auto& clients = record->connected_clients();
         return std::any_of(clients.begin(), clients.end(),
                            [policy, &origin, tab_id](const auto& client) {
@@ -243,6 +248,7 @@ ActivityRecord* CastActivityManager::FindActivityForAutoJoin(
                                                       client.second->origin(),
                                                       client.second->tab_id());
                            });
+#endif
       });
   return it == activities_.end() ? nullptr : it->second.get();
 }
@@ -286,16 +292,19 @@ void CastActivityManager::JoinSession(
   // RouteRequestResult::ResultCode.  The check is currently performed inside
   // CanJoinSession(), and the behavior is consistent with the old
   // implementation, which never reports an INCOGNITO_MISMATCH error.
-
+#if 0
   const MediaSinkInternal* sink =
       media_sink_service_->GetSinkById(activity->route().media_sink_id());
   if (!sink) {
+#else
+  {
+#endif
     std::move(callback).Run(base::nullopt, nullptr,
                             std::string("Sink not found"),
                             RouteRequestResult::ResultCode::SINK_NOT_FOUND);
     return;
   }
-
+#if 0
   mojom::RoutePresentationConnectionPtr presentation_connection =
       activity->AddClient(cast_source, origin, tab_id);
 
@@ -313,6 +322,7 @@ void CastActivityManager::JoinSession(
   NotifyAllOnRoutesUpdated();
   std::move(callback).Run(activity->route(), std::move(presentation_connection),
                           base::nullopt, RouteRequestResult::ResultCode::OK);
+#endif
 }
 
 // TODO(jrw): Can this be merged with HandleStopSessionResponse?
@@ -377,7 +387,7 @@ void CastActivityManager::TerminateSession(
     return;
   }
 
-  const MediaSinkInternal* sink = media_sink_service_->GetSinkByRoute(route);
+  const MediaSinkInternal* sink = nullptr; //media_sink_service_->GetSinkByRoute(route);
   CHECK(sink);
 
   activity->SendStopSessionMessageToReceiver(
@@ -402,8 +412,8 @@ CastActivityManager::FindActivityByChannelId(int channel_id) {
   return std::find_if(
       activities_.begin(), activities_.end(), [channel_id, this](auto& entry) {
         const MediaRoute& route = entry.second->route();
-        const MediaSinkInternal* sink =
-            media_sink_service_->GetSinkByRoute(route);
+        const MediaSinkInternal* sink = nullptr;
+//            media_sink_service_->GetSinkByRoute(route);
         return sink && sink->cast_data().cast_channel_id == channel_id;
       });
 }
@@ -555,6 +565,7 @@ cast_channel::ResultCallback CastActivityManager::MakeResultCallbackForRoute(
 void CastActivityManager::AddNonLocalActivityRecord(
     const MediaSinkInternal& sink,
     const CastSession& session) {
+#if 0
   const MediaSink::Id& sink_id = sink.sink().id();
 
   // We derive the MediaSource from a session using the app ID.
@@ -577,6 +588,7 @@ void CastActivityManager::AddNonLocalActivityRecord(
 
   auto* activity_ptr = AddCastActivityRecord(route, app_id);
   activity_ptr->SetOrUpdateSession(session, sink, hash_token_);
+#endif
 }
 
 const MediaRoute* CastActivityManager::GetRoute(

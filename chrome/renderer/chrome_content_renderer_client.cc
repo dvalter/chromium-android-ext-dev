@@ -493,7 +493,7 @@ void ChromeContentRendererClient::RenderFrameCreated(
 #endif
 
 #if BUILDFLAG(ENABLE_PLUGINS)
-  new PepperHelper(render_frame);
+  // new PepperHelper(render_frame);
 #endif
 
 #if BUILDFLAG(ENABLE_NACL)

@@ -208,11 +208,13 @@ const ui::ThemeProvider* BrowserFrame::GetThemeProvider() const {
 }
 
 const ui::NativeTheme* BrowserFrame::GetNativeTheme() const {
+#if 0
   if (browser_view_->browser()->profile()->IsIncognitoProfile() &&
       ThemeServiceFactory::GetForProfile(browser_view_->browser()->profile())
           ->UsingDefaultTheme()) {
     return ui::NativeThemeDarkAura::instance();
   }
+#endif
   return views::Widget::GetNativeTheme();
 }
 

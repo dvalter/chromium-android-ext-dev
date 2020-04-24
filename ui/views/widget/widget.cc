@@ -347,8 +347,8 @@ void Widget::Init(InitParams params) {
   const InitParams::Type type = params.type;
   const gfx::Rect bounds = params.bounds;
   const ui::WindowShowState show_state = params.show_state;
-  WidgetDelegate* delegate = params.delegate;
 #endif
+  WidgetDelegate* delegate = params.delegate;
 
   native_widget_->InitNativeWidget(std::move(params));
 #if 0

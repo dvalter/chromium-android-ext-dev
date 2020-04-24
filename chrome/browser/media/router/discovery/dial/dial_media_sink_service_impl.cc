@@ -152,17 +152,17 @@ void DialMediaSinkServiceImpl::OnDiscoveryComplete() {
 
   // Note: calling |AddOrUpdateSink()| or |RemoveSink()| here won't cause the
   // discovery timer to fire again, since it is considered to be still running.
-  for (const auto& sink : sinks_to_update)
-    AddOrUpdateSink(sink);
+//  for (const auto& sink : sinks_to_update)
+//    AddOrUpdateSink(sink);
 
-  for (const auto& sink : sinks_to_remove)
-    RemoveSink(sink);
+//  for (const auto& sink : sinks_to_remove)
+//    RemoveSink(sink);
 
   // If discovered sinks are updated, then query results might have changed.
   for (const auto& query : sink_queries_)
     query.second->Notify(query.first);
 
-  MediaSinkServiceBase::OnDiscoveryComplete();
+  //MediaSinkServiceBase::OnDiscoveryComplete();
 }
 
 void DialMediaSinkServiceImpl::OnDialDeviceEvent(

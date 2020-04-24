@@ -218,7 +218,8 @@ void XmlDownloader::Refresh() {
 BrowserSwitcherService::BrowserSwitcherService(Profile* profile)
     : profile_(profile),
       prefs_(profile),
-      driver_(new AlternativeBrowserDriverImpl(&prefs_)),
+//      driver_(new AlternativeBrowserDriverImpl(&prefs_)),
+      driver_(nullptr),
       sitelist_(new BrowserSwitcherSitelistImpl(&prefs_)) {
   base::ThreadTaskRunnerHandle::Get()->PostTask(
       FROM_HERE, base::BindOnce(&BrowserSwitcherService::Init,

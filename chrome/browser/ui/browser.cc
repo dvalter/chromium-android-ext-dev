@@ -1315,7 +1315,8 @@ bool Browser::ShouldAllowRunningInsecureContent(
   if (allowed_per_prefs)
     return true;
 
-  if (base::FeatureList::IsEnabled(features::kMixedContentSiteSetting)) {
+//  if (base::FeatureList::IsEnabled(features::kMixedContentSiteSetting)) {
+  if (0) {
     Profile* profile =
         Profile::FromBrowserContext(web_contents->GetBrowserContext());
     HostContentSettingsMap* content_settings =

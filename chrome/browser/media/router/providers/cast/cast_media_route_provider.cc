@@ -100,14 +100,18 @@ void CastMediaRouteProvider::CreateRoute(const std::string& source_id,
   DCHECK_CALLED_ON_VALID_SEQUENCE(sequence_checker_);
   // TODO(https://crbug.com/809249): Handle mirroring routes, including
   // mirror-to-Cast transitions.
+#if 0
   const MediaSinkInternal* sink = media_sink_service_->GetSinkById(sink_id);
   if (!sink) {
+#else
+  {
+#endif
     std::move(callback).Run(base::nullopt, nullptr,
                             std::string("Sink not found"),
                             RouteRequestResult::ResultCode::SINK_NOT_FOUND);
     return;
   }
-
+#if 0
   std::unique_ptr<CastMediaSource> cast_source =
       CastMediaSource::FromMediaSourceId(source_id);
   if (!cast_source) {
@@ -119,6 +123,7 @@ void CastMediaRouteProvider::CreateRoute(const std::string& source_id,
 
   activity_manager_->LaunchSession(*cast_source, *sink, presentation_id, origin,
                                    tab_id, incognito, std::move(callback));
+#endif
 }
 
 void CastMediaRouteProvider::JoinRoute(const std::string& media_source,
@@ -191,8 +196,8 @@ void CastMediaRouteProvider::StartObservingMediaSinks(
   // app precache message to receivers.
   if (cast_source->broadcast_request()) {
     // TODO(imcheng): Add metric to record broadcast usage.
-    BroadcastMessageToSinks(cast_source->GetAppIds(),
-                            *cast_source->broadcast_request());
+//    BroadcastMessageToSinks(cast_source->GetAppIds(),
+//                            *cast_source->broadcast_request());
     return;
   }
 

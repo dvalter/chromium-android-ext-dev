@@ -285,7 +285,7 @@ void DoDragImpl(std::unique_ptr<ui::OSExchangeData> drag_data,
                 int operation) {
   // Allow nested run loop so we get DnD events as we drag this around.
   base::MessageLoopCurrent::ScopedNestableTaskAllower nestable_task_allower;
-
+#if 0
   views::Widget* widget = views::Widget::GetWidgetForNativeView(native_view);
   if (widget) {
     widget->RunShellDrag(nullptr, std::move(drag_data), gfx::Point(), operation,
@@ -294,6 +294,7 @@ void DoDragImpl(std::unique_ptr<ui::OSExchangeData> drag_data,
     views::RunShellDrag(native_view, std::move(drag_data), point, operation,
                         source);
   }
+#endif
 }
 
 void DragBookmarksImpl(Profile* profile,

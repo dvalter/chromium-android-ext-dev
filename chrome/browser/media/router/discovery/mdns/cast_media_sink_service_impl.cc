@@ -343,7 +343,7 @@ void CastMediaSinkServiceImpl::OnError(const cast_channel::CastSocket& socket,
   // sink. We would set it to ERROR here. In OpenChannel(), we would check
   // create a socket only if the state is not already CONNECTED.
   MediaSinkInternal sink = sink_it->second;
-  RemoveSink(sink);
+//  RemoveSink(sink);
 
   // If socket is not opened yet, then |OnChannelOpened()| will handle the
   // retry.
@@ -470,8 +470,8 @@ void CastMediaSinkServiceImpl::OpenChannel(
     DVLOG(2) << "Updating existing sink without opening new channel: "
              << sink_id << ", name: " << cast_sink.sink().name();
     MediaSinkInternal existing_sink_copy = *existing_sink;
-    UpdateCastSink(cast_sink, &existing_sink_copy);
-    AddOrUpdateSink(existing_sink_copy);
+//    UpdateCastSink(cast_sink, &existing_sink_copy);
+//    AddOrUpdateSink(existing_sink_copy);
     return;
   }
 
@@ -600,8 +600,8 @@ void CastMediaSinkServiceImpl::OnChannelOpenSucceeded(
       metrics_.RecordCastSinkDiscoverySource(SinkSource::kDialMdns);
     }
   }
-  AddOrUpdateSink(cast_sink);
-  failure_count_map_.erase(sink_id);
+//  AddOrUpdateSink(cast_sink);
+//  failure_count_map_.erase(sink_id);
 
   // To maintain the invariant that an IPEndpoint appears in at most one entry
   // in the sink list, we will remove the sink (if any) that has the same
@@ -615,15 +615,15 @@ void CastMediaSinkServiceImpl::OnChannelOpenSucceeded(
                             entry.second.cast_data().ip_endpoint == ip_endpoint;
                    });
 
-  if (old_sink_it != sinks.end())
-    RemoveSink(old_sink_it->second);
+//  if (old_sink_it != sinks.end())
+//    RemoveSink(old_sink_it->second);
 
   // Certain classes of Cast sinks support advertising via SSDP but do not
   // properly implement the rest of the DIAL protocol. If we successfully open
   // a Cast channel to a device that came from DIAL, remove it from
   // |dial_media_sink_service_|. This ensures the device shows up as a Cast sink
   // only.
-  dial_media_sink_service_->RemoveSinkById(GetDialSinkIdFromCast(sink_id));
+//  dial_media_sink_service_->RemoveSinkById(GetDialSinkIdFromCast(sink_id));
 }
 
 void CastMediaSinkServiceImpl::OnChannelOpenFailed(
@@ -636,7 +636,7 @@ void CastMediaSinkServiceImpl::OnChannelOpenFailed(
       !(ip_endpoint == existing_sink->cast_data().ip_endpoint))
     return;
 
-  RemoveSink(sink);
+//  RemoveSink(sink);
 }
 
 void CastMediaSinkServiceImpl::OnSinkAddedOrUpdated(
@@ -668,7 +668,7 @@ void CastMediaSinkServiceImpl::TryConnectDialDiscoveredSink(
     metrics_.RecordCastSinkDiscoverySource(SinkSource::kMdnsDial);
     // Sink is a Cast device; remove from |dial_media_sink_service_| to prevent
     // duplicates.
-    dial_media_sink_service_->RemoveSink(dial_sink);
+//    dial_media_sink_service_->RemoveSink(dial_sink);
     return;
   }
 

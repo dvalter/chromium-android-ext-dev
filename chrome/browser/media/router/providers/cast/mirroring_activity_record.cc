@@ -197,7 +197,7 @@ void MirroringActivityRecord::SendStopSessionMessageToReceiver(
     const std::string& hash_token,
     MediaRouteProvider::TerminateRouteCallback callback) {
   const std::string& sink_id = route_.media_sink_id();
-  const MediaSinkInternal* sink = media_sink_service_->GetSinkById(sink_id);
+  const MediaSinkInternal* sink = nullptr; //media_sink_service_->GetSinkById(sink_id);
   DCHECK(sink);
   DCHECK(session_id_);
   message_handler_->StopSession(

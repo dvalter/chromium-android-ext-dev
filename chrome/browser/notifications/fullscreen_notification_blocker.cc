@@ -23,7 +23,7 @@ FullscreenNotificationBlocker::~FullscreenNotificationBlocker() {
 
 void FullscreenNotificationBlocker::CheckState() {
   bool was_fullscreen_mode = is_fullscreen_mode_;
-  is_fullscreen_mode_ = IsFullScreenMode();
+  is_fullscreen_mode_ = false;//IsFullScreenMode();
   if (is_fullscreen_mode_ != was_fullscreen_mode)
     NotifyBlockingStateChanged();
 

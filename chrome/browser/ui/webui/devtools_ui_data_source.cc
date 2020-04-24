@@ -186,6 +186,7 @@ bool DevToolsDataSource::ShouldServeMimeTypeAsContentTypeHeader() {
 void DevToolsDataSource::StartBundledDataRequest(
     const std::string& path,
     content::URLDataSource::GotDataCallback callback) {
+#if 0
   scoped_refptr<base::RefCountedMemory> bytes =
       content::DevToolsFrontendHost::GetFrontendResourceBytes(path);
 
@@ -194,6 +195,7 @@ void DevToolsDataSource::StartBundledDataRequest(
       << ". If you compiled with debug_devtools=1, try running with "
          "--debug-devtools.";
   std::move(callback).Run(bytes);
+#endif
 }
 
 void DevToolsDataSource::StartRemoteDataRequest(

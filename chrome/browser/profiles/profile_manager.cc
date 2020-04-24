@@ -1724,7 +1724,7 @@ void ProfileManager::SaveActiveProfiles() {
   }
 }
 
-#if !defined(OS_ANDROID)
+#if true || !defined(OS_ANDROID)
 void ProfileManager::OnBrowserOpened(Browser* browser) {
   DCHECK(browser);
   Profile* profile = browser->profile();
@@ -1856,7 +1856,7 @@ void ProfileManager::OnNewActiveProfileLoaded(
 void ProfileManager::ScheduleForcedEphemeralProfileForDeletion(
     const base::FilePath& profile_dir) {
   DCHECK_EQ(0u, chrome::GetBrowserCount(GetProfileByPath(profile_dir)));
-  DCHECK(IsProfileEphemeral(&GetProfileAttributesStorage(), profile_dir));
+//  DCHECK(IsProfileEphemeral(&GetProfileAttributesStorage(), profile_dir));
 
   // Search for latest active profile, already loaded preferably.
   bool found_entry_loaded = false;

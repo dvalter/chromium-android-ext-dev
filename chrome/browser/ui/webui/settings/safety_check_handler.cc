@@ -11,10 +11,12 @@ SafetyCheckHandler::SafetyCheckHandler() = default;
 SafetyCheckHandler::~SafetyCheckHandler() = default;
 
 void SafetyCheckHandler::PerformSafetyCheck() {
+#if 0
   version_updater_.reset(VersionUpdater::Create(web_ui()->GetWebContents()));
   CheckUpdates(version_updater_.get(),
                base::Bind(&SafetyCheckHandler::OnUpdateCheckResult,
                           base::Unretained(this)));
+#endif
 }
 
 void SafetyCheckHandler::CheckUpdates(

@@ -433,7 +433,8 @@ bool ContentSettingsAgentImpl::AllowRunningInsecureContent(
     const blink::WebURL& resource_url) {
   bool allow = allowed_per_settings;
 
-  if (base::FeatureList::IsEnabled(features::kMixedContentSiteSetting)) {
+//  if (base::FeatureList::IsEnabled(features::kMixedContentSiteSetting)) {
+  if (0) {
     if (content_setting_rules_) {
       auto setting = GetContentSettingFromRules(
           content_setting_rules_->mixed_content_rules,
