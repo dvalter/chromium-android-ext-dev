@@ -76,8 +76,10 @@ int ChromeMainDelegateAndroid::RunProcess(
   LOG(ERROR) << "[Kiwi] ChromeMainDelegateAndroid::RunProcess - Step 1";
   TRACE_EVENT0("startup", "ChromeMainDelegateAndroid::RunProcess");
   // Defer to the default main method outside the browser process.
-  if (!process_type.empty())
+  if (!process_type.empty()) {
+    LOG(ERROR) << "[Kiwi] ChromeMainDelegateAndroid::RunProcess - 1b -- exit";
     return -1;
+  }
 
   LOG(ERROR) << "[Kiwi] ChromeMainDelegateAndroid::RunProcess - Step 2";
   SecureDataDirectory();

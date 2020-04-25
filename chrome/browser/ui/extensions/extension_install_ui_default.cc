@@ -60,9 +60,11 @@ void ShowExtensionInstalledBubble(
     scoped_refptr<const extensions::Extension> extension,
     Profile* profile,
     const SkBitmap& icon) {
+  #if 0
   Browser* browser = FindOrCreateVisibleBrowser(profile);
   if (browser)
     ExtensionInstalledBubble::ShowBubble(extension, browser, icon);
+  #endif
 }
 
 }  // namespace

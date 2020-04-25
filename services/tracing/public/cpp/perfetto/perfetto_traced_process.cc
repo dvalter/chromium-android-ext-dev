@@ -143,19 +143,24 @@ PerfettoTaskRunner* PerfettoTracedProcess::GetTaskRunner() {
 void PerfettoTracedProcess::ResetTaskRunnerForTesting(
     scoped_refptr<base::SequencedTaskRunner> task_runner) {
   GetTaskRunner()->ResetTaskRunnerForTesting(task_runner);
+  LOG(ERROR) << "[Kiwi] PerfettoTracedProcess::ResetTaskRunnerForTesting - Step 1";
   InitTracingPostThreadPoolStartAndFeatureList();
   // Detaching the sequence_checker_ must happen after we reset the task runner.
   // This is because the Get() could call the constructor (if this is the first
   // call to Get()) which would then PostTask which would create races if we
   // reset the task runner right afterwards.
+  LOG(ERROR) << "[Kiwi] PerfettoTracedProcess::ResetTaskRunnerForTesting - Step 2";
   DETACH_FROM_SEQUENCE(PerfettoTracedProcess::Get()->sequence_checker_);
   // Call Get() explicitly. This ensures that we constructed the
   // PerfettoTracedProcess. On some tests (like cast linux) the DETACH macro is
   // compiled to nothing, which woud cause this PostTask to access a nullptr the
   // producer requires a PostTask from inside the constructor.
+  LOG(ERROR) << "[Kiwi] PerfettoTracedProcess::ResetTaskRunnerForTesting - Step 3";
   PerfettoTracedProcess::Get();
+  LOG(ERROR) << "[Kiwi] PerfettoTracedProcess::ResetTaskRunnerForTesting - Step 4";
   PerfettoTracedProcess::GetTaskRunner()->GetOrCreateTaskRunner()->PostTask(
       FROM_HERE, base::BindOnce([]() {
+  LOG(ERROR) << "[Kiwi] PerfettoTracedProcess::ResetTaskRunnerForTesting - BindOnce";
         auto* producer =
             PerfettoTracedProcess::Get()->SystemProducerForTesting();
         CHECK(producer);
