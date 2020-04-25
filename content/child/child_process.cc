@@ -52,19 +52,24 @@ ChildProcess::ChildProcess(base::ThreadPriority io_thread_priority,
     DCHECK(base::ThreadPoolInstance::Get());
     initialized_thread_pool_ = true;
   }
+  LOG(ERROR) << "[Kiwi] ChildProcess::ChildProcess - Step 1";
   tracing::InitTracingPostThreadPoolStartAndFeatureList();
 
+  LOG(ERROR) << "[Kiwi] ChildProcess::ChildProcess - Step 2";
   // We can't recover from failing to start the IO thread.
   base::Thread::Options thread_options(base::MessagePumpType::IO, 0);
+  LOG(ERROR) << "[Kiwi] ChildProcess::ChildProcess - Step 3";
   thread_options.priority = io_thread_priority;
 #if defined(OS_ANDROID)
   // TODO(reveman): Remove this in favor of setting it explicitly for each type
   // of process.
+  LOG(ERROR) << "[Kiwi] ChildProcess::ChildProcess - Step 4";
   if (base::FeatureList::IsEnabled(
           blink::features::kBlinkCompositorUseDisplayThreadPriority)) {
     thread_options.priority = base::ThreadPriority::DISPLAY;
   }
 #endif
+  LOG(ERROR) << "[Kiwi] ChildProcess::ChildProcess - Step 5";
   CHECK(io_thread_.StartWithOptions(thread_options));
 }
 
