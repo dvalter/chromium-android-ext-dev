@@ -31,6 +31,12 @@ public class EmptyTabModelFilter extends TabModelFilter {
     @Override
     protected void resetFilterStateInternal() {}
 
+    // Kiwi addition to the API
+    @Override
+    public int getLastNonExtensionActiveIndex() {
+        return INVALID_TAB_INDEX;
+    }
+
     @Override
     protected void removeTab(Tab tab) {}
 
