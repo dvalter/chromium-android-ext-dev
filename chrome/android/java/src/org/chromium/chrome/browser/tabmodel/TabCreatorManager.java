@@ -14,6 +14,9 @@ import org.chromium.chrome.browser.util.UrlConstants;
 import org.chromium.content_public.browser.LoadUrlParams;
 import org.chromium.content_public.browser.WebContents;
 
+import org.chromium.chrome.browser.partnercustomizations.HomepageManager;
+
+
 /**
  * An interface to return a {@link TabCreator} either for regular or incognito tabs.
  */
