@@ -45,6 +45,7 @@ class TabModelJniBridge : public TabModel {
   // TabModel::
   int GetTabCount() const override;
   int GetActiveIndex() const override;
+  int GetLastNonExtensionActiveIndex() const override;
   content::WebContents* GetWebContentsAt(int index) const override;
   TabAndroid* GetTabAt(int index) const override;
 
