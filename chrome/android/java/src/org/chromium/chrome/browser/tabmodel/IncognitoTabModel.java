@@ -158,6 +158,11 @@ public class IncognitoTabModel implements TabModel {
     }
 
     @Override
+    public int getLastNonExtensionActiveIndex() {
+        return mDelegateModel.index();
+    }
+
+    @Override
     public void closeAllTabs(boolean allowDelegation, boolean uponExit) {
         mDelegateModel.closeAllTabs(allowDelegation, uponExit);
         destroyIncognitoIfNecessary();

@@ -496,6 +496,13 @@ public class TabGroupModelFilter extends TabModelFilter {
         return getRelatedTabList(group.getTabIdList());
     }
 
+    // Kiwi addition to the API
+    @Override
+    public int getLastNonExtensionActiveIndex() {
+        return INVALID_TAB_INDEX;
+    }
+
+
     /**
      * This method returns all tabs in a tab group with reference to {@code tabRootId} as group id.
      *
