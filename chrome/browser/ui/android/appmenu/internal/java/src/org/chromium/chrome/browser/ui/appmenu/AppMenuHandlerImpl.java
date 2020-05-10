@@ -5,6 +5,7 @@
 package org.chromium.chrome.browser.ui.appmenu;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
@@ -49,6 +50,7 @@ class AppMenuHandlerImpl
     private final AppMenuDelegate mAppMenuDelegate;
     private final View mDecorView;
     private final ActivityLifecycleDispatcher mActivityLifecycleDispatcher;
+    private final Activity mActivity;
 
     private Callback<MenuItem> mTestOptionsItemSelectedListener;
 
@@ -77,10 +79,11 @@ class AppMenuHandlerImpl
      * @param hardwareButtonAnchorView The {@link View} used as an anchor for the menu when it is
      *            displayed using a hardware button.
      */
-    public AppMenuHandlerImpl(AppMenuPropertiesDelegate delegate, AppMenuDelegate appMenuDelegate,
+    public AppMenuHandlerImpl(Activity activity, AppMenuPropertiesDelegate delegate, AppMenuDelegate appMenuDelegate,
             int menuResourceId, View decorView,
             ActivityLifecycleDispatcher activityLifecycleDispatcher,
             View hardwareButtonAnchorView) {
+        mActivity = activity;
         mAppMenuDelegate = appMenuDelegate;
         mDelegate = delegate;
         mDecorView = decorView;
@@ -212,7 +215,7 @@ class AppMenuHandlerImpl
         if (mDelegate.shouldShowHeader(appRect.height())) {
             headerResourceId = mDelegate.getHeaderResourceId();
         }
-        mAppMenu.show(wrapper, anchorView, isByPermanentButton, rotation, appRect, pt.y,
+        mAppMenu.show(mActivity, wrapper, anchorView, isByPermanentButton, rotation, appRect, pt.y,
                 footerResourceId, headerResourceId, mHighlightMenuId, mCircleHighlight,
                 showFromBottom, mDelegate.getCustomViewBinders());
         mAppMenuDragHelper.onShow(startDragging);
@@ -300,6 +303,14 @@ class AppMenuHandlerImpl
         for (int i = 0; i < mObservers.size(); ++i) {
             mObservers.get(i).onMenuVisibilityChanged(isVisible);
         }
+    }
+
+    /**
+     * A notification that the footer view has been inflated.
+     * @param view The inflated view.
+     */
+    void onFooterInflated(View view) {
+        if (mDelegate != null) mDelegate.onFooterViewInflated(this, view);
     }
 
     /**

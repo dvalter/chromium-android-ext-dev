@@ -4,6 +4,7 @@
 
 package org.chromium.chrome.browser.ui.appmenu;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewConfiguration;
@@ -65,7 +66,11 @@ class AppMenuCoordinatorImpl implements AppMenuCoordinator {
         mAppMenuDelegate = appMenuDelegate;
         mAppMenuPropertiesDelegate = mAppMenuDelegate.createAppMenuPropertiesDelegate();
 
-        mAppMenuHandler = new AppMenuHandlerImpl(mAppMenuPropertiesDelegate, mAppMenuDelegate,
+        Activity activity = null;
+        if (mContext instanceof Activity) {
+            activity = (Activity) mContext;
+        }
+        mAppMenuHandler = new AppMenuHandlerImpl(activity, mAppMenuPropertiesDelegate, mAppMenuDelegate,
                 mAppMenuPropertiesDelegate.getAppMenuLayoutId(), decorView,
                 activityLifecycleDispatcher, hardwareButtonAnchorView);
     }
