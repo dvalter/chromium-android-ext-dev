@@ -56,10 +56,15 @@ class IconWithBadgeImageSource : public gfx::CanvasImageSource {
     return paint_blocked_actions_decoration_;
   }
 
+#if 0
  private:
+#endif
   // gfx::CanvasImageSource:
   void Draw(gfx::Canvas* canvas) override;
 
+#if 1
+ private:
+#endif
   // Paints |badge_|, if any, on |canvas|.
   void PaintBadge(gfx::Canvas* canvas);
 
