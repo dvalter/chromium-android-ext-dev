@@ -177,11 +177,6 @@ base::WeakPtr<HidChooserContext> HidChooserContext::AsWeakPtr() {
 void HidChooserContext::EnsureHidManagerConnection() {
   if (hid_manager_)
     return;
-
-  mojo::PendingRemote<device::mojom::HidManager> manager;
-  content::GetDeviceService().BindHidManager(
-      manager.InitWithNewPipeAndPassReceiver());
-  SetUpHidManagerConnection(std::move(manager));
 }
 
 void HidChooserContext::SetUpHidManagerConnection(

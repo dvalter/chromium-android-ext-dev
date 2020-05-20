@@ -19,6 +19,8 @@
 #include "ui/views/background.h"
 #include "ui/views/border.h"
 
+#include "ui/android/window_android.h"
+
 #if defined(USE_AURA)
 #include "ui/aura/window.h"
 #include "ui/wm/core/window_util.h"
@@ -567,7 +569,6 @@ void OverlayAgentViews::OnPaintLayer(const ui::PaintContext& context) {
   gfx::Canvas* canvas = recorder.canvas();
   // Convert the hovered rect from screen coordinates to layer coordinates.
   gfx::RectF hovered_rect_f(hovered_rect_);
-  hovered_rect_f.Offset(-layer_for_highlighting_screen_offset_);
 
   cc::PaintFlags flags;
   flags.setStrokeWidth(1.0f);
@@ -601,7 +602,6 @@ void OverlayAgentViews::OnPaintLayer(const ui::PaintContext& context) {
 
   // Convert the pinned rect from screen coordinates to layer coordinates.
   gfx::RectF pinned_rect_f(pinned_rect_);
-  pinned_rect_f.Offset(-layer_for_highlighting_screen_offset_);
 
   // Draw |pinned_rect_f| bounds in blue.
   canvas->DrawRect(pinned_rect_f, flags);
@@ -706,35 +706,7 @@ void OverlayAgentViews::OnPaintLayer(const ui::PaintContext& context) {
 
 bool OverlayAgentViews::UpdateHighlight(
     const std::pair<gfx::NativeWindow, gfx::Rect>& window_and_bounds) {
-  if (window_and_bounds.second.IsEmpty()) {
-    hovered_rect_.SetRect(0, 0, 0, 0);
-    return false;
-  }
-  ui::Layer* root_layer = nullptr;
-#if defined(OS_MACOSX)
-  views::Widget* widget =
-      views::Widget::GetWidgetForNativeWindow(window_and_bounds.first);
-  root_layer = widget->GetLayer();
-  layer_for_highlighting_screen_offset_ =
-      widget->GetContentsView()->GetBoundsInScreen().OffsetFromOrigin();
-#else
-  gfx::NativeWindow root = window_and_bounds.first->GetRootWindow();
-  root_layer = root->layer();
-  layer_for_highlighting_screen_offset_ =
-      root->GetBoundsInScreen().OffsetFromOrigin();
-#endif  // defined(OS_MACOSX)
-  DCHECK(root_layer);
-
-  layer_for_highlighting_->SetBounds(root_layer->bounds());
-  layer_for_highlighting_->SchedulePaint(root_layer->bounds());
-
-  if (root_layer != layer_for_highlighting_->parent())
-    root_layer->Add(layer_for_highlighting_.get());
-  else
-    root_layer->StackAtTop(layer_for_highlighting_.get());
-
-  hovered_rect_ = window_and_bounds.second;
-  return true;
+  return false;
 }
 
 }  // namespace ui_devtools

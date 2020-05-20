@@ -76,7 +76,7 @@ extern const base::FeatureParam<int> kDynamicTuningScaleInvisibleTimeSec;
 
 #endif  // defined(OS_LINUX)
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
 // Enables freezing pages directly from PerformanceManager rather than via
 // TabManager.
 extern const base::Feature kPageFreezingFromPerformanceManager;

@@ -15,7 +15,7 @@
 #include "components/omnibox/browser/buildflags.h"
 #include "url/gurl.h"
 
-#if (!defined(OS_ANDROID) || BUILDFLAG(ENABLE_VR)) && !defined(OS_IOS)
+#if (defined(OS_ANDROID) || BUILDFLAG(ENABLE_VR)) && !defined(OS_IOS)
 namespace gfx {
 struct VectorIcon;
 }
@@ -132,7 +132,7 @@ class OmniboxPedal {
   // Pedal may not be ready to trigger if no update is available.)
   virtual bool IsReadyToTrigger(const AutocompleteProviderClient& client) const;
 
-#if (!defined(OS_ANDROID) || BUILDFLAG(ENABLE_VR)) && !defined(OS_IOS)
+#if (defined(OS_ANDROID) || BUILDFLAG(ENABLE_VR)) && !defined(OS_IOS)
   // Returns the vector icon to represent this Pedal's action in suggestion.
   virtual const gfx::VectorIcon& GetVectorIcon() const;
 #endif

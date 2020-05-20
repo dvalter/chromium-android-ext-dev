@@ -231,8 +231,6 @@ const ContentSettingsImageDetails kImageDetails[] = {
      IDS_BLOCKED_PLUGIN_EXPLANATORY_TEXT, 0},
     {ContentSettingsType::MIXEDSCRIPT, kMixedContentIcon,
      IDS_BLOCKED_DISPLAYING_INSECURE_CONTENT, 0, 0},
-    {ContentSettingsType::PPAPI_BROKER, kExtensionIcon,
-     IDS_BLOCKED_PPAPI_BROKER_MESSAGE, 0, IDS_ALLOWED_PPAPI_BROKER_MESSAGE},
     {ContentSettingsType::SOUND, kTabAudioIcon, IDS_BLOCKED_SOUND_TITLE, 0, 0},
     {ContentSettingsType::ADS, kAdsIcon, IDS_BLOCKED_ADS_PROMPT_TOOLTIP,
      IDS_BLOCKED_ADS_PROMPT_TITLE, 0},

@@ -12,7 +12,7 @@
 #include "components/omnibox/browser/omnibox_pedal.h"
 #include "components/strings/grit/components_strings.h"
 
-#if (!defined(OS_ANDROID) || BUILDFLAG(ENABLE_VR)) && !defined(OS_IOS)
+#if (defined(OS_ANDROID) || BUILDFLAG(ENABLE_VR)) && !defined(OS_IOS)
 #include "components/omnibox/browser/vector_icons.h"  // nogncheck
 #endif
 
@@ -26,7 +26,7 @@ OmniboxPedalClearBrowsingData::OmniboxPedalClearBrowsingData()
               IDS_OMNIBOX_PEDAL_CLEAR_BROWSING_DATA_SUGGESTION_CONTENTS),
           GURL("chrome://settings/clearBrowserData")) {}
 
-#if (!defined(OS_ANDROID) || BUILDFLAG(ENABLE_VR)) && !defined(OS_IOS)
+#if (defined(OS_ANDROID) || BUILDFLAG(ENABLE_VR)) && !defined(OS_IOS)
 const gfx::VectorIcon& OmniboxPedalClearBrowsingData::GetVectorIcon() const {
   return omnibox::kAnswerWhenIsIcon;
 }

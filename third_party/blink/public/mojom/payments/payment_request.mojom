@@ -214,8 +214,7 @@ interface PaymentRequest {
   Init(pending_remote<PaymentRequestClient> client,
        array<PaymentMethodData> method_data,
        PaymentDetails details,
-       PaymentOptions options,
-       [EnableIf=is_android] bool google_pay_bridge_eligible);
+       PaymentOptions options);
 
   // Shows the user interface with the payment details.
   Show(bool is_user_gesture, bool wait_for_updated_details);

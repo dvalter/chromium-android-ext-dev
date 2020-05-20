@@ -30,7 +30,7 @@
 #include "ui/gfx/image/image_skia.h"
 #include "ui/gfx/paint_vector_icon.h"
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
 #include "chrome/app/vector_icons/vector_icons.h"
 #include "components/omnibox/browser/vector_icons.h"  // nogncheck
 #endif
@@ -114,7 +114,7 @@ AutofillPopupLayoutModel::AutofillPopupLayoutModel(
 
 AutofillPopupLayoutModel::~AutofillPopupLayoutModel() {}
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
 int AutofillPopupLayoutModel::GetDesiredPopupHeight() const {
   std::vector<autofill::Suggestion> suggestions = delegate_->GetSuggestions();
   int popup_height = 2 * kPopupBorderThickness;

@@ -26,6 +26,7 @@
 #include "ui/events/event.h"
 #include "ui/events/event_utils.h"
 #include "ui/gfx/image/image_skia.h"
+#include "ui/native_theme/native_theme_android.h"
 #include "ui/views/controls/menu/menu_controller.h"
 #include "ui/views/event_monitor.h"
 #include "ui/views/focus/focus_manager.h"
@@ -188,6 +189,11 @@ Widget::~Widget() {
         << "Destroying a widget with a live native widget. "
         << "Widget probably should use WIDGET_OWNS_NATIVE_WIDGET ownership.";
   }
+}
+
+// static
+const ui::NativeTheme* Widget::GetNativeTheme() const {
+  return ui::NativeThemeAndroid::instance();
 }
 
 // static

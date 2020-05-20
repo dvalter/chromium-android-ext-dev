@@ -344,7 +344,7 @@ PasswordGenerationPopupControllerImpl::GetSuggestions() {
   return std::vector<autofill::Suggestion>();
 }
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
 int PasswordGenerationPopupControllerImpl::GetElidedValueWidthForRow(int row) {
   return 0;
 }

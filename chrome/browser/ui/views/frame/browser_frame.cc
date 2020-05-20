@@ -31,7 +31,6 @@
 #include "ui/base/material_design/material_design_controller.h"
 #include "ui/events/event_handler.h"
 #include "ui/gfx/font_list.h"
-#include "ui/native_theme/native_theme_dark_aura.h"
 #include "ui/views/controls/menu/menu_runner.h"
 #include "ui/views/widget/native_widget.h"
 
@@ -207,11 +206,6 @@ const ui::ThemeProvider* BrowserFrame::GetThemeProvider() const {
 }
 
 const ui::NativeTheme* BrowserFrame::GetNativeTheme() const {
-  if (browser_view_->browser()->profile()->IsIncognitoProfile() &&
-      ThemeServiceFactory::GetForProfile(browser_view_->browser()->profile())
-          ->UsingDefaultTheme()) {
-    return ui::NativeThemeDarkAura::instance();
-  }
   return views::Widget::GetNativeTheme();
 }
 

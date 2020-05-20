@@ -46,7 +46,7 @@
 #include "chrome/browser/win/browser_util.h"
 #endif
 
-#if !defined(OS_ANDROID) && !defined(OS_CHROMEOS)
+#if defined(OS_ANDROID) && !defined(OS_CHROMEOS)
 #include "chrome/browser/first_run/upgrade_util.h"
 #endif
 
@@ -157,7 +157,7 @@ ShutdownType GetShutdownType() {
   return g_shutdown_type;
 }
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
 bool ShutdownPreThreadsStop() {
 #if defined(OS_CHROMEOS)
   chromeos::BootTimesRecorder::Get()->AddLogoutTimeMarker(
@@ -383,7 +383,7 @@ void SetTryingToQuit(bool quitting) {
   // attempt is cancelled.
   PrefService* pref_service = g_browser_process->local_state();
   if (pref_service) {
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
     pref_service->ClearPref(prefs::kWasRestarted);
 #endif  // !defined(OS_ANDROID)
     pref_service->ClearPref(prefs::kRestartLastSessionOnShutdown);

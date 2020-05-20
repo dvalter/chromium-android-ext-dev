@@ -84,6 +84,8 @@ class AwBrowserContext : public content::BrowserContext,
   bool IsDefaultBrowserContext() { return true; }
 
   // content::BrowserContext implementation.
+  std::unique_ptr<content::ZoomLevelDelegate> CreateZoomLevelDelegate(
+      const base::FilePath&) override;
   base::FilePath GetPath() override;
   bool IsOffTheRecord() override;
   content::ResourceContext* GetResourceContext() override;

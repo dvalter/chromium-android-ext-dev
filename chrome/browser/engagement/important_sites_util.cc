@@ -38,7 +38,6 @@
 
 #if defined(OS_ANDROID)
 #include "chrome/browser/android/search_permissions/search_permissions_service.h"
-#else
 #include "chrome/browser/web_applications/components/web_app_id.h"
 #include "chrome/browser/web_applications/web_app_provider.h"
 #include "chrome/browser/web_applications/web_app_registrar.h"
@@ -365,7 +364,7 @@ void PopulateInfoMapWithBookmarks(
 // about clearing data for installed apps, so this and any functions explicitly
 // used to warn about clearing data for installed apps can be excluded from the
 // Android build.
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
 void PopulateInfoMapWithInstalled(
     browsing_data::TimePeriod time_period,
     Profile* profile,
@@ -483,7 +482,7 @@ ImportantSitesUtil::GetImportantRegisterableDomains(Profile* profile,
   return final_list;
 }
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
 std::vector<ImportantDomainInfo>
 ImportantSitesUtil::GetInstalledRegisterableDomains(
     browsing_data::TimePeriod time_period,

@@ -379,7 +379,7 @@ const std::vector<Suggestion> AutofillPopupControllerImpl::GetSuggestions() {
   return suggestions_;
 }
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
 int AutofillPopupControllerImpl::GetElidedValueWidthForRow(int row) {
   return gfx::GetStringWidth(GetElidedValueAt(row),
                              layout_model_.GetValueFontListForRow(row));

@@ -50,6 +50,9 @@ class AutofillKeyboardAccessoryAdapter : public AutofillPopupView,
                                  base::OnceClosure confirm_deletion) = 0;
   };
 
+  int GetElidedValueWidthForRow(int row) override;
+  int GetElidedLabelWidthForRow(int row) override;
+
   void SetAccessoryView(std::unique_ptr<AccessoryView> view) {
     view_ = std::move(view);
   }

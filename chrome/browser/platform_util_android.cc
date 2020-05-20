@@ -10,6 +10,7 @@
 #include "chrome/browser/platform_util.h"
 #include "chrome/browser/util/jni_headers/PlatformUtil_jni.h"
 #include "ui/android/view_android.h"
+#include "ui/android/window_android.h"
 #include "url/gurl.h"
 
 using base::android::ScopedJavaLocalRef;
@@ -39,6 +40,11 @@ void OpenExternal(Profile* profile, const GURL& url) {
 gfx::NativeWindow GetTopLevel(gfx::NativeView view) {
   NOTIMPLEMENTED();
   return view->GetWindowAndroid();
+}
+
+gfx::NativeView GetViewForWindow(gfx::NativeWindow window) {
+  NOTIMPLEMENTED();
+  return window;
 }
 
 gfx::NativeView GetParent(gfx::NativeView view) {

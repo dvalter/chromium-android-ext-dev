@@ -27,7 +27,19 @@ RegisterProtocolHandlerPermissionRequest::
 
 permissions::PermissionRequest::IconId
 RegisterProtocolHandlerPermissionRequest::GetIconId() const {
-  return vector_icons::kProtocolHandlerIcon;
+  return 0;
+}
+
+base::string16 RegisterProtocolHandlerPermissionRequest::GetTitleText() const {
+  return l10n_util::GetStringFUTF16(
+                   IDS_REGISTER_PROTOCOL_HANDLER_CONFIRM,
+                   handler_.GetProtocolDisplayName());
+}
+
+base::string16 RegisterProtocolHandlerPermissionRequest::GetMessageText() const {
+  return l10n_util::GetStringFUTF16(
+                   IDS_REGISTER_PROTOCOL_HANDLER_CONFIRM,
+                   handler_.GetProtocolDisplayName());
 }
 
 base::string16

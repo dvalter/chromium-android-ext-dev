@@ -502,7 +502,7 @@ class WatchDogThread : public base::Thread {
 // ShutdownWatcherHelper is useless on Android because there is no shutdown,
 // Chrome is always killed one way or another (swiped away in the task
 // switcher, OOM-killed, etc.).
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
 
 // This is a wrapper class for getting the crash dumps of the hangs during
 // startup.

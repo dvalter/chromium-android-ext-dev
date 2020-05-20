@@ -423,7 +423,7 @@
 #include "chrome/browser/chrome_browser_main_posix.h"
 #endif
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
 #include "chrome/browser/badging/badge_manager.h"
 #include "chrome/browser/devtools/chrome_devtools_manager_delegate.h"
 #include "chrome/browser/devtools/devtools_window.h"
@@ -1301,7 +1301,7 @@ ChromeContentBrowserClient::CreateBrowserMainParts(
 #else
   main_parts->AddParts(new ChromeBrowserMainExtraPartsViewsLinux());
 #endif  // USE_X11
-#else
+#elif !defined(OS_ANDROID)
   main_parts->AddParts(new ChromeBrowserMainExtraPartsViews());
 #endif
 #endif

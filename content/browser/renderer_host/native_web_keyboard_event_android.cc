@@ -64,6 +64,8 @@ NativeWebKeyboardEvent& NativeWebKeyboardEvent::operator=(
   return *this;
 }
 
+NativeWebKeyboardEvent::NativeWebKeyboardEvent(const ui::KeyEvent& key_event) {}
+
 NativeWebKeyboardEvent::~NativeWebKeyboardEvent() {}
 
 }  // namespace content

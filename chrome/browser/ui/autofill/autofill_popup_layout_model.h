@@ -43,7 +43,7 @@ class AutofillPopupLayoutModel {
   // The amount of padding at the end of the popup in dip.
   static const int kEndPadding = 8;
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
   // Calculates the desired height of the popup based on its contents.
   int GetDesiredPopupHeight() const;
 
@@ -99,7 +99,7 @@ class AutofillPopupLayoutModel {
   // Returns the enclosing rectangle for the element_bounds.
   gfx::Rect RoundedElementBounds() const;
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
   gfx::ImageSkia GetIconImageByName(const std::string& icon_str) const;
 
   // The fonts for the popup text.

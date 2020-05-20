@@ -13,7 +13,7 @@
 #include "chrome/browser/search/search_engine_base_url_tracker.h"
 #include "chrome/browser/ui/search/instant_controller.h"
 
-#if defined(OS_ANDROID)
+#if !defined(OS_ANDROID)
 #error "Instant is only used on desktop";
 #endif
 

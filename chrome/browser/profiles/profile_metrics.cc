@@ -25,7 +25,7 @@
 #include "components/signin/core/browser/signin_header_helper.h"
 #include "content/public/browser/browser_thread.h"
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
 #include "chrome/browser/ui/browser_finder.h"
 #endif
 
@@ -33,7 +33,7 @@ namespace {
 
 const int kMaximumDaysOfDisuse = 4 * 7;  // Should be integral number of weeks.
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
 size_t number_of_profile_switches_ = 0;
 #endif
 
@@ -47,7 +47,7 @@ enum ProfileOpenState {
   PROFILE_UNOPENED
 };
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
 ProfileOpenState GetProfileOpenState(
     ProfileManager* manager,
     const base::FilePath& path) {
@@ -80,7 +80,7 @@ ProfileMetrics::ProfileType GetProfileType(
 
 bool HasProfileBeenActiveSince(const ProfileAttributesEntry* entry,
                                const base::Time& active_limit) {
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
   // TODO(mlerman): iOS and Android should set an ActiveTime in the
   // ProfileAttributesStorage. (see ProfileManager::OnBrowserSetLastActive)
   if (entry->GetActiveTime() < active_limit)
@@ -214,7 +214,7 @@ profile_metrics::BrowserProfileType ProfileMetrics::GetBrowserProfileType(
   return profile_metrics::BrowserProfileType::kMaxValue;
 }
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
 void ProfileMetrics::LogNumberOfProfileSwitches() {
   UMA_HISTOGRAM_COUNTS_100("Profile.NumberOfSwitches",
                            number_of_profile_switches_);
@@ -436,7 +436,7 @@ void ProfileMetrics::LogProfileOpenMethod(ProfileOpen metric) {
                             NUM_PROFILE_OPEN_METRICS);
 }
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
 void ProfileMetrics::LogProfileSwitch(
     ProfileOpen metric,
     ProfileManager* manager,

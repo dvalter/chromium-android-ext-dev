@@ -17,6 +17,7 @@
 #include "base/time/time.h"
 #include "ui/android/ui_android_export.h"
 #include "ui/android/view_android.h"
+#include "ui/events/event_target.h"
 #include "ui/gfx/geometry/vector2d_f.h"
 
 namespace display {
@@ -33,7 +34,8 @@ class WindowAndroidObserver;
 
 // Android implementation of the activity window.
 // WindowAndroid is also the root of a ViewAndroid tree.
-class UI_ANDROID_EXPORT WindowAndroid : public ViewAndroid {
+class UI_ANDROID_EXPORT WindowAndroid : public ViewAndroid,
+                           public ui::EventTarget {
  public:
   static WindowAndroid* FromJavaWindowAndroid(
       const base::android::JavaParamRef<jobject>& jwindow_android);
@@ -49,6 +51,13 @@ class UI_ANDROID_EXPORT WindowAndroid : public ViewAndroid {
   void Destroy(JNIEnv* env, const base::android::JavaParamRef<jobject>& obj);
 
   base::android::ScopedJavaLocalRef<jobject> GetJavaObject();
+
+  static void ConvertPointToTarget(const WindowAndroid* source,
+                                   const WindowAndroid* target,
+                                   gfx::PointF* point);
+  static void ConvertPointToTarget(const WindowAndroid* source,
+                                   const WindowAndroid* target,
+                                   gfx::Point* point);
 
   // Compositor callback relay.
   void OnCompositingDidCommit();
@@ -139,6 +148,12 @@ class UI_ANDROID_EXPORT WindowAndroid : public ViewAndroid {
 
   // ViewAndroid overrides.
   WindowAndroid* GetWindowAndroid() const override;
+
+  // Overridden from ui::EventTarget:
+  bool CanAcceptEvent(const ui::Event& event) override;
+  EventTarget* GetParentTarget() override;
+  std::unique_ptr<ui::EventTargetIterator> GetChildIterator() const override;
+  ui::EventTargeter* GetEventTargeter() override;
 
   // The ID of the display that this window belongs to.
   int display_id() const { return display_id_; }

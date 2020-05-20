@@ -32,22 +32,10 @@
 #include "extensions/buildflags/buildflags.h"
 #include "services/network/public/cpp/shared_url_loader_factory.h"
 
-#if defined(OS_WIN)
-#include "base/win/registry.h"
-#include "components/policy/core/common/policy_loader_win.h"
-#elif defined(OS_MACOSX)
-#include <CoreFoundation/CoreFoundation.h>
-#include "base/mac/foundation_util.h"
-#include "base/strings/sys_string_conversions.h"
-#include "components/policy/core/common/policy_loader_mac.h"
-#include "components/policy/core/common/preferences_mac.h"
-#elif defined(OS_POSIX) && !defined(OS_ANDROID)
 #include "components/policy/core/common/config_dir_policy_loader.h"
-#elif defined(OS_ANDROID)
 #include "components/policy/core/browser/android/android_combined_policy_provider.h"
-#endif
 
-#if !defined(OS_ANDROID) && !defined(OS_CHROMEOS)
+#if defined(OS_ANDROID)
 #include "chrome/browser/policy/chrome_browser_cloud_management_controller.h"
 #include "components/policy/core/common/cloud/machine_level_user_cloud_policy_manager.h"
 #endif
@@ -109,7 +97,7 @@ bool ChromeBrowserPolicyConnector::IsEnterpriseManaged() const {
 bool ChromeBrowserPolicyConnector::HasMachineLevelPolicies() {
   if (ProviderHasPolicies(GetPlatformProvider()))
     return true;
-#if !defined(OS_ANDROID) && !defined(OS_CHROMEOS)
+#if defined(OS_ANDROID) && !defined(OS_CHROMEOS)
   if (ProviderHasPolicies(machine_level_user_cloud_policy_manager_))
     return true;
 #endif  // !defined(OS_ANDROID) && !defined(OS_CHROMEOS)
@@ -117,7 +105,7 @@ bool ChromeBrowserPolicyConnector::HasMachineLevelPolicies() {
 }
 
 void ChromeBrowserPolicyConnector::Shutdown() {
-#if !defined(OS_ANDROID) && !defined(OS_CHROMEOS)
+#if defined(OS_ANDROID) && !defined(OS_CHROMEOS)
   // Reset the controller before calling base class so that
   // shutdown occurs in correct sequence.
   chrome_browser_cloud_management_controller_.reset();
@@ -205,7 +193,6 @@ ChromeBrowserPolicyConnector::CreatePlatformProvider() {
   } else {
     return nullptr;
   }
-#elif defined(OS_ANDROID)
   return std::make_unique<policy::android::AndroidCombinedPolicyProvider>(
       GetSchemaRegistry());
 #else

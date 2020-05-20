@@ -613,7 +613,7 @@ public class PaymentRequestImpl
      */
     @Override
     public void init(PaymentRequestClient client, PaymentMethodData[] methodData,
-            PaymentDetails details, PaymentOptions options, boolean googlePayBridgeEligible) {
+            PaymentDetails details, PaymentOptions options) {
         if (mClient != null) {
             mJourneyLogger.setAborted(AbortReason.INVALID_DATA_FROM_RENDERER);
             disconnectFromClientWithDebugMessage(ErrorStrings.ATTEMPTED_INITIALIZATION_TWICE);
@@ -672,19 +672,11 @@ public class PaymentRequestImpl
             return;
         }
 
-        boolean googlePayBridgeActivated = googlePayBridgeEligible
-                && SkipToGPayHelper.canActivateExperiment(mWebContents, methodData);
-
-        mMethodData = getValidatedMethodData(methodData, googlePayBridgeActivated, mCardEditor);
+        mMethodData = getValidatedMethodData(methodData, false, mCardEditor);
         if (mMethodData == null) {
             mJourneyLogger.setAborted(AbortReason.INVALID_DATA_FROM_RENDERER);
             disconnectFromClientWithDebugMessage(ErrorStrings.INVALID_PAYMENT_METHODS_OR_DATA);
             return;
-        }
-
-        if (googlePayBridgeActivated) {
-            PaymentMethodData data = mMethodData.get(MethodStrings.GOOGLE_PAY);
-            mSkipToGPayHelper = new SkipToGPayHelper(options, data.gpayBridgeData);
         }
 
         mQueryForQuota = new HashMap<>(mMethodData);

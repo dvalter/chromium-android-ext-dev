@@ -169,8 +169,6 @@ views::Widget* IntentPickerBubbleView::ShowBubble(
     intent_picker_bubble_->GetViewAccessibility().OverrideName(
         l10n_util::GetStringUTF16(
             IDS_BROWSER_SHARING_CLICK_TO_CALL_DIALOG_TITLE_LABEL));
-    ClickToCallUiController::GetOrCreateFromWebContents(web_contents)
-        ->ClearLastDialog();
   } else {
     DCHECK(icon_type == PageActionIconType::kIntentPicker);
     intent_picker_bubble_->GetViewAccessibility().OverrideName(

@@ -7,7 +7,7 @@
 #include "build/build_config.h"
 #include "chrome/browser/profiles/profile.h"
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
 #include "chrome/browser/ui/storage_pressure_bubble.h"
 #endif
 

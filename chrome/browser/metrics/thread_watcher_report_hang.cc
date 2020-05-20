@@ -22,7 +22,7 @@ NOINLINE void ReportThreadHang() {
 #endif
 }
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
 
 NOINLINE void StartupHang() {
   volatile int inhibit_comdat = __LINE__;

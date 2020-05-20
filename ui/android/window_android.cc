@@ -18,6 +18,7 @@
 #include "ui/android/ui_android_jni_headers/WindowAndroid_jni.h"
 #include "ui/android/window_android_compositor.h"
 #include "ui/android/window_android_observer.h"
+#include "ui/events/event_target_iterator.h"
 #include "ui/base/ui_base_features.h"
 
 namespace ui {
@@ -97,6 +98,17 @@ WindowAndroid* WindowAndroid::CreateForTesting() {
 void WindowAndroid::OnCompositingDidCommit() {
   for (WindowAndroidObserver& observer : observer_list_)
     observer.OnCompositingDidCommit();
+}
+
+void WindowAndroid::ConvertPointToTarget(const WindowAndroid* source,
+                                  const WindowAndroid* target,
+                                  gfx::PointF* point) {
+  return;
+}
+
+void WindowAndroid::ConvertPointToTarget(const WindowAndroid* source,
+                                  const WindowAndroid* target,
+                                  gfx::Point* point) {
 }
 
 void WindowAndroid::AddObserver(WindowAndroidObserver* observer) {
@@ -271,6 +283,22 @@ bool WindowAndroid::CanRequestPermission(const std::string& permission) {
 WindowAndroid* WindowAndroid::GetWindowAndroid() const {
   DCHECK(parent_ == nullptr);
   return const_cast<WindowAndroid*>(this);
+}
+
+bool WindowAndroid::CanAcceptEvent(const ui::Event& event) {
+  return false;
+}
+
+ui::EventTarget* WindowAndroid::GetParentTarget() {
+  return nullptr;
+}
+
+std::unique_ptr<ui::EventTargetIterator> WindowAndroid::GetChildIterator() const {
+  return nullptr;
+}
+
+ui::EventTargeter* WindowAndroid::GetEventTargeter() {
+  return nullptr;
 }
 
 ScopedJavaLocalRef<jobject> WindowAndroid::GetWindowToken() {

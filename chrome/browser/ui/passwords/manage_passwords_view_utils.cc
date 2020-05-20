@@ -44,7 +44,7 @@
 #include "url/gurl.h"
 #include "url/origin.h"
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
 #include "chrome/browser/ui/browser.h"
 #endif
 
@@ -232,7 +232,7 @@ bool ShouldManagePasswordsinGooglePasswordManager(Profile* profile) {
 }
 
 // Navigation is handled differently on Android.
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
 void NavigateToGooglePasswordManager(Profile* profile,
                                      ManagePasswordsReferrer referrer) {
   NavigateParams params(profile, GetGooglePasswordManagerURL(referrer),

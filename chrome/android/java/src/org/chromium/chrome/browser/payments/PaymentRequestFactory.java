@@ -48,8 +48,7 @@ public class PaymentRequestFactory implements InterfaceFactory<PaymentRequest> {
 
         @Override
         public void init(PaymentRequestClient client, PaymentMethodData[] methodData,
-                PaymentDetails details, PaymentOptions options,
-                boolean unusedGooglePayBridgeEligible) {
+                PaymentDetails details, PaymentOptions options) {
             mClient = client;
         }
 

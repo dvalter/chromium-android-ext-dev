@@ -140,7 +140,7 @@ class PasswordGenerationPopupControllerImpl
   const gfx::RectF& element_bounds() const override;
   bool IsRTL() const override;
   const std::vector<autofill::Suggestion> GetSuggestions() override;
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
   int GetElidedValueWidthForRow(int row) override;
   int GetElidedLabelWidthForRow(int row) override;
 #endif

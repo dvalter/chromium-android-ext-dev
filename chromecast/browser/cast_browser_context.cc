@@ -80,7 +80,7 @@ void CastBrowserContext::InitWhileIOAllowed() {
   BrowserContext::Initialize(this, path_);
 }
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
 std::unique_ptr<content::ZoomLevelDelegate>
 CastBrowserContext::CreateZoomLevelDelegate(
     const base::FilePath& partition_path) {

@@ -11,7 +11,7 @@
 
 namespace metrics {
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
 
 // This function makes it possible to tell from the callstack why startup is
 // taking too long.

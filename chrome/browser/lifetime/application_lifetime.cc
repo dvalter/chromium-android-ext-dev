@@ -34,7 +34,7 @@
 #include "content/public/browser/navigation_details.h"
 #include "content/public/browser/notification_service.h"
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
 #include "chrome/browser/lifetime/termination_notification.h"
 #include "chrome/browser/ui/browser.h"
 #include "chrome/browser/ui/browser_finder.h"
@@ -51,7 +51,7 @@
 #include "third_party/cros_system_api/dbus/service_constants.h"
 #endif
 
-#if !defined(OS_ANDROID) && !defined(OS_CHROMEOS)
+#if defined(OS_ANDROID) && !defined(OS_CHROMEOS)
 #include "chrome/browser/ui/user_manager.h"
 #endif
 
@@ -63,7 +63,7 @@ namespace chrome {
 
 namespace {
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
 // Returns true if all browsers can be closed without user interaction.
 // This currently checks if there is pending download, or if it needs to
 // handle unload handler.
@@ -121,7 +121,7 @@ bool SetLocaleForNextStart(PrefService* local_state) {
 bool g_send_stop_request_to_session_manager = false;
 #endif
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
 using IgnoreUnloadHandlers =
     util::StrongAlias<class IgnoreUnloadHandlersTag, bool>;
 
@@ -155,7 +155,7 @@ void AttemptRestartInternal(IgnoreUnloadHandlers ignore_unload_handlers) {
 
 }  // namespace
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
 void MarkAsCleanShutdown() {
   // TODO(beng): Can this use ProfileManager::GetLoadedProfiles() instead?
   for (auto* browser : *BrowserList::GetInstance())
@@ -178,7 +178,7 @@ void AttemptExitInternal(bool try_to_quit_application) {
   g_browser_process->platform_part()->AttemptExit(try_to_quit_application);
 }
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
 void CloseAllBrowsersAndQuit() {
   browser_shutdown::SetTryingToQuit(true);
   CloseAllBrowsers();
@@ -270,7 +270,7 @@ void AttemptRelaunch() {
   AttemptRestart();
 }
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
 void RelaunchIgnoreUnloadHandlers() {
 #if defined(OS_CHROMEOS)
   chromeos::PowerManagerClient::Get()->RequestRestart(
@@ -290,7 +290,7 @@ void AttemptExit() {
   // don't notify users of crashes beyond this point.
   // Note that MarkAsCleanShutdown() does not set UMA's exit cleanly bit
   // so crashes during shutdown are still reported in UMA.
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
   // Android doesn't use Browser.
   if (AreAllBrowsersCloseable())
     MarkAsCleanShutdown();
@@ -301,7 +301,7 @@ void AttemptExit() {
 
 void ExitIgnoreUnloadHandlers() {
   VLOG(1) << "ExitIgnoreUnloadHandlers";
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
   // We always mark exit cleanly.
   MarkAsCleanShutdown();
 
@@ -328,7 +328,7 @@ bool IsAttemptingShutdown() {
 }
 #endif
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
 void SessionEnding() {
   // This is a time-limited shutdown where we need to write as much to
   // disk as we can as soon as we can, and where we must kill the
@@ -396,6 +396,8 @@ void OnAppExiting() {
   notified = true;
   HandleAppExitingForPlatform();
 }
+
+void HandleAppExitingForPlatform() {}
 #endif  // !defined(OS_ANDROID)
 
 }  // namespace chrome

@@ -1346,7 +1346,7 @@ void StoragePartitionImpl::Initialize() {
   push_messaging_context_ = std::make_unique<PushMessagingContext>(
       browser_context_, service_worker_context_);
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
   host_zoom_level_context_ = new HostZoomLevelContext(
       browser_context_->CreateZoomLevelDelegate(partition_path_));
 #endif  // !defined(OS_ANDROID)
@@ -1603,7 +1603,7 @@ SharedWorkerServiceImpl* StoragePartitionImpl::GetSharedWorkerService() {
   return shared_worker_service_.get();
 }
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
 HostZoomMap* StoragePartitionImpl::GetHostZoomMap() {
   DCHECK(initialized_);
   DCHECK(host_zoom_level_context_.get());

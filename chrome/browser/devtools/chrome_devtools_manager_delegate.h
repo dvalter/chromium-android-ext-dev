@@ -13,8 +13,6 @@
 #include "base/compiler_specific.h"
 #include "base/macros.h"
 #include "chrome/browser/devtools/device/devtools_device_discovery.h"
-#include "chrome/browser/devtools/protocol/forward.h"
-#include "chrome/browser/devtools/protocol/protocol.h"
 #include "content/public/browser/devtools_agent_host_observer.h"
 #include "content/public/browser/devtools_manager_delegate.h"
 #include "net/base/host_port_pair.h"

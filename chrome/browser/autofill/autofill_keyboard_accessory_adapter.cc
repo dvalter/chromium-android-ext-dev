@@ -113,6 +113,14 @@ const base::string16& AutofillKeyboardAccessoryAdapter::GetElidedLabelAt(
   return labels_[OffsetIndexFor(row)];
 }
 
+int AutofillKeyboardAccessoryAdapter::GetElidedValueWidthForRow(int row) {
+  return 0;
+}
+
+int AutofillKeyboardAccessoryAdapter::GetElidedLabelWidthForRow(int row) {
+  return 0;
+}
+
 bool AutofillKeyboardAccessoryAdapter::GetRemovalConfirmationText(
     int index,
     base::string16* title,

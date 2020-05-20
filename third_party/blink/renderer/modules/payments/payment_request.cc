@@ -1144,7 +1144,7 @@ PaymentRequest::PaymentRequest(
   UseCounter::Count(execution_context, WebFeature::kPaymentRequestInitialized);
   mojo::PendingRemote<payments::mojom::blink::PaymentRequestClient> client;
   client_receiver_.Bind(client.InitWithNewPipeAndPassReceiver(), task_runner);
-#if defined(OS_ANDROID)
+#if !defined(OS_ANDROID)
   payment_provider_->Init(
       std::move(client), std::move(validated_method_data),
       std::move(validated_details),

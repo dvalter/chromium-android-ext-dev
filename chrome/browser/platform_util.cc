@@ -55,24 +55,6 @@ void DisableShellOperationsForTesting() {
 
 }  // namespace internal
 
-void OpenItem(Profile* profile,
-              const base::FilePath& full_path,
-              OpenItemType item_type,
-              const OpenOperationCallback& callback) {
-  DCHECK_CURRENTLY_ON(BrowserThread::UI);
-  // TaskPriority::USER_BLOCKING because this is usually opened as a result of a
-  // user action (e.g. open-downloaded-file or show-item-in-folder).
-  // TaskShutdownBehavior::CONTINUE_ON_SHUTDOWN because this doesn't need global
-  // state and can hang shutdown without this trait as it may result in an
-  // interactive dialog.
-  base::PostTask(
-      FROM_HERE,
-      {base::ThreadPool(), base::MayBlock(), base::TaskPriority::USER_BLOCKING,
-       base::TaskShutdownBehavior::CONTINUE_ON_SHUTDOWN},
-      base::BindOnce(&VerifyAndOpenItemOnBlockingThread, full_path, item_type,
-                     callback));
-}
-
 bool IsBrowserLockedFullscreen(const Browser* browser) {
   return false;
 }

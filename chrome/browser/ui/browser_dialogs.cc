@@ -16,7 +16,7 @@ void RecordDialogCreation(DialogIdentifier identifier) {
 
 }  // namespace chrome
 
-#if !defined(TOOLKIT_VIEWS)
+#if defined(TOOLKIT_VIEWS)
 // There's no dialog version of this available outside views, run callback as if
 // the dialog was instantly accepted.
 void ShowFolderUploadConfirmationDialog(

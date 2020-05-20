@@ -15,7 +15,7 @@
 class OmniboxPedalClearBrowsingData : public OmniboxPedal {
  public:
   OmniboxPedalClearBrowsingData();
-#if (!defined(OS_ANDROID) || BUILDFLAG(ENABLE_VR)) && !defined(OS_IOS)
+#if (defined(OS_ANDROID) || BUILDFLAG(ENABLE_VR)) && !defined(OS_IOS)
   const gfx::VectorIcon& GetVectorIcon() const override;
 #endif
 };

@@ -173,7 +173,6 @@
 #include "content/browser/android/nfc_host.h"
 #include "content/browser/web_contents/web_contents_android.h"
 #include "services/device/public/mojom/nfc.mojom.h"
-#else  // !OS_ANDROID
 #include "content/browser/host_zoom_map_impl.h"
 #endif  // OS_ANDROID
 
@@ -1181,7 +1180,7 @@ FindRequestManager* WebContentsImpl::GetFindRequestManagerForTesting() {
   return GetFindRequestManager();
 }
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
 void WebContentsImpl::UpdateZoom() {
   RenderWidgetHostImpl* rwh = GetRenderViewHost()->GetWidget();
   if (rwh->GetView())

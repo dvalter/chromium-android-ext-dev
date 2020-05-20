@@ -450,24 +450,9 @@ void SafeBrowsingPrivateEventRouter::OnSensitiveDataEvent(
               triggered_rule.SetIntKey(kKeyTriggeredRuleId, rule.rule_id());
               triggered_rule.SetStringKey(kKeyTriggeredRuleName,
                                           rule.rule_name());
-              triggered_rule.SetStringKey(kKeyTriggeredRuleResourceName,
-                                          rule.rule_resource_name());
-              triggered_rule.SetStringKey(kKeyTriggeredRuleSeverity,
-                                          rule.rule_severity());
               triggered_rule.SetIntKey(kKeyTriggeredRuleAction, rule.action());
 
               base::ListValue matched_detectors;
-              for (const auto& detector : rule.matched_detectors()) {
-                base::Value matched_detector(base::Value::Type::DICTIONARY);
-                matched_detector.SetStringKey(kKeyMatchedDetectorId,
-                                              detector.detector_id());
-                matched_detector.SetStringKey(kKeyMatchedDetectorName,
-                                              detector.display_name());
-                matched_detector.SetStringKey(kKeyMatchedDetectorType,
-                                              detector.detector_type());
-
-                matched_detectors.Append(std::move(matched_detector));
-              }
               triggered_rule.SetKey(kKeyMatchedDetectors,
                                     std::move(matched_detectors));
 
@@ -488,35 +473,7 @@ void SafeBrowsingPrivateEventRouter::OnSensitiveDataWarningBypassed(
     const std::string& mime_type,
     const std::string& trigger,
     const int64_t content_size) {
-  if (!IsRealtimeReportingEnabled())
     return;
-
-  ReportRealtimeEvent(
-      kKeySensitiveDataEvent,
-      base::BindOnce(
-          [](const std::string& url, const std::string& file_name,
-             const std::string& download_digest_sha256,
-             const std::string& profile_user_name, const std::string& mime_type,
-             const std::string& trigger, const int64_t content_size) {
-            // Create a real-time event dictionary from the arguments and
-            // report it.
-            base::Value event(base::Value::Type::DICTIONARY);
-            event.SetStringKey(kKeyUrl, url);
-            event.SetStringKey(kKeyFileName, file_name);
-            event.SetStringKey(kKeyDownloadDigestSha256,
-                               download_digest_sha256);
-            event.SetStringKey(kKeyProfileUserName, profile_user_name);
-            event.SetStringKey(kKeyContentType, mime_type);
-            // |content_size| can be set to -1 to indicate an unknown size, in
-            // which case the field is not set.
-            if (content_size >= 0)
-              event.SetIntKey(kKeyContentSize, content_size);
-            event.SetStringKey(kKeyTrigger, trigger);
-            event.SetBoolKey(kKeyClickedThrough, true);
-            return event;
-          },
-          url.spec(), file_name, download_digest_sha256, GetProfileUserName(),
-          mime_type, trigger, content_size));
 }
 
 void SafeBrowsingPrivateEventRouter::OnUnscannedFileEvent(

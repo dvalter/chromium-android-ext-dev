@@ -44,7 +44,7 @@
 #include "components/undo/undo_operation.h"
 #include "content/public/browser/browser_thread.h"
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
 #include "chrome/browser/extensions/api/passwords_private/passwords_private_utils.h"
 #endif
 
@@ -342,7 +342,7 @@ void PasswordManagerPresenter::UndoRemoveSavedPasswordOrException() {
   undo_manager_.Undo();
 }
 
-#if !defined(OS_ANDROID)  // This is never called on Android.
+#if defined(OS_ANDROID)  // This is never called on Android.
 void PasswordManagerPresenter::RequestShowPassword(
     const std::string& sort_key,
     base::OnceCallback<void(base::Optional<base::string16>)> callback) const {

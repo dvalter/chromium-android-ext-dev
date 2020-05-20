@@ -50,17 +50,6 @@ void PageActionIconController::Init(const PageActionIconParams& params,
                          params.page_action_icon_delegate);
         page_action_icons_.push_back(bookmark_star_icon_);
         break;
-      case PageActionIconType::kClickToCall:
-        click_to_call_icon_ = new SharingIconView(
-            params.icon_label_bubble_delegate, params.page_action_icon_delegate,
-            base::BindRepeating([](content::WebContents* contents) {
-              return static_cast<SharingUiController*>(
-                  ClickToCallUiController::GetOrCreateFromWebContents(
-                      contents));
-            }),
-            base::BindRepeating(SharingDialogView::GetAsBubbleForClickToCall));
-        page_action_icons_.push_back(click_to_call_icon_);
-        break;
       case PageActionIconType::kCookieControls:
         cookie_controls_icon_ =
             new CookieControlsIconView(params.icon_label_bubble_delegate,
@@ -130,17 +119,6 @@ void PageActionIconController::Init(const PageActionIconParams& params,
             params.command_updater, params.icon_label_bubble_delegate,
             params.page_action_icon_delegate);
         page_action_icons_.push_back(send_tab_to_self_icon_);
-        break;
-      case PageActionIconType::kSharedClipboard:
-        shared_clipboard_icon_ = new SharingIconView(
-            params.icon_label_bubble_delegate, params.page_action_icon_delegate,
-            base::BindRepeating([](content::WebContents* contents) {
-              return static_cast<SharingUiController*>(
-                  SharedClipboardUiController::GetOrCreateFromWebContents(
-                      contents));
-            }),
-            base::BindRepeating(SharingDialogView::GetAsBubble));
-        page_action_icons_.push_back(shared_clipboard_icon_);
         break;
       case PageActionIconType::kTranslate:
         DCHECK(params.command_updater);

@@ -299,13 +299,6 @@ std::unique_ptr<views::View> BookmarkBubbleView::CreateSigninPromoView() {
   // ChromeOS does not show the signin promo.
   return nullptr;
 #else
-  if (!SyncPromoUI::ShouldShowSyncPromo(profile_))
-    return nullptr;
-
-  return std::make_unique<DiceBubbleSyncPromoView>(
-      profile_, delegate_.get(),
-      signin_metrics::AccessPoint::ACCESS_POINT_BOOKMARK_BUBBLE,
-      IDS_BOOKMARK_DICE_PROMO_SYNC_MESSAGE,
-      /*dice_signin_button_prominent=*/false);
+  return nullptr;
 #endif
 }

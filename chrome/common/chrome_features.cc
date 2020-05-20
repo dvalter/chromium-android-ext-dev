@@ -64,7 +64,7 @@ const base::Feature kAppNotificationStatusMessaging{
     "AppNotificationStatusMessaging", base::FEATURE_DISABLED_BY_DEFAULT};
 #endif  // defined(OS_ANDROID)
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
 // App Service related flags. See chrome/services/app_service/README.md.
 const base::Feature kAppServiceContextMenu{"AppServiceContextMenu",
                                            base::FEATURE_DISABLED_BY_DEFAULT};
@@ -328,7 +328,7 @@ const base::Feature kEnableAmbientAuthenticationInGuestSession{
     "EnableAmbientAuthenticationInGuestSession",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
 // Upload enterprise cloud reporting without the extension.
 const base::Feature kEnterpriseReportingInBrowser{
     "EnterpriseReportingInBrowser", base::FEATURE_DISABLED_BY_DEFAULT};
@@ -521,7 +521,7 @@ const base::Feature kAcknowledgeNtpOverrideOnDeactivate{
 const base::Feature kMixedContentSiteSetting{"MixedContentSiteSetting",
                                              base::FEATURE_ENABLED_BY_DEFAULT};
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
 const base::Feature kOnConnectNative{"OnConnectNative",
                                      base::FEATURE_DISABLED_BY_DEFAULT};
 #endif

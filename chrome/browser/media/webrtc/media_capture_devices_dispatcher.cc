@@ -112,15 +112,6 @@ MediaCaptureDevicesDispatcher::MediaCaptureDevicesDispatcher()
   media_access_handlers_.push_back(
       std::make_unique<ExtensionMediaAccessHandler>());
 #endif
-  media_access_handlers_.push_back(
-      std::make_unique<DesktopCaptureAccessHandler>());
-#if defined(OS_CHROMEOS)
-  // Wrapper around TabCaptureAccessHandler used in Public Sessions.
-  media_access_handlers_.push_back(
-      std::make_unique<PublicSessionTabCaptureAccessHandler>());
-#else
-  media_access_handlers_.push_back(std::make_unique<TabCaptureAccessHandler>());
-#endif
 #endif
   media_access_handlers_.push_back(
       std::make_unique<PermissionBubbleMediaAccessHandler>());

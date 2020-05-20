@@ -17,6 +17,8 @@ ChooserBubbleDelegate::ChooserBubbleDelegate(
           content::WebContents::FromRenderFrameHost(owner))),
       chooser_controller_(std::move(chooser_controller)) {}
 
+std::unique_ptr<BubbleUi> ChooserBubbleDelegate::BuildBubbleUi() {}
+
 ChooserBubbleDelegate::~ChooserBubbleDelegate() {}
 
 const content::RenderFrameHost* ChooserBubbleDelegate::OwningFrame() const {

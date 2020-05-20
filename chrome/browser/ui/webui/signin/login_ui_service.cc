@@ -78,18 +78,6 @@ void LoginUIService::ShowExtensionLoginPrompt(bool enable_sync,
   chrome::ScopedTabbedBrowserDisplayer displayer(
       profile_->GetOriginalProfile());
   Browser* browser = displayer.browser();
-
-  if (enable_sync) {
-    // Set a primary account.
-    browser->signin_view_controller()->ShowDiceEnableSyncTab(
-        browser, signin_metrics::AccessPoint::ACCESS_POINT_EXTENSIONS,
-        signin_metrics::PromoAction::PROMO_ACTION_NO_SIGNIN_PROMO, email_hint);
-  } else {
-    // Add an account to the web without setting a primary account.
-    browser->signin_view_controller()->ShowDiceAddAccountTab(
-        browser, signin_metrics::AccessPoint::ACCESS_POINT_EXTENSIONS,
-        email_hint);
-  }
 #endif
 }
 

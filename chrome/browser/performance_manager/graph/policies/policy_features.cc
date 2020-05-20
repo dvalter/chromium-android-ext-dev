@@ -80,7 +80,7 @@ const base::FeatureParam<int> kDynamicTuningScaleInvisibleTimeSec = {
 
 #endif  // defined(OS_LINUX)
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
 const base::Feature kPageFreezingFromPerformanceManager{
     "PageFreezingFromPerformanceManager", base::FEATURE_DISABLED_BY_DEFAULT};
 

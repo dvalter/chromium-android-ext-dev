@@ -20,7 +20,7 @@
 #include "third_party/icu/source/common/unicode/ubidi.h"
 #include "ui/gfx/geometry/rect.h"
 
-#if !defined(OS_ANDROID) && !defined(OS_IOS)
+#if defined(OS_ANDROID) && !defined(OS_IOS)
 #include "components/omnibox/browser/vector_icons.h"  // nogncheck
 #include "ui/gfx/paint_vector_icon.h"
 #include "ui/gfx/vector_icon_types.h"
@@ -278,7 +278,7 @@ void OmniboxPopupModel::SetRichSuggestionBitmap(int result_index,
 }
 
 // Android and iOS have their own platform-specific icon logic.
-#if !defined(OS_ANDROID) && !defined(OS_IOS)
+#if defined(OS_ANDROID) && !defined(OS_IOS)
 gfx::Image OmniboxPopupModel::GetMatchIcon(const AutocompleteMatch& match,
                                            SkColor vector_icon_color) {
   gfx::Image extension_icon =

@@ -29,7 +29,7 @@
 #include "content/public/browser/web_contents_user_data.h"
 #include "ui/shell_dialogs/select_file_dialog.h"
 
-#if defined(OS_ANDROID)
+#if !defined(OS_ANDROID)
 #error "Instant is only used on desktop";
 #endif
 

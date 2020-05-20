@@ -18,20 +18,16 @@
 #include "ui/base/clipboard/clipboard_buffer.h"
 #include "url/gurl.h"
 
-#if defined(TOOLKIT_VIEWS)
 #include "ui/base/clipboard/clipboard_format_type.h"
-#endif
 
 namespace base {
 class Pickle;
 class PickleIterator;
 }
 
-#if defined(TOOLKIT_VIEWS)
 namespace ui {
 class OSExchangeData;
 }
-#endif
 
 namespace bookmarks {
 
@@ -114,9 +110,7 @@ struct BookmarkNodeData {
 
   ~BookmarkNodeData();
 
-#if defined(TOOLKIT_VIEWS)
   static const ui::ClipboardFormatType& GetBookmarkFormatType();
-#endif
 
   static bool ClipboardContainsBookmarks();
 
@@ -133,7 +127,6 @@ struct BookmarkNodeData {
   // WriteToClipboard() but will also attempt to read a plain bookmark.
   bool ReadFromClipboard(ui::ClipboardBuffer buffer);
 
-#if defined(TOOLKIT_VIEWS)
   // Writes elements to data. If there is only one element and it is a URL
   // the URL and title are written to the clipboard in a format other apps can
   // use.
@@ -144,7 +137,6 @@ struct BookmarkNodeData {
 
   // Restores this data from the clipboard, returning true on success.
   bool Read(const ui::OSExchangeData& data);
-#endif
 
 #if !defined(OS_MACOSX)
   // Writes the data for a drag to |pickle|.

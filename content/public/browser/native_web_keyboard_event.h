@@ -48,7 +48,6 @@ struct CONTENT_EXPORT NativeWebKeyboardEvent : public blink::WebKeyboardEvent {
       int scancode,
       int unicode_character,
       bool is_system_key);
-#else
   explicit NativeWebKeyboardEvent(const ui::KeyEvent& key_event);
 #if defined(USE_AURA)
   // Create a legacy keypress event specified by |character|.

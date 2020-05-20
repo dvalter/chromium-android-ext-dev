@@ -96,7 +96,7 @@ base::FilePath BrowserContextImpl::GetDefaultDownloadDirectory() {
   return download_dir;
 }
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
 std::unique_ptr<content::ZoomLevelDelegate>
 BrowserContextImpl::CreateZoomLevelDelegate(const base::FilePath&) {
   return nullptr;

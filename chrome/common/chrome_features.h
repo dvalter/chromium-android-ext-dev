@@ -55,7 +55,7 @@ COMPONENT_EXPORT(CHROME_FEATURES)
 extern const base::Feature kAppNotificationStatusMessaging;
 #endif  // defined(OS_ANDROID)
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
 COMPONENT_EXPORT(CHROME_FEATURES)
 extern const base::Feature kAppServiceContextMenu;
 COMPONENT_EXPORT(CHROME_FEATURES)
@@ -187,7 +187,7 @@ extern const base::Feature kEnableAmbientAuthenticationInGuestSession;
 COMPONENT_EXPORT(CHROME_FEATURES)
 extern const base::Feature kEnableAmbientAuthenticationInIncognito;
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
 COMPONENT_EXPORT(CHROME_FEATURES)
 extern const base::Feature kEnterpriseReportingInBrowser;
 #endif
@@ -327,7 +327,7 @@ extern const base::Feature kAcknowledgeNtpOverrideOnDeactivate;
 COMPONENT_EXPORT(CHROME_FEATURES)
 extern const base::Feature kMixedContentSiteSetting;
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
 COMPONENT_EXPORT(CHROME_FEATURES) extern const base::Feature kOnConnectNative;
 #endif
 

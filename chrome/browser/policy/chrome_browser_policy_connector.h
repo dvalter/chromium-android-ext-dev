@@ -20,7 +20,7 @@ class PrefService;
 namespace policy {
 class ConfigurationPolicyProvider;
 
-#if !defined(OS_ANDROID) && !defined(OS_CHROMEOS)
+#if defined(OS_ANDROID) && !defined(OS_CHROMEOS)
 class ChromeBrowserCloudManagementController;
 class MachineLevelUserCloudPolicyManager;
 #endif
@@ -55,7 +55,7 @@ class ChromeBrowserPolicyConnector : public BrowserPolicyConnector {
 
   ConfigurationPolicyProvider* GetPlatformProvider();
 
-#if !defined(OS_ANDROID) && !defined(OS_CHROMEOS)
+#if defined(OS_ANDROID) && !defined(OS_CHROMEOS)
   ChromeBrowserCloudManagementController*
   chrome_browser_cloud_management_controller() {
     return chrome_browser_cloud_management_controller_.get();
@@ -77,7 +77,7 @@ class ChromeBrowserPolicyConnector : public BrowserPolicyConnector {
   // Owned by base class.
   ConfigurationPolicyProvider* platform_provider_ = nullptr;
 
-#if !defined(OS_ANDROID) && !defined(OS_CHROMEOS)
+#if defined(OS_ANDROID) && !defined(OS_CHROMEOS)
   std::unique_ptr<ChromeBrowserCloudManagementController>
       chrome_browser_cloud_management_controller_;
   // Owned by base class.

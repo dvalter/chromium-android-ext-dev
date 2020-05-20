@@ -19,8 +19,6 @@ namespace media_router {
 // Returns true if Media Router is enabled for |context|.
 bool MediaRouterEnabled(content::BrowserContext* context);
 
-#if !defined(OS_ANDROID)
-
 // TODO(crbug.com/1028753): Remove default-enabled kDialMediaRouteProvider after
 // tests stop disabling it.
 extern const base::Feature kDialMediaRouteProvider;
@@ -65,8 +63,6 @@ bool CastMediaRouteProviderEnabled();
 
 // Returns true if Mirroring Service should be used for mirroring.
 bool ShouldUseMirroringService();
-
-#endif  // !defined(OS_ANDROID)
 
 }  // namespace media_router
 

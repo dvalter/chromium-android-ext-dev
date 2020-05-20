@@ -13,10 +13,6 @@
 #include "components/signin/public/base/signin_buildflags.h"
 #include "url/gurl.h"
 
-#if defined(OS_ANDROID)
-#error This file should only be included on desktop.
-#endif
-
 class Browser;
 class SigninViewControllerDelegate;
 struct CoreAccountId;

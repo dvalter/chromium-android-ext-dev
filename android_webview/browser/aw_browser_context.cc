@@ -226,6 +226,12 @@ base::FilePath AwBrowserContext::GetContextStoragePath() {
   return user_data_dir;
 }
 
+// override
+std::unique_ptr<content::ZoomLevelDelegate>
+AwBrowserContext::CreateZoomLevelDelegate(const base::FilePath&) {
+  return nullptr;
+}
+
 // static
 void AwBrowserContext::RegisterPrefs(PrefRegistrySimple* registry) {
   safe_browsing::RegisterProfilePrefs(registry);

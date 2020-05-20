@@ -24,7 +24,7 @@
 #include "ui/base/text/bytes_formatting.h"
 #include "ui/gfx/text_elider.h"
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
 #include "chrome/browser/ui/browser.h"
 #endif
 
@@ -538,7 +538,7 @@ bool DownloadUIModel::ShouldPromoteOrigin() const {
   return false;
 }
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
 bool DownloadUIModel::IsCommandEnabled(
     const DownloadCommands* download_commands,
     DownloadCommands::Command command) const {

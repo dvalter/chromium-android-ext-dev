@@ -64,7 +64,7 @@ class AutofillPopupViewDelegate {
   // Returns the full set of autofill suggestions, if applicable.
   virtual const std::vector<autofill::Suggestion> GetSuggestions() = 0;
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
   // Returns elided values and labels for the given |row|.
   virtual int GetElidedValueWidthForRow(int row) = 0;
   virtual int GetElidedLabelWidthForRow(int row) = 0;

@@ -136,7 +136,7 @@ class OmniboxPopupModel {
   // Stores the image in a local data member and schedules a repaint.
   void SetRichSuggestionBitmap(int result_index, const SkBitmap& bitmap);
 
-#if !defined(OS_ANDROID) && !defined(OS_IOS)
+#if defined(OS_ANDROID) && !defined(OS_IOS)
   // Gets the icon for the match index.
   gfx::Image GetMatchIcon(const AutocompleteMatch& match,
                           SkColor vector_icon_color);

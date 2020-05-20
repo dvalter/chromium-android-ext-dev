@@ -72,12 +72,9 @@ void PermissionPromptBubbleView::AddPermissionRequestLine(
 
   auto* icon =
       line_container->AddChildView(std::make_unique<views::ImageView>());
-  const gfx::VectorIcon& vector_id = request->GetIconId();
   const SkColor icon_color = icon->GetNativeTheme()->GetSystemColor(
       ui::NativeTheme::kColorId_DefaultIconColor);
   constexpr int kPermissionIconSize = 18;
-  icon->SetImage(
-      gfx::CreateVectorIcon(vector_id, kPermissionIconSize, icon_color));
 
   auto* label = line_container->AddChildView(
       std::make_unique<views::Label>(request->GetMessageTextFragment()));

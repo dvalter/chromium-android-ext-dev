@@ -101,7 +101,7 @@ class AutofillPopupControllerImpl : public AutofillPopupController {
   void SetElementBounds(const gfx::RectF& bounds);
   bool IsRTL() const override;
   const std::vector<Suggestion> GetSuggestions() override;
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
   int GetElidedValueWidthForRow(int row) override;
   int GetElidedLabelWidthForRow(int row) override;
 #endif

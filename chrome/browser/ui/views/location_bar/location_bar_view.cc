@@ -238,7 +238,7 @@ void LocationBarView::Init() {
     // The send tab to self icon is intentionally the first one added so it is
     // the left most icon.
     params.types_enabled.push_back(PageActionIconType::kSendTabToSelf);
-    if (base::FeatureList::IsEnabled(kClickToCallUI))
+    if (false)
       params.types_enabled.push_back(PageActionIconType::kClickToCall);
     if (base::FeatureList::IsEnabled(kSharingQRCodeGenerator))
       params.types_enabled.push_back(PageActionIconType::kQRCodeGenerator);

@@ -36,7 +36,7 @@
 #include "content/public/browser/notification_registrar.h"
 #include "content/public/browser/notification_service.h"
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
 #include "chrome/browser/metrics/browser_activity_watcher.h"
 #endif
 
@@ -68,7 +68,7 @@ class ThreadWatcherObserver : public content::NotificationObserver {
   // Called when user activity is detected.
   void OnUserActivityDetected();
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
   std::unique_ptr<BrowserActivityWatcher> browser_activity_watcher_;
 #endif
 
@@ -97,7 +97,7 @@ ThreadWatcherObserver::ThreadWatcherObserver(
   DCHECK(!g_thread_watcher_observer_);
   g_thread_watcher_observer_ = this;
 
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
   browser_activity_watcher_ = std::make_unique<BrowserActivityWatcher>(
       base::BindRepeating(&ThreadWatcherObserver::OnUserActivityDetected,
                           base::Unretained(this)));
@@ -477,7 +477,7 @@ namespace {
 // StartupTimeBomb::DisarmStartupTimeBomb() proxy, to avoid ifdefing out
 // individual calls by ThreadWatcherList methods.
 static void DisarmStartupTimeBomb() {
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
   StartupTimeBomb::DisarmStartupTimeBomb();
 #endif
 }
@@ -851,7 +851,7 @@ void WatchDogThread::CleanUp() {
 }
 
 // StartupTimeBomb and ShutdownWatcherHelper are not available on Android.
-#if !defined(OS_ANDROID)
+#if defined(OS_ANDROID)
 
 namespace {
 
