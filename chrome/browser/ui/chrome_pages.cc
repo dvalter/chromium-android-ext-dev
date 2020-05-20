@@ -507,8 +507,10 @@ void ShowBrowserSignin(Browser* browser,
               ->HasPrimaryAccount()
           ? profiles::BUBBLE_VIEW_MODE_GAIA_REAUTH
           : profiles::BUBBLE_VIEW_MODE_GAIA_SIGNIN;
+#if 0
   browser->signin_view_controller()->ShowSignin(bubble_view_mode, browser,
                                                 access_point);
+#endif
 }
 
 void ShowBrowserSigninOrSettings(Browser* browser,

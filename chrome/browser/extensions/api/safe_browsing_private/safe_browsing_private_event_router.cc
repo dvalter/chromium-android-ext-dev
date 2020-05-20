@@ -759,9 +759,11 @@ void SafeBrowsingPrivateEventRouter::RealtimeReportingPrefChanged(
 
 void SafeBrowsingPrivateEventRouter::IfAuthorized(
     base::OnceCallback<void(bool)> cont) {
+#if 0
   if (binary_upload_service_) {
     binary_upload_service_->IsAuthorized(std::move(cont));
   }
+#endif
 }
 
 void SafeBrowsingPrivateEventRouter::ReportRealtimeEvent(

@@ -78,7 +78,7 @@
 #include "net/base/file_stream.h"
 #include "third_party/skia/include/core/SkBitmap.h"
 #include "ui/base/page_transition_types.h"
-#include "chrome/browser/sessions/session_tab_helper.h"
+#include "components/sessions/content/session_tab_helper.h"
 #include "ui/gfx/codec/png_codec.h"
 #include "ui/gfx/favicon_size.h"
 #include "ui/gfx/image/image_skia.h"
@@ -108,6 +108,8 @@ using base::android::JavaByteArrayToByteVector;
 using base::android::JavaRef;
 using base::android::ScopedJavaLocalRef;
 using base::android::ToJavaByteArray;
+
+using sessions::SessionTabHelper;
 
 bool PageActionWantsToRun(
     content::WebContents* web_contents, ExtensionAction* extension_action_) {

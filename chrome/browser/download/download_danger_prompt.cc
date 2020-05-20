@@ -70,6 +70,7 @@ void DownloadDangerPrompt::SendSafeBrowsingDownloadReport(
     ClientSafeBrowsingReportRequest::ReportType report_type,
     bool did_proceed,
     const download::DownloadItem& download) {
+#if 0
   safe_browsing::SafeBrowsingService* sb_service =
       g_browser_process->safe_browsing_service();
   ClientSafeBrowsingReportRequest report;
@@ -103,6 +104,7 @@ void DownloadDangerPrompt::SendSafeBrowsingDownloadReport(
     sb_service->SendSerializedDownloadReport(serialized_report);
   else
     DLOG(ERROR) << "Unable to serialize the threat report.";
+#endif
 }
 
 void DownloadDangerPrompt::RecordDownloadDangerPrompt(

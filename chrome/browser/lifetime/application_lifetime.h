@@ -31,7 +31,7 @@ void AttemptRestart();
 // entire OS, instead of just relaunching the browser.
 void AttemptRelaunch();
 
-#if !defined(OS_ANDROID)
+#if 1 // !defined(OS_ANDROID)
 // Starts an administrator-initiated relaunch process. On platforms other than
 // Chrome OS, this relaunches the browser and restores the user's session. On
 // Chrome OS, this restarts the entire OS. This differs from AttemptRelaunch in
@@ -62,7 +62,7 @@ void ExitIgnoreUnloadHandlers();
 bool IsAttemptingShutdown();
 #endif
 
-#if !defined(OS_ANDROID)
+#if 1 // !defined(OS_ANDROID)
 // Closes all browsers and if successful, quits.
 void CloseAllBrowsersAndQuit();
 

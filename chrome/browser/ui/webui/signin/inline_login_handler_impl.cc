@@ -404,6 +404,8 @@ void InlineSigninHelper::OnClientOAuthSuccessAndBrowserOpened(
 
     signin_metrics::LogSigninReason(
         GetSigninReasonFromHandlerSigninReason(reason));
+
+#if BUILDFLAG(ENABLE_ONE_CLICK_SIGNIN)
   } else {
     if (confirm_untrusted_signin_) {
       // Display a confirmation dialog to the user.
@@ -417,6 +419,7 @@ void InlineSigninHelper::OnClientOAuthSuccessAndBrowserOpened(
       return;
     }
     CreateSyncStarter(result.refresh_token);
+#endif
   }
   base::ThreadTaskRunnerHandle::Get()->DeleteSoon(FROM_HERE, this);
 }

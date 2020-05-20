@@ -193,7 +193,7 @@ Widget::~Widget() {
 
 // static
 const ui::NativeTheme* Widget::GetNativeTheme() const {
-  return ui::NativeThemeAndroid::instance();
+  return ui::NativeTheme::GetInstanceForNativeUi();
 }
 
 // static

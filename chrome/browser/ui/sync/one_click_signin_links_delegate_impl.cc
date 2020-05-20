@@ -16,9 +16,11 @@ OneClickSigninLinksDelegateImpl::OneClickSigninLinksDelegateImpl(
 OneClickSigninLinksDelegateImpl::~OneClickSigninLinksDelegateImpl() {}
 
 void OneClickSigninLinksDelegateImpl::OnLearnMoreLinkClicked(bool is_dialog) {
+#if BUILDFLAG(ENABLE_ONE_CLICK_SIGNIN)
   NavigateParams params(browser_, GURL(chrome::kChromeSyncLearnMoreURL),
                         ui::PAGE_TRANSITION_LINK);
   params.disposition = is_dialog ? WindowOpenDisposition::NEW_WINDOW
                                  : WindowOpenDisposition::NEW_FOREGROUND_TAB;
   Navigate(&params);
+#endif
 }

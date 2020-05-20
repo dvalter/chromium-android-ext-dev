@@ -50,7 +50,7 @@ import android.widget.AdapterView;
 
 import org.chromium.content_public.browser.LoadUrlParams;
 import org.chromium.ui.base.PageTransition;
-import org.chromium.chrome.browser.tabmodel.TabLaunchType;
+import org.chromium.chrome.browser.tab.TabLaunchType;
 import org.chromium.chrome.browser.ChromeActivity;
 import org.chromium.ui.mojom.WindowOpenDisposition;
 import org.chromium.base.ContextUtils;
