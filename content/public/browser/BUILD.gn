@@ -491,7 +491,7 @@ jumbo_source_set("browser_sources") {
     sources += [ "remote_cocoa.h" ]
   }
 
-  if (!is_android) {
+  if (is_android) {
     sources += [
       "host_zoom_map.h",
       "zoom_level_delegate.h",

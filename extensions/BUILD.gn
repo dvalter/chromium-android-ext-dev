@@ -221,7 +221,6 @@ test("extensions_unittests") {
   ]
 
   deps = [
-    ":extensions_resources",
     ":shell_and_test_pak",
     ":test_support",
     "//base/test:test_support",

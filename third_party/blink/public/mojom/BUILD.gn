@@ -162,7 +162,7 @@ mojom("mojom_platform") {
     "worker/worker_options.mojom",
   ]
 
-  if (!is_android) {
+  if (is_android) {
     sources += [ "serial/serial.mojom" ]
   }
 

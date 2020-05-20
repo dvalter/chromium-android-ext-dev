@@ -12,7 +12,7 @@ import("//ui/base/ui_features.gni")
 import("//ui/ozone/ozone.gni")
 import("//ui/views/features.gni")
 
-assert(toolkit_views)
+# assert(toolkit_views)
 
 # Reset sources_assignment_filter for the BUILD.gn file to prevent
 # regression during the migration of Chromium away from the feature.
@@ -157,6 +157,7 @@ jumbo_component("views") {
     "controls/menu/menu_types.h",
     "controls/menu/submenu_view.h",
     "controls/message_box_view.h",
+    "controls/native/native_view_host_android.h",
     "controls/native/native_view_host.h",
     "controls/native/native_view_host_mac.h",
     "controls/native/native_view_host_wrapper.h",
@@ -193,6 +194,7 @@ jumbo_component("views") {
     "debug_utils.h",
     "drag_controller.h",
     "drag_utils.h",
+    "event_monitor_android.h",
     "event_monitor.h",
     "focus/external_focus_tracker.h",
     "focus/focus_manager.h",
@@ -257,6 +259,7 @@ jumbo_component("views") {
     "widget/native_widget_private.h",
     "widget/root_view.h",
     "widget/root_view_targeter.h",
+    "widget/tooltip_manager_android.h",
     "widget/tooltip_manager.h",
     "widget/widget.h",
     "widget/widget_delegate.h",
@@ -354,6 +357,8 @@ jumbo_component("views") {
     "controls/menu/menu_image_util.cc",
     "controls/menu/menu_item_view.cc",
     "controls/menu/menu_model_adapter.cc",
+    "controls/menu/menu_pre_target_handler_android.cc",
+    "controls/menu/menu_pre_target_handler_android.h",
     "controls/menu/menu_runner.cc",
     "controls/menu/menu_runner_impl.cc",
     "controls/menu/menu_runner_impl_adapter.cc",
@@ -361,6 +366,7 @@ jumbo_component("views") {
     "controls/menu/menu_separator.cc",
     "controls/menu/submenu_view.cc",
     "controls/message_box_view.cc",
+    "controls/native/native_view_host_android.cc",
     "controls/native/native_view_host.cc",
     "controls/prefix_selector.cc",
     "controls/progress_bar.cc",
@@ -389,7 +395,9 @@ jumbo_component("views") {
     "controls/views_text_services_context_menu_base.cc",
     "controls/views_text_services_context_menu_base.h",
     "debug_utils.cc",
+    "drag_utils_android.cc",
     "drag_utils.cc",
+    "event_monitor_android.cc",
     "focus/external_focus_tracker.cc",
     "focus/focus_manager.cc",
     "focus/focus_manager_factory.cc",
@@ -412,9 +420,12 @@ jumbo_component("views") {
     "metadata/metadata_cache.cc",
     "metadata/metadata_types.cc",
     "metadata/type_conversion.cc",
+    "metrics_android.cc",
     "metrics.cc",
     "mouse_watcher.cc",
     "mouse_watcher_view_host.cc",
+    "native_cursor_android.cc",
+    "native_cursor_android.h",
     "paint_info.cc",
     "painter.cc",
     "rect_based_targeting_utils.cc",
@@ -436,9 +447,12 @@ jumbo_component("views") {
     "views_features.cc",
     "views_switches.cc",
     "widget/drop_helper.cc",
+    "widget/native_widget_android.cc",
+    "widget/native_widget_android.h",
     "widget/native_widget_private.cc",
     "widget/root_view.cc",
     "widget/root_view_targeter.cc",
+    "widget/tooltip_manager_android.cc",
     "widget/tooltip_manager.cc",
     "widget/widget.cc",
     "widget/widget_aura_utils.cc",

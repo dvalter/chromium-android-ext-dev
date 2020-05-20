@@ -59,7 +59,7 @@ jumbo_component("animation") {
     ]
   }
 
-  if (!is_android) {
+  if (is_android) {
     sources += [
       "throb_animation.cc",
       "throb_animation.h",

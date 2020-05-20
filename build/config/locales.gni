@@ -171,7 +171,7 @@ android_only_chrome_locales = [
 ]
 
 if (is_android) {
-  locales = all_chrome_locales
+  locales = all_chrome_locales - android_only_chrome_locales
 
   # Android doesn't ship all locales on KitKat in order to save space
   # (but webview does). http://crbug.com/369218

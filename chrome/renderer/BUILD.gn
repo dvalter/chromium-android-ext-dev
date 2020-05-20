@@ -420,6 +420,8 @@ jumbo_static_library("renderer") {
       "net/page_auto_fetcher_helper_android.cc",
       "net/page_auto_fetcher_helper_android.h",
     ]
+
+    deps += [ "//chrome/common/search:generate_chrome_colors_info" ]
   }
 
   if (is_chromeos) {

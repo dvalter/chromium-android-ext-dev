@@ -1412,7 +1412,7 @@ group("extra_resources") {
     "//components/autofill/core/browser:autofill_address_rewriter_resources",
   ]
 
-  if (!is_android) {
+  if (enable_extensions || !is_android) {
     public_deps += [
       "//chrome/browser/resources:bookmarks_resources",
       "//chrome/browser/resources:component_extension_resources",
@@ -1438,7 +1438,7 @@ group("extra_resources") {
     ]
   }
 
-  if (!is_android && !is_chromeos) {
+  if (is_android && !is_chromeos) {
     public_deps += [ "//chrome/browser/resources:welcome_resources" ]
   }
 

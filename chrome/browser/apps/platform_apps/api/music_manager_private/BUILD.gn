@@ -13,6 +13,7 @@ source_set("music_manager_private") {
     "device_id.cc",
     "device_id.h",
     "device_id_chromeos.cc",
+    "device_id_android.cc",
     "device_id_linux.cc",
     "device_id_mac.cc",
     "device_id_win.cc",

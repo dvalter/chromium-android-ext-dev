@@ -4782,7 +4782,6 @@ test("unit_tests") {
       "//chrome/common/extensions/api",
       "//components/safe_browsing:buildflags",
       "//components/services/unzip:in_process",
-      "//extensions:extensions_resources",
       "//extensions/browser:test_support",
       "//extensions/common",
       "//extensions/renderer:unit_test_support",

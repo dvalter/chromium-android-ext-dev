@@ -78,7 +78,7 @@ static_library("browser") {
     all_dependent_configs = [ "//ui/views:flags" ]
   }
 
-  if (toolkit_views && !is_mac) {
+  if (!is_mac) {
     sources += [ "bookmark_node_data_views.cc" ]
   }
 

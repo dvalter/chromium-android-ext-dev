@@ -4,13 +4,13 @@
 
 import("//extensions/buildflags/buildflags.gni")
 
-if (!is_android) {
+if (is_android) {
   import("//build/config/features.gni")
   import("//chrome/common/features.gni")
   import("//tools/grit/grit_rule.gni")
 }
 
-if (!is_android) {
+if (is_android) {
   _inspector_protocol = "//third_party/inspector_protocol"
   import("$_inspector_protocol/inspector_protocol.gni")
 
@@ -99,7 +99,7 @@ static_library("devtools") {
     "//ui/events:dom_keycode_converter",
   ]
 
-  if (!is_android) {
+  if (is_android) {
     deps += [
       "//chrome:extra_resources",
       "//chrome:resources",
@@ -179,19 +179,13 @@ static_library("devtools") {
       "url_constants.cc",
       "url_constants.h",
     ]
-    if (enable_service_discovery) {
-      sources += [
-        "device/cast_device_provider.cc",
-        "device/cast_device_provider.h",
-      ]
-    }
   }
   if (is_mac) {
     sources += [ "devtools_dock_tile_mac.mm" ]
   } else {
     sources += [ "devtools_dock_tile.cc" ]
   }
-  if (!is_android) {
+  if (is_android) {
     deps += [
       ":protocol_generated_sources",
       "//components/subresource_filter/content/browser:browser",

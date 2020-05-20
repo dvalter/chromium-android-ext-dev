@@ -36,7 +36,7 @@ jumbo_component("message_center") {
 
   defines = [ "MESSAGE_CENTER_IMPLEMENTATION" ]
 
-  if (enable_message_center) {
+  if (true) {
     deps += [
       ":message_center_vector_icons",
       "//base:i18n",
@@ -88,7 +88,7 @@ jumbo_component("message_center") {
       ]
     }
 
-    if (toolkit_views) {
+    if (true) {
       sources += [
         "views/desktop_message_popup_collection.cc",
         "views/desktop_message_popup_collection.h",

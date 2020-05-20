@@ -222,6 +222,7 @@ jumbo_static_library("extensions") {
     "api/image_writer_private/operation_manager.h",
     "api/image_writer_private/removable_storage_provider.cc",
     "api/image_writer_private/removable_storage_provider.h",
+    "api/image_writer_private/removable_storage_provider_android.cc",
     "api/image_writer_private/removable_storage_provider_chromeos.cc",
     "api/image_writer_private/removable_storage_provider_mac.cc",
     "api/image_writer_private/removable_storage_provider_win.cc",
@@ -625,6 +626,8 @@ jumbo_static_library("extensions") {
     "global_shortcut_listener_mac.mm",
     "global_shortcut_listener_win.cc",
     "global_shortcut_listener_win.h",
+    "global_shortcut_listener_android.cc",
+    "global_shortcut_listener_android.h",
     "install_gate.h",
     "install_observer.cc",
     "install_observer.h",
@@ -691,6 +694,8 @@ jumbo_static_library("extensions") {
     "sync_bundle.cc",
     "sync_bundle.h",
     "system_display/display_info_provider.h",
+    "system_display/display_info_provider_android.cc",
+    "system_display/display_info_provider_android.h",
     "system_display/display_info_provider_chromeos.cc",
     "system_display/display_info_provider_chromeos.h",
     "system_display/display_info_provider_mac.cc",
@@ -1106,7 +1111,7 @@ jumbo_static_library("extensions") {
     }
   }
 
-  if (!is_android) {
+  if (is_android) {
     sources += [
       "api/processes/processes_api.cc",
       "api/processes/processes_api.h",

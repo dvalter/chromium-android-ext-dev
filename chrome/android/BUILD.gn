@@ -1344,7 +1344,6 @@ if (current_toolchain == default_toolchain) {
         }
       }
       if (!dfmify_dev_ui || !_is_bundle_module) {
-        additional_extra_paks += [ "$root_gen_dir/chrome/dev_ui_resources.pak" ]
         deps += [ "//chrome/browser/resources:dev_ui_paks" ]
       }
 

@@ -82,7 +82,7 @@ if (closure_compile) {
   }
 }
 
-if (!is_android) {
+if (enable_extensions || !is_android) {
   grit("bookmarks_resources") {
     # The .grd contains references to generated files.
     source_is_generated = true
@@ -292,7 +292,7 @@ if (is_chromeos) {
   }
 }
 
-if (!is_android && !is_chromeos) {
+if (is_android && !is_chromeos) {
   grit("welcome_resources") {
     source = "welcome/welcome_resources.grd"
 

@@ -415,7 +415,6 @@ jumbo_static_library("browser") {
     "download/download_core_service_factory.h",
     "download/download_core_service_impl.cc",
     "download/download_core_service_impl.h",
-    "download/download_crx_util_android.cc",
     "download/download_file_picker.cc",
     "download/download_file_picker.h",
     "download/download_history.cc",
@@ -459,6 +458,7 @@ jumbo_static_library("browser") {
     "download/download_ui_controller.h",
     "download/download_ui_model.cc",
     "download/download_ui_model.h",
+    "download/drag_download_item_android.cc",
     "download/drag_download_item.h",
     "download/mixed_content_download_blocking.cc",
     "download/mixed_content_download_blocking.h",
@@ -1206,6 +1206,8 @@ jumbo_static_library("browser") {
     "plugins/pdf_plugin_placeholder_observer.h",
     "policy/browser_dm_token_storage.cc",
     "policy/browser_dm_token_storage.h",
+    "policy/browser_dm_token_storage_android.cc",
+    "policy/browser_dm_token_storage_android.h",
     "policy/browser_dm_token_storage_linux.cc",
     "policy/browser_dm_token_storage_linux.h",
     "policy/browser_dm_token_storage_mac.h",
@@ -3024,7 +3026,6 @@ jumbo_static_library("browser") {
       ]
       deps += [ "//chrome/android/modules/dev_ui/provider:native" ]
     }
-  } else {  # !is_android
     sources += [
       "accessibility/invert_bubble_prefs.cc",
       "accessibility/invert_bubble_prefs.h",
@@ -3072,8 +3073,6 @@ jumbo_static_library("browser") {
       "badging/badge_manager_delegate.h",
       "badging/badge_manager_factory.cc",
       "badging/badge_manager_factory.h",
-      "banners/app_banner_manager_desktop.cc",
-      "banners/app_banner_manager_desktop.h",
       "bookmarks/bookmark_html_writer.cc",
       "bookmarks/bookmark_html_writer.h",
       "certificate_viewer.h",
@@ -3140,8 +3139,6 @@ jumbo_static_library("browser") {
       "enterprise_reporting/report_request_definition.h",
       "enterprise_reporting/report_request_queue_generator.cc",
       "enterprise_reporting/report_request_queue_generator.h",
-      "enterprise_reporting/report_scheduler.cc",
-      "enterprise_reporting/report_scheduler.h",
       "enterprise_reporting/report_uploader.cc",
       "enterprise_reporting/report_uploader.h",
       "feedback/feedback_dialog_utils.cc",
@@ -3301,7 +3298,6 @@ jumbo_static_library("browser") {
       "metrics/desktop_session_duration/desktop_session_duration_tracker.h",
       "metrics/first_web_contents_profiler.cc",
       "metrics/first_web_contents_profiler.h",
-      "metrics/incognito_observer_desktop.cc",
       "metrics/tab_stats_data_store.cc",
       "metrics/tab_stats_data_store.h",
       "metrics/tab_stats_tracker.cc",
@@ -3314,6 +3310,7 @@ jumbo_static_library("browser") {
       "notifications/profile_notification.cc",
       "notifications/profile_notification.h",
       "obsolete_system/obsolete_system.h",
+      "obsolete_system/obsolete_system_android.cc",
       "obsolete_system/obsolete_system_linux.cc",
       "obsolete_system/obsolete_system_mac.cc",
       "obsolete_system/obsolete_system_win.cc",
@@ -3381,16 +3378,6 @@ jumbo_static_library("browser") {
       "profiles/profile_shortcut_manager.h",
       "profiles/profile_window.cc",
       "profiles/profile_window.h",
-      "renderer_context_menu/accessibility_labels_bubble_model.cc",
-      "renderer_context_menu/accessibility_labels_bubble_model.h",
-      "renderer_context_menu/accessibility_labels_menu_observer.cc",
-      "renderer_context_menu/accessibility_labels_menu_observer.h",
-      "renderer_context_menu/render_view_context_menu.cc",
-      "renderer_context_menu/render_view_context_menu.h",
-      "renderer_context_menu/spelling_bubble_model.cc",
-      "renderer_context_menu/spelling_bubble_model.h",
-      "renderer_context_menu/spelling_menu_observer.cc",
-      "renderer_context_menu/spelling_menu_observer.h",
       "repost_form_warning_controller.cc",
       "repost_form_warning_controller.h",
       "resource_coordinator/background_tab_navigation_throttle.cc",
@@ -3530,16 +3517,6 @@ jumbo_static_library("browser") {
       "serial/serial_chooser_context.h",
       "serial/serial_chooser_context_factory.cc",
       "serial/serial_chooser_context_factory.h",
-      "sharing/click_to_call/click_to_call_context_menu_observer.cc",
-      "sharing/click_to_call/click_to_call_context_menu_observer.h",
-      "sharing/click_to_call/click_to_call_metrics.cc",
-      "sharing/click_to_call/click_to_call_metrics.h",
-      "sharing/click_to_call/click_to_call_ui_controller.cc",
-      "sharing/click_to_call/click_to_call_ui_controller.h",
-      "sharing/click_to_call/click_to_call_utils.cc",
-      "sharing/click_to_call/click_to_call_utils.h",
-      "sharing/click_to_call/phone_number_regex.cc",
-      "sharing/click_to_call/phone_number_regex.h",
       "sharing/shared_clipboard/remote_copy_message_handler.cc",
       "sharing/shared_clipboard/remote_copy_message_handler.h",
       "sharing/shared_clipboard/shared_clipboard_context_menu_observer.cc",
@@ -3718,7 +3695,6 @@ jumbo_static_library("browser") {
       "//chrome/browser/profile_resetter:profile_reset_report_proto",
       "//chrome/browser/resource_coordinator:intervention_policy_database_proto",
       "//chrome/browser/resource_coordinator:tab_metrics_event_proto",
-      "//chrome/browser/resource_coordinator/tab_ranker",
       "//chrome/browser/resources:component_extension_resources",
       "//chrome/browser/search:generated",
       "//chrome/common/importer:interfaces",
@@ -3748,7 +3724,6 @@ jumbo_static_library("browser") {
         "chrome_browser_main_posix.h",
         "first_run/first_run_internal_posix.cc",
         "importer/firefox_profile_lock_posix.cc",
-        "process_singleton_posix.cc",
         "task_manager/sampling/shared_sampler_posix.cc",
       ]
     }
@@ -3837,8 +3812,6 @@ jumbo_static_library("browser") {
       "notifications/web_page_notifier_controller.h",
       "policy/default_geolocation_policy_handler.cc",
       "policy/default_geolocation_policy_handler.h",
-      "renderer_context_menu/quick_answers_menu_observer.cc",
-      "renderer_context_menu/quick_answers_menu_observer.h",
       "signin/signin_error_notifier_ash.cc",
       "signin/signin_error_notifier_ash.h",
       "signin/signin_error_notifier_factory_ash.cc",
@@ -4216,7 +4189,7 @@ jumbo_static_library("browser") {
     defines += [ "USE_CRAS" ]
   }
 
-  if (!is_android && !is_chromeos) {
+  if (is_android && !is_chromeos) {
     sources += [
       "first_run/upgrade_util.cc",
       "first_run/upgrade_util.h",
@@ -4244,8 +4217,6 @@ jumbo_static_library("browser") {
       "policy/chrome_browser_cloud_management_register_watcher.h",
       "policy/cloud/chrome_browser_cloud_management_helper.cc",
       "policy/cloud/chrome_browser_cloud_management_helper.h",
-      "policy/cloud/user_policy_signin_service.cc",
-      "policy/cloud/user_policy_signin_service.h",
       "policy/cloud/user_policy_signin_service_internal.h",
       "profiles/avatar_menu.cc",
       "profiles/avatar_menu.h",
@@ -4275,7 +4246,6 @@ jumbo_static_library("browser") {
       "upgrade_detector/upgrade_detector_impl.cc",
       "upgrade_detector/upgrade_detector_impl.h",
     ]
-  } else {
     sources += [
       "media/protected_media_identifier_permission_context.cc",
       "media/protected_media_identifier_permission_context.h",
@@ -4381,7 +4351,7 @@ jumbo_static_library("browser") {
       sources -= [ "background/background_mode_manager_aura.cc" ]
     }
   }
-  if (enable_background_contents) {
+  if (true) {
     sources += [
       "background/background_contents_service.cc",
       "background/background_contents_service.h",
@@ -5141,7 +5111,7 @@ jumbo_static_library("browser") {
     }
   }
 
-  if (enable_session_service) {
+  if (true) {
     sources += [
       "sessions/session_restore.cc",
       "sessions/session_restore.h",
@@ -5490,7 +5460,7 @@ grit("resources") {
     }
   }
 
-  if (is_win || is_mac || is_desktop_linux || is_chromeos) {
+  if (is_win || is_mac || is_desktop_linux || is_chromeos || is_android) {
     deps += [
       "//chrome/browser/resources/discards:discards_resources_gen",
       "//chrome/browser/resources/management:polymer3_elements",
