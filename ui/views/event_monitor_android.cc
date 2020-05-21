@@ -22,14 +22,11 @@ class WindowMonitorAndroid : public EventMonitorAndroid {
   WindowMonitorAndroid(ui::EventObserver* event_observer,
                     ui::WindowAndroid* target_window,
                     const std::set<ui::EventType>& types)
-      : EventMonitorAndroid(event_observer, target_window, types),
-        target_window_(target_window) {
+      : EventMonitorAndroid(event_observer, target_window, types) {
   }
   ~WindowMonitorAndroid() override = default;
 
  private:
-  ui::WindowAndroid* target_window_;
-
   DISALLOW_COPY_AND_ASSIGN(WindowMonitorAndroid);
 };
 

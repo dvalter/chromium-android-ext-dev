@@ -10,8 +10,8 @@
 #include "chrome/common/url_constants.h"
 
 OneClickSigninLinksDelegateImpl::OneClickSigninLinksDelegateImpl(
-    Browser* browser)
-    : browser_(browser) {}
+    Browser*)
+    {}
 
 OneClickSigninLinksDelegateImpl::~OneClickSigninLinksDelegateImpl() {}
 

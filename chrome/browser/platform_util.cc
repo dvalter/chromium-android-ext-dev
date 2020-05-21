@@ -21,6 +21,7 @@ namespace {
 
 bool shell_operations_allowed = true;
 
+#if 0
 void VerifyAndOpenItemOnBlockingThread(const base::FilePath& path,
                                        OpenItemType type,
                                        const OpenOperationCallback& callback) {
@@ -44,6 +45,7 @@ void VerifyAndOpenItemOnBlockingThread(const base::FilePath& path,
     base::PostTask(FROM_HERE, {BrowserThread::UI},
                    base::BindOnce(callback, OPEN_SUCCEEDED));
 }
+#endif
 
 }  // namespace
 

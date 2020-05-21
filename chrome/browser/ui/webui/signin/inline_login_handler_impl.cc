@@ -299,7 +299,9 @@ InlineSigninHelper::InlineSigninHelper(
       gaia_id_(gaia_id),
       password_(password),
       auth_code_(auth_code),
+#if 0
       confirm_untrusted_signin_(confirm_untrusted_signin),
+#endif
       is_force_sign_in_with_usermanager_(is_force_sign_in_with_usermanager) {
   DCHECK(profile_);
   DCHECK(!email_.empty());

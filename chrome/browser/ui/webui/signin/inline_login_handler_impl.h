@@ -183,7 +183,9 @@ class InlineSigninHelper : public GaiaAuthConsumer {
   std::string gaia_id_;
   std::string password_;
   std::string auth_code_;
+#if 0
   bool confirm_untrusted_signin_;
+#endif
   bool is_force_sign_in_with_usermanager_;
 
   DISALLOW_COPY_AND_ASSIGN(InlineSigninHelper);

@@ -22,7 +22,9 @@ class OneClickSigninLinksDelegateImpl : public OneClickSigninLinksDelegate {
   void OnLearnMoreLinkClicked(bool is_dialog) override;
 
   // Browser in which the links should be opened.
+#if 0
   Browser* const browser_;
+#endif
 
   DISALLOW_COPY_AND_ASSIGN(OneClickSigninLinksDelegateImpl);
 };

@@ -168,8 +168,6 @@ class VIEWS_EXPORT NativeWidgetAndroid : public internal::NativeWidgetPrivate {
   // Are we in the destructor?
   bool destroying_;
 
-  gfx::NativeCursor cursor_;
-
   std::unique_ptr<TooltipManagerAndroid> tooltip_manager_;
 
   // Reorders child windows of |window_| associated with a view based on the
@@ -177,7 +175,6 @@ class VIEWS_EXPORT NativeWidgetAndroid : public internal::NativeWidgetPrivate {
   std::unique_ptr<WindowReorderer> window_reorderer_;
 
   std::unique_ptr<DropHelper> drop_helper_;
-  int last_drop_operation_;
 
   // Native widget's handler to receive events before the event target.
   std::unique_ptr<FocusManagerEventHandler> focus_manager_event_handler_;

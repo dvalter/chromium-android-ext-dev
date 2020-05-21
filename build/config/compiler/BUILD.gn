@@ -1562,12 +1562,12 @@ config("chromium_code") {
   } else {
     cflags = [ "-Wall" ]
     if (treat_warnings_as_errors) {
-      cflags += [ "-Wno-error" ]
+      cflags += [ "-Werror" ]
 
       # The compiler driver can sometimes (rarely) emit warnings before calling
       # the actual linker.  Make sure these warnings are treated as errors as
       # well.
-      ldflags = [ "-Wno-error" ]
+      ldflags = [ "-Werror" ]
     }
     if (is_clang) {
       # Enable extra warnings for chromium_code when we control the compiler.

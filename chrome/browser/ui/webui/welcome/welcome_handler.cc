@@ -89,8 +89,9 @@ void WelcomeHandler::HandleActivateSignIn(const base::ListValue* args) {
       redirect_url = GURL(url_string);
       DCHECK(redirect_url.is_valid());
     }
-
+#if 0
     Browser* browser = GetBrowser();
+#endif
   }
 }
 

@@ -502,12 +502,12 @@ void ShowBrowserSignin(Browser* browser,
       std::make_unique<ScopedTabbedBrowserDisplayer>(original_profile);
   browser = displayer->browser();
 
+#if 0
   profiles::BubbleViewMode bubble_view_mode =
       IdentityManagerFactory::GetForProfile(original_profile)
               ->HasPrimaryAccount()
           ? profiles::BUBBLE_VIEW_MODE_GAIA_REAUTH
           : profiles::BUBBLE_VIEW_MODE_GAIA_SIGNIN;
-#if 0
   browser->signin_view_controller()->ShowSignin(bubble_view_mode, browser,
                                                 access_point);
 #endif

@@ -50,6 +50,7 @@ ForcedShowDialogState g_forced_show_dialog_state =
 // certain builds, and only if the user has not already set preferences. In a
 // real, official-build first run, initializes the default metrics reporting if
 // the dialog should be shown.
+#if 0
 bool ShouldShowFirstRunDialog() {
   if (g_forced_show_dialog_state != ForcedShowDialogState::kNotForced)
     return g_forced_show_dialog_state == ForcedShowDialogState::kForceShown;
@@ -84,6 +85,7 @@ bool ShouldShowFirstRunDialog() {
                 : metrics::EnableMetricsDefault::OPT_OUT);
   return true;
 }
+#endif
 #endif  // !OS_CHROMEOS
 
 }  // namespace

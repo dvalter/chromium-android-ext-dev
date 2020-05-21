@@ -77,7 +77,9 @@ void LoginUIService::ShowExtensionLoginPrompt(bool enable_sync,
   // This may be called in incognito. Redirect to the original profile.
   chrome::ScopedTabbedBrowserDisplayer displayer(
       profile_->GetOriginalProfile());
+#if 0
   Browser* browser = displayer.browser();
+#endif
 #endif
 }
 

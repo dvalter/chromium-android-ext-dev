@@ -70,11 +70,13 @@ void PermissionPromptBubbleView::AddPermissionRequestLine(
                          DISTANCE_SUBSECTION_HORIZONTAL_INDENT)),
       provider->GetDistanceMetric(views::DISTANCE_RELATED_LABEL_HORIZONTAL)));
 
+#if 0
   auto* icon =
       line_container->AddChildView(std::make_unique<views::ImageView>());
   const SkColor icon_color = icon->GetNativeTheme()->GetSystemColor(
       ui::NativeTheme::kColorId_DefaultIconColor);
   constexpr int kPermissionIconSize = 18;
+#endif
 
   auto* label = line_container->AddChildView(
       std::make_unique<views::Label>(request->GetMessageTextFragment()));

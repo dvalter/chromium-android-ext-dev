@@ -132,6 +132,8 @@ void PageActionIconController::Init(const PageActionIconParams& params,
                                   params.page_action_icon_delegate);
         page_action_icons_.push_back(zoom_icon_);
         break;
+      default:
+        break;
     }
   }
 

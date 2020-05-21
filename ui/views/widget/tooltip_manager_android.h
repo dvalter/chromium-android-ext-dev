@@ -54,7 +54,6 @@ class VIEWS_EXPORT TooltipManagerAndroid : public TooltipManager {
   // Returns the Window the tooltip text is installed on.
   aura::Window* GetWindow();
 
-  Widget* widget_;
   base::string16 tooltip_text_;
 
   DISALLOW_COPY_AND_ASSIGN(TooltipManagerAndroid);

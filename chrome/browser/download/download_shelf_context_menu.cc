@@ -138,8 +138,10 @@ base::string16 DownloadShelfContextMenu::GetLabelForCommandId(
       break;
     case DownloadCommands::ALWAYS_OPEN_TYPE: {
       if (download_commands_) {
+#if 0
         bool can_open_pdf_in_system_viewer =
             download_commands_->CanOpenPdfInSystemViewer();
+#endif
 #if defined(OS_WIN)
         if (can_open_pdf_in_system_viewer) {
           id = IsAdobeReaderDefaultPDFViewer()

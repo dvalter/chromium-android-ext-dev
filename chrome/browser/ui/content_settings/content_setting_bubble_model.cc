@@ -681,8 +681,10 @@ ContentSettingPluginBubbleModel::ContentSettingPluginBubbleModel(
   const GURL& url = web_contents->GetURL();
   bool managed_by_user =
       GetSettingManagedByUser(url, content_type(), GetProfile(), nullptr);
+#if 0
   HostContentSettingsMap* map =
       HostContentSettingsMapFactory::GetForProfile(GetProfile());
+#endif
   ContentSetting setting = CONTENT_SETTING_BLOCK;
 
   // If the setting is not managed by the user, hide the "Manage" button.

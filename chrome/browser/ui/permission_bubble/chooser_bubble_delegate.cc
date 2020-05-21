@@ -8,6 +8,7 @@
 #include "chrome/browser/ui/browser.h"
 #include "chrome/browser/ui/browser_finder.h"
 #include "content/public/browser/web_contents.h"
+#include "components/bubble/bubble_ui.h"
 
 ChooserBubbleDelegate::ChooserBubbleDelegate(
     content::RenderFrameHost* owner,
@@ -17,7 +18,9 @@ ChooserBubbleDelegate::ChooserBubbleDelegate(
           content::WebContents::FromRenderFrameHost(owner))),
       chooser_controller_(std::move(chooser_controller)) {}
 
-std::unique_ptr<BubbleUi> ChooserBubbleDelegate::BuildBubbleUi() {}
+std::unique_ptr<BubbleUi> ChooserBubbleDelegate::BuildBubbleUi() {
+  return base::WrapUnique<BubbleUi>(nullptr);
+}
 
 ChooserBubbleDelegate::~ChooserBubbleDelegate() {}
 

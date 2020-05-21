@@ -16,7 +16,7 @@ namespace views {
 ////////////////////////////////////////////////////////////////////////////////
 // TooltipManagerAndroid public:
 
-TooltipManagerAndroid::TooltipManagerAndroid(Widget* widget) : widget_(widget) {
+TooltipManagerAndroid::TooltipManagerAndroid(Widget*) {
   wm::SetTooltipText(GetWindow(), &tooltip_text_);
 }
 
